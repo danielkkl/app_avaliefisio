@@ -21,7 +21,7 @@ export const userPlans = pgTable("user_plans", {
 export const fichas = pgTable("fichas", {
   id: serial("id").primaryKey(),
   userId: varchar("user_id").notNull(),
-  
+
   // Identificação
   nomePaciente: text("nome_paciente"),
   dataNascimento: varchar("data_nascimento"),
@@ -42,18 +42,20 @@ export const fichas = pgTable("fichas", {
   dataAvaliacao: varchar("data_avaliacao"),
   numeroAtendimentos: integer("numero_atendimentos"),
 
+
   // Hábitos de Vida
-  alimentacao: text("alimentacao"),
-  sono: text("sono"),
-  ingestaoHidrica: text("ingestao_hidrica"),
+
+  alimentacao: jsonb("alimentacao"),
+  sono: jsonb("sono"),
+  ingestaoHidrica: jsonb("ingestao_hidrica"),
   rotinaDiaria: text("rotina_diaria"),
-  atividadeFisica: text("atividade_fisica"),
-  medicamentos: text("medicamentos"),
+  atividadeFisica: jsonb("atividade_fisica"),
+  medicamentos: jsonb("medicamentos"),
   tabagismo: varchar("tabagismo"),
   etilismo: varchar("etilismo"),
   estresse: varchar("estresse"),
   trabalhoRepetitivo: text("trabalho_repetitivo"),
-  historicoEsportivo: text("historico_esportivo"),
+  historicoEsportivo: jsonb("historico_esportivo"),
 
   // Sinais Vitais
   pa: varchar("pa"),
@@ -81,6 +83,21 @@ export const fichas = pgTable("fichas", {
   fatoresPiora: text("fatores_piora"),
   cirurgias: text("cirurgias"),
 
+  // ADM Específica (fich2.html)
+  flexaoJoelho: integer("flexao_joelho"),
+  extensaoJoelho: integer("extensao_joelho"),
+  forcaMRC: integer("forca_mrc"),
+
+  // Testes Ortopédicos (fich2.html)
+  testeLachman: varchar("teste_lachman"),
+  testeFimDeCurso: varchar("teste_fim_de_curso"),
+  testeNeer: varchar("teste_neer"),
+
+  // Escalas Funcionais (fich2.html)
+  escalaBerg: integer("escala_berg"),
+  escalaAshworth: integer("escala_ashworth"),
+  escalaTC6: integer("escala_tc6"),
+
   // Avaliação Física
   inspecao: text("inspecao"),
   palpacao: text("palpacao"),
@@ -91,10 +108,11 @@ export const fichas = pgTable("fichas", {
   perimetria: text("perimetria"),
   testesEspeciais: text("testes_especiais"),
 
-  // Estratégias
+  // Estratégias e Interpretação
   estrategiasCurto: text("estrategias_curto"),
   estrategiasMedio: text("estrategias_medio"),
   estrategiasLongo: text("estrategias_longo"),
+  interpretacaoAutomatica: text("interpretacao_automatica"),
 
   // Termo
   aceitoTermo: boolean("aceito_termo").default(false),
@@ -103,6 +121,7 @@ export const fichas = pgTable("fichas", {
   musculos: jsonb("musculos"),
   prescricoes: jsonb("prescricoes"),
   evolucoes: jsonb("evolucoes"),
+  mapaDor: text("mapa_dor"), // Base64 da imagem do canvas
 
   // PDF e integração
   pdfUrl: text("pdf_url"),

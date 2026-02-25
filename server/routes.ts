@@ -45,7 +45,11 @@ export async function registerRoutes(
           field: err.errors[0].path.join("."),
         });
       }
-      res.status(500).json({ message: "Erro interno do servidor" });
+      console.error("Erro no servidor:", err);
+      res.status(500).json({ 
+        message: "Erro interno do servidor", 
+        detail: err instanceof Error ? err.message : String(err) 
+      });
     }
   });
 
@@ -64,7 +68,11 @@ export async function registerRoutes(
           field: err.errors[0].path.join("."),
         });
       }
-      res.status(500).json({ message: "Erro interno do servidor" });
+      console.error("Erro no servidor:", err);
+      res.status(500).json({ 
+        message: "Erro interno do servidor", 
+        detail: err instanceof Error ? err.message : String(err) 
+      });
     }
   });
 

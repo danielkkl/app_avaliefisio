@@ -48,7 +48,7 @@ export function useCreateFicha() {
       
       if (!res.ok) {
         const errorData = await res.json().catch(() => ({}));
-        throw new Error(errorData.message || "Erro ao criar avaliação");
+        throw new Error(errorData.detail || errorData.message || "Erro ao criar avaliação");
       }
       return api.fichas.create.responses[201].parse(await res.json());
     },
@@ -86,7 +86,7 @@ export function useUpdateFicha() {
 
       if (!res.ok) {
         const errorData = await res.json().catch(() => ({}));
-        throw new Error(errorData.message || "Erro ao atualizar avaliação");
+        throw new Error(errorData.detail || errorData.message || "Erro ao atualizar avaliação");
       }
       return api.fichas.update.responses[200].parse(await res.json());
     },

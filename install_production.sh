@@ -12,7 +12,7 @@ if ! command -v docker &> /dev/null; then
     exit 1
 fi
 
-if ! command -v docker-compose &> /dev/null; then
+if ! command -v docker compose &> /dev/null; then
     echo "❌ Erro: Docker Compose não encontrado. Por favor, instale o Docker Compose antes de continuar."
     exit 1
 fi
@@ -32,11 +32,11 @@ fi
 
 # 3. Limpar containers antigos (para evitar o erro KeyError: 'ContainerConfig')
 echo "🧹 Limpando containers antigos..."
-docker-compose -f docker-compose.production.yml down --remove-orphans > /dev/null 2>&1
+docker compose -f docker-compose.production.yml down --remove-orphans > /dev/null 2>&1
 
 # 4. Iniciar containers
 echo "🏗️ Construindo e iniciando containers via Docker Compose..."
-docker-compose -f docker-compose.production.yml up -d --build
+docker compose -f docker-compose.production.yml up -d --build
 
 # 5. Aguardar banco de dados estar pronto
 echo "⏳ Aguardando banco de dados estar pronto..."

@@ -1,0 +1,49 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: beyond_app_prod
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      DATABASE_URL: postgresql://beyond_user:beyond_pass123@db:5432/beyond_avaliacao
+      SESSION_SECRET: X820QnatOLzUQAz5wZUO5sbaE43L9HWWd91ia3CJk
+    depends_on:
+      db:
+        condition: service_healthy
+    mem_limit: 350m
+
+  db:
+    image: postgres:14-alpine
+    container_name: beyond_db_prod
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: beyond_user
+      POSTGRES_PASSWORD: beyond_pass123
+      POSTGRES_DB: beyond_avaliacao
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    command: >
+      postgres
+      -c shared_buffers=128MB
+      -c work_mem=4MB
+      -c maintenance_work_mem=64MB
+      -c max_connections=20
+      -c listen_addresses='*'
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U beyond_user -d beyond_avaliacao"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    mem_limit: 400m
+
+volumes:
+  postgres_data:
