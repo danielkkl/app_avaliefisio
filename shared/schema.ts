@@ -40,22 +40,22 @@ export const fichas = pgTable("fichas", {
   cpf: varchar("cpf"),
   numeroProntuario: varchar("numero_prontuario"),
   dataAvaliacao: varchar("data_avaliacao"),
-  numeroAtendimentos: integer("numero_atendimentos"),
+  dataConsulta: varchar("data_consulta"),
 
 
   // Hábitos de Vida
 
-  alimentacao: jsonb("alimentacao"),
-  sono: jsonb("sono"),
-  ingestaoHidrica: jsonb("ingestao_hidrica"),
+  alimentacao: varchar("alimentacao"),
+  sono: varchar("sono"),
+  ingestaoHidrica: varchar("ingestao_hidrica"),
   rotinaDiaria: text("rotina_diaria"),
-  atividadeFisica: jsonb("atividade_fisica"),
-  medicamentos: jsonb("medicamentos"),
+  atividadeFisica: varchar("atividade_fisica"),
+  medicamentos: text("medicamentos"),
   tabagismo: varchar("tabagismo"),
   etilismo: varchar("etilismo"),
   estresse: varchar("estresse"),
-  trabalhoRepetitivo: text("trabalho_repetitivo"),
-  historicoEsportivo: jsonb("historico_esportivo"),
+  trabalhoRepetitivo: varchar("trabalho_repetitivo"),
+  historicoEsportivo: varchar("historico_esportivo"),
 
   // Sinais Vitais
   pa: varchar("pa"),
@@ -77,7 +77,8 @@ export const fichas = pgTable("fichas", {
   hdp: text("hdp"),
   eva: integer("eva"),
   inicioDor: text("inicio_dor"),
-  tipoDor: text("tipo_dor"),
+  tipoDor: varchar("tipo_dor"),
+  tipoDorOutro: text("tipo_dor_outro"),
   irradiacao: text("irradiacao"),
   fatoresMelhora: text("fatores_melhora"),
   fatoresPiora: text("fatores_piora"),
@@ -101,7 +102,6 @@ export const fichas = pgTable("fichas", {
   // Avaliação Física
   inspecao: text("inspecao"),
   palpacao: text("palpacao"),
-  sensibilidade: text("sensibilidade"),
   posturaEstatica: text("postura_estatica"),
   posturaDinamica: text("postura_dinamica"),
   marcha: text("marcha"),
@@ -114,13 +114,26 @@ export const fichas = pgTable("fichas", {
   estrategiasLongo: text("estrategias_longo"),
   interpretacaoAutomatica: text("interpretacao_automatica"),
 
-  // Termo
+  // Prescrições - Campos adicionais
+  prescricoesProgressao: text("prescricoes_progressao"),
+  prescricoesObservacao: text("prescricoes_observacao"),
+
+  // Termo de Consentimento
   aceitoTermo: boolean("aceito_termo").default(false),
+  termoConsentimentoFoto: boolean("termo_consentimento_foto").default(false),
+  termoConsentimentoFaltas: boolean("termo_consentimento_faltas").default(false),
+  termoConsentimentoReposicao: boolean("termo_consentimento_reposicao").default(false),
+  dataAssinaturaTermo: varchar("data_assinatura_termo"),
+
+  // Assinaturas (Base64)
+  assinaturaPaciente: text("assinatura_paciente"),
+  assinaturaFisioterapeuta: text("assinatura_fisioterapeuta"),
 
   // Dados dinâmicos (JSON)
   musculos: jsonb("musculos"),
   prescricoes: jsonb("prescricoes"),
   evolucoes: jsonb("evolucoes"),
+  admForca: jsonb("adm_forca"), // Nova estrutura de tabela
   mapaDor: text("mapa_dor"), // Base64 da imagem do canvas
 
   // PDF e integração

@@ -14,6 +14,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
@@ -25,8 +26,13 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Loader2, Save, ArrowLeft, Plus, Trash2, Printer } from "lucide-react";
-import { useEffect, useCallback, useRef } from "react";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import {
+  Plus, Trash2, Printer, Map, Activity, History, ShieldCheck, PenTool,
+  Loader2, Save, ArrowLeft
+} from "lucide-react";
+import React, { useEffect, useCallback, useRef, useState } from "react";
+import { Slider } from "@/components/ui/slider";
 import { z } from "zod";
 
 const formSchema = insertFichaSchema;
@@ -87,6 +93,9 @@ export default function FichaForm() {
   const updateMutation = useUpdateFicha();
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [brushColor, setBrushColor] = useState("#4CAF50");
+  const [brushSize, setBrushSize] = useState(5);
+  const [isDrawing, setIsDrawing] = useState(false);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -94,7 +103,6 @@ export default function FichaForm() {
       nomePaciente: "",
       idadeAtual: 0,
       numeroAtendimentos: 0,
-      eva: 0,
       fcMax: 0,
       frMax: 0,
       aceitoTermo: false,
@@ -109,14 +117,40 @@ export default function FichaForm() {
       escalaBerg: undefined,
       escalaAshworth: undefined,
       escalaTC6: undefined,
-      interpretacaoAutomatica: "",
-      mapaDor: "",
-      alimentacao: { selected: [], other: "" },
-      sono: { selected: [], other: "" },
-      ingestaoHidrica: { selected: [], other: "" },
-      atividadeFisica: { selected: [], other: "" },
-      medicamentos: { selected: [], other: "" },
-      historicoEsportivo: { selected: [], other: "" },
+      dataConsulta: new Date().toLocaleDateString("pt-BR"),
+      hda: "",
+      hdp: "",
+      eva: 0,
+      inicioDor: "",
+      tipoDor: "",
+      tipoDorOutro: "",
+      irradiacao: "",
+      fatoresMelhora: "",
+      fatoresPiora: "",
+      cirurgias: "",
+      alimentacao: "",
+      sono: "",
+      ingestaoHidrica: "",
+      atividadeFisica: "",
+      medicamentos: "",
+      historicoEsportivo: "",
+      tabagismo: "Não",
+      etilismo: "Não",
+      estresse: "Não",
+      trabalhoRepetitivo: "Não",
+      rotinaDiaria: "",
+      admForca: [
+        { movimento: "Flexão de ombro", admDireita: "", admEsquerda: "", forcaD: "", forcaE: "", deficit: "0", cif: "XXX.0 Sem déficit" },
+      ],
+      evolucoes: [
+        { data: new Date().toLocaleDateString("pt-BR"), fisioterapeuta: "Dr. Daniel Barcellos — CREFITO 10 389091-F", descricao: "", resposta: "", ajuste: "" },
+      ],
+      termoConsentimentoFoto: false,
+      termoConsentimentoFaltas: false,
+      termoConsentimentoReposicao: false,
+      dataAssinaturaTermo: new Date().toLocaleDateString("pt-BR"),
+      assinaturaPaciente: "",
+      assinaturaFisioterapeuta: "",
     },
   });
 
@@ -125,7 +159,28 @@ export default function FichaForm() {
     fields: musculoFields,
     append: appendMusculo,
     remove: removeMusculo,
-  } = useFieldArray({ control: form.control, name: "musculos" as any });
+  } = useFieldArray({
+    control: form.control,
+    name: "musculos",
+  });
+
+  const {
+    fields: admForcaFields,
+    append: appendAdmForca,
+    remove: removeAdmForca,
+  } = useFieldArray({
+    control: form.control,
+    name: "admForca",
+  });
+
+  const {
+    fields: evolucoesFields,
+    append: appendEvolucao,
+    remove: removeEvolucao,
+  } = useFieldArray({
+    control: form.control,
+    name: "evolucoes",
+  });
 
   const {
     fields: prescricaoFields,
@@ -141,6 +196,8 @@ export default function FichaForm() {
         ...rest,
         musculos: Array.isArray(rest.musculos) ? rest.musculos : [],
         prescricoes: Array.isArray(rest.prescricoes) ? rest.prescricoes : [],
+        evolucoes: Array.isArray(rest.evolucoes) ? rest.evolucoes : [],
+        admForca: Array.isArray(rest.admForca) ? rest.admForca : [],
       });
     }
   }, [ficha, form]);
@@ -221,6 +278,33 @@ export default function FichaForm() {
 
   const consultor = form.watch("consultor");
 
+  const draw = (e: React.MouseEvent | React.TouchEvent) => {
+    if (!isDrawing || !canvasRef.current) return;
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const rect = canvas.getBoundingClientRect();
+    let x, y;
+
+    if ("touches" in e) {
+      x = e.touches[0].clientX - rect.left;
+      y = e.touches[0].clientY - rect.top;
+    } else {
+      x = e.clientX - rect.left;
+      y = e.clientY - rect.top;
+    }
+
+    ctx.lineWidth = brushSize;
+    ctx.lineCap = "round";
+    ctx.strokeStyle = brushColor;
+
+    ctx.lineTo(x, y);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+  };
+
   return (
     <div className="max-w-5xl mx-auto pb-12 animate-in fade-in duration-500">
       <Button
@@ -259,7 +343,10 @@ export default function FichaForm() {
                     { label: "Avaliação Física", value: "avaliacao-fisica" },
                     { label: "Mapa da Dor", value: "mapa-dor" },
                     { label: "Prescrições", value: "prescricoes" },
+                    { label: "Evolução", value: "evolucao" },
                     { label: "Estratégias", value: "estrategias" },
+                    { label: "Termo", value: "termo" },
+                    { label: "Assinaturas", value: "assinaturas" },
                   ].map((tab) => (
                     <TabsTrigger
                       key={tab.value}
@@ -534,23 +621,15 @@ export default function FichaForm() {
                       )}
                     />
 
-                    {/* Nº Atendimentos */}
+                    {/* Data da Consulta */}
                     <FormField
                       control={form.control}
-                      name="numeroAtendimentos"
+                      name="dataConsulta"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Nº Atendimentos Cinesioterapia</FormLabel>
+                          <FormLabel>Data da Consulta</FormLabel>
                           <FormControl>
-                            <Input
-                              type="number"
-                              placeholder="0"
-                              {...field}
-                              onChange={(e) =>
-                                field.onChange(parseInt(e.target.value))
-                              }
-                              value={field.value ?? ""}
-                            />
+                            <Input placeholder="DD/MM/AAAA" {...field} value={field.value || ""} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -668,135 +747,171 @@ export default function FichaForm() {
 
 
                 <TabsContent value="habitos-de-vida" className="space-y-6 mt-0">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 bg-card rounded-xl border shadow-sm">
-                    {[
-                      {
-                        key: "alimentacao",
-                        label: "Alimentação",
-                        options: [
-                          "Alimentação saudável",
-                          "Alimentação desregulada",
-                          "Dieta rica em proteínas",
-                          "Dieta baixa em carboidratos",
-                          "Restrição calórica",
-                        ],
-                      },
-                      {
-                        key: "sono",
-                        label: "Sono",
-                        options: [
-                          "Sono regular",
-                          "Insônia",
-                          "Apneia do sono",
-                          "Dorme poucas horas",
-                          "Sono agitado",
-                        ],
-                      },
-                      {
-                        key: "ingestaoHidrica",
-                        label: "Ingestão Hídrica",
-                        options: ["Ingestão hídrica adequada", "Ingestão hídrica insuficiente"],
-                      },
-                      {
-                        key: "atividadeFisica",
-                        label: "Atividade Física",
-                        options: [
-                          "Sedentário",
-                          "Exercícios leves",
-                          "Exercícios moderados",
-                          "Exercícios intensos",
-                          "Atividades esportivas regulares",
-                        ],
-                      },
-                      {
-                        key: "medicamentos",
-                        label: "Medicamentos",
-                        options: [
-                          "Uso de medicamentos",
-                          "Uso de suplementos",
-                          "Uso de fitoterápicos",
-                          "Não utiliza medicamentos",
-                        ],
-                      },
-                      {
-                        key: "historicoEsportivo",
-                        label: "Histórico Esportivo",
-                        options: [
-                          "Atleta amador",
-                          "Atleta profissional",
-                          "Histórico esportivo",
-                          "Histórico esportivo na infância",
-                        ],
-                      },
-                    ].map((category) => (
-                      <div key={category.key} className="space-y-4 p-4 border rounded-lg bg-muted/20">
-                        <h4 className="font-semibold text-sm uppercase tracking-wider text-primary">
-                          {category.label}
-                        </h4>
-                        <div className="grid grid-cols-1 gap-3">
-                          {category.options.map((option) => (
-                            <FormField
-                              key={option}
-                              control={form.control}
-                              name={category.key as any}
-                              render={({ field }) => {
-                                const selected = field.value?.selected || [];
-                                return (
-                                  <FormItem className="flex flex-row items-center space-x-3 space-y-0">
+                  <div className="p-6 bg-card rounded-xl border shadow-sm space-y-8">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                      <FormField
+                        control={form.control}
+                        name="alimentacao"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="font-bold text-xs uppercase">Alimentação</FormLabel>
+                            <Select onValueChange={field.onChange} value={field.value}>
+                              <FormControl>
+                                <SelectTrigger>
+                                  <SelectValue placeholder="Selecione" />
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent>
+                                <SelectItem value="Saudável">Saudável</SelectItem>
+                                <SelectItem value="Regular">Regular</SelectItem>
+                                <SelectItem value="Inadequada">Inadequada</SelectItem>
+                              </SelectContent>
+                            </Select>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="sono"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="font-bold text-xs uppercase">Sono</FormLabel>
+                            <Select onValueChange={field.onChange} value={field.value}>
+                              <FormControl>
+                                <SelectTrigger>
+                                  <SelectValue placeholder="Selecione" />
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent>
+                                <SelectItem value="Bom (7-9h)">Bom (7-9h)</SelectItem>
+                                <SelectItem value="Regular (5-7h)">Regular (5-7h)</SelectItem>
+                                <SelectItem value="Ruim (<5h)">Ruim (&lt;5h)</SelectItem>
+                                <SelectItem value="Insônia">Insônia</SelectItem>
+                              </SelectContent>
+                            </Select>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="ingestaoHidrica"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="font-bold text-xs uppercase">Ingestão Hídrica</FormLabel>
+                            <Select onValueChange={field.onChange} value={field.value}>
+                              <FormControl>
+                                <SelectTrigger>
+                                  <SelectValue placeholder="Selecione" />
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent>
+                                <SelectItem value="Adequada (>2L/dia)">Adequada (&gt;2L/dia)</SelectItem>
+                                <SelectItem value="Regular (1-2L/dia)">Regular (1-2L/dia)</SelectItem>
+                                <SelectItem value="Insuficiente (<1L/dia)">Insuficiente (&lt;1L/dia)</SelectItem>
+                              </SelectContent>
+                            </Select>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <FormField
+                        control={form.control}
+                        name="rotinaDiaria"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="font-bold text-xs uppercase">Rotina Diária</FormLabel>
+                            <FormControl>
+                              <Input placeholder="Descreva a rotina" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="atividadeFisica"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="font-bold text-xs uppercase">Atividade Física</FormLabel>
+                            <Select onValueChange={field.onChange} value={field.value}>
+                              <FormControl>
+                                <SelectTrigger>
+                                  <SelectValue placeholder="Selecione" />
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent>
+                                <SelectItem value="Sedentário">Sedentário</SelectItem>
+                                <SelectItem value="Leve (1-2x/sem)">Leve (1-2x/sem)</SelectItem>
+                                <SelectItem value="Moderado (3-4x/sem)">Moderado (3-4x/sem)</SelectItem>
+                                <SelectItem value="Intenso (5+x/sem)">Intenso (5+x/sem)</SelectItem>
+                              </SelectContent>
+                            </Select>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+
+                    <FormField
+                      control={form.control}
+                      name="medicamentos"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="font-bold text-xs uppercase">Medicamentos</FormLabel>
+                          <FormControl>
+                            <Input placeholder="Liste os medicamentos em uso" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-6 pt-4 border-t">
+                      {[
+                        { key: "tabagismo", label: "Tabagismo" },
+                        { key: "etilismo", label: "Etilismo" },
+                        { key: "estresse", label: "Estresse" },
+                        { key: "trabalhoRepetitivo", label: "Trabalho Repetitivo" },
+                        { key: "historicoEsportivo", label: "Histórico Esportivo" },
+                      ].map((item) => (
+                        <FormField
+                          key={item.key}
+                          control={form.control}
+                          name={item.key as any}
+                          render={({ field }) => (
+                            <FormItem className="space-y-3">
+                              <FormLabel className="font-bold text-xs uppercase">{item.label}</FormLabel>
+                              <FormControl>
+                                <RadioGroup
+                                  onValueChange={field.onChange}
+                                  value={field.value}
+                                  className="flex flex-row space-x-4"
+                                >
+                                  <FormItem className="flex items-center space-x-2 space-y-0">
                                     <FormControl>
-                                      <Checkbox
-                                        checked={selected.includes(option)}
-                                        onCheckedChange={(checked) => {
-                                          const newSelected = checked
-                                            ? [...selected, option]
-                                            : selected.filter((s: string) => s !== option);
-                                          field.onChange({
-                                            ...field.value,
-                                            selected: newSelected,
-                                          });
-                                        }}
-                                      />
+                                      <RadioGroupItem value="Sim" />
                                     </FormControl>
-                                    <FormLabel className="text-sm font-normal cursor-pointer">
-                                      {option}
-                                    </FormLabel>
+                                    <FormLabel className="font-normal cursor-pointer">Sim</FormLabel>
                                   </FormItem>
-                                );
-                              }}
-                            />
-                          ))}
-                          <FormField
-                            control={form.control}
-                            name={category.key as any}
-                            render={({ field }) => (
-                              <FormItem className="flex flex-row items-center space-x-3 space-y-0 pt-2 border-t">
-                                <FormControl>
-                                  <Checkbox
-                                    checked={!!field.value?.other}
-                                    onCheckedChange={(checked) => {
-                                      if (!checked) {
-                                        field.onChange({ ...field.value, other: "" });
-                                      }
-                                    }}
-                                  />
-                                </FormControl>
-                                <div className="flex-1 flex items-center gap-2">
-                                  <span className="text-sm font-normal">Outro:</span>
-                                  <Input
-                                    placeholder="..."
-                                    className="h-8 text-xs"
-                                    value={field.value?.other || ""}
-                                    onChange={(e) =>
-                                      field.onChange({ ...field.value, other: e.target.value })
-                                    }
-                                  />
-                                </div>
-                              </FormItem>
-                            )}
-                          />
-                        </div>
-                      </div>
-                    ))}
+                                  <FormItem className="flex items-center space-x-2 space-y-0">
+                                    <FormControl>
+                                      <RadioGroupItem value="Não" />
+                                    </FormControl>
+                                    <FormLabel className="font-normal cursor-pointer">Não</FormLabel>
+                                  </FormItem>
+                                </RadioGroup>
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      ))}
+                    </div>
                   </div>
                 </TabsContent>
 
@@ -1073,162 +1188,160 @@ export default function FichaForm() {
                   </div>
                 </TabsContent>
 
-                {/* ══════════════ ADM / FORÇA MUSCULAR ══════════════ */}
+                {/* ══════════════ ADM / FORÇA ══════════════ */}
                 <TabsContent value="adm-forca" className="space-y-6 mt-0">
-                  <div className="p-6 bg-card rounded-xl border shadow-sm space-y-4">
-                    <h3 className="font-semibold text-sm uppercase text-muted-foreground">
-                      ADM / Força Muscular
-                    </h3>
-
-                    {/* Campos específicos do fich2.html */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                      <FormField
-                        control={form.control}
-                        name="flexaoJoelho"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Flexão Joelho (graus)</FormLabel>
-                            <FormControl>
-                              <Input
-                                type="number"
-                                placeholder="0-180"
-                                {...field}
-                                onChange={(e) =>
-                                  field.onChange(
-                                    e.target.value ? parseInt(e.target.value) : undefined
-                                  )
-                                }
-                                value={field.value ?? ""}
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                      <FormField
-                        control={form.control}
-                        name="extensaoJoelho"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Extensão Joelho (graus)</FormLabel>
-                            <FormControl>
-                              <Input
-                                type="number"
-                                placeholder="0-180"
-                                {...field}
-                                onChange={(e) =>
-                                  field.onChange(
-                                    e.target.value ? parseInt(e.target.value) : undefined
-                                  )
-                                }
-                                value={field.value ?? ""}
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                      <FormField
-                        control={form.control}
-                        name="forcaMRC"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Força MRC (0-5)</FormLabel>
-                            <FormControl>
-                              <Input
-                                type="number"
-                                min="0"
-                                max="5"
-                                placeholder="0-5"
-                                {...field}
-                                onChange={(e) =>
-                                  field.onChange(
-                                    e.target.value ? parseInt(e.target.value) : undefined
-                                  )
-                                }
-                                value={field.value ?? ""}
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
+                  <div className="p-6 bg-card rounded-xl border shadow-sm space-y-6">
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-sm font-bold uppercase text-primary flex items-center gap-2">
+                        <Activity className="h-4 w-4" />
+                        ADM / FORÇA MUSCULAR — CLASSIFICAÇÃO CIF
+                      </h3>
                     </div>
 
-                    {/* Tabela dinâmica de músculos */}
-                    <div className="mt-6">
-                      <h4 className="text-sm font-medium mb-3">Músculos Adicionais</h4>
-                      <div className="overflow-x-auto">
-                        <table className="w-full border text-sm">
-                          <thead className="bg-muted">
-                            <tr>
-                              <th className="border px-3 py-2 text-left">Músculo / Movimento</th>
-                              <th className="border px-3 py-2 text-left w-32">Grau (0–5)</th>
-                              <th className="border px-3 py-2 w-12"></th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {musculoFields.map((field, index) => (
-                              <tr key={field.id}>
-                                <td className="border px-2 py-1">
+                    <div className="overflow-x-auto border rounded-xl">
+                      <table className="w-full text-xs text-left border-collapse">
+                        <thead className="bg-muted/50 uppercase font-bold text-[10px] tracking-wider">
+                          <tr>
+                            <th className="p-3 border">MOVIMENTO / SEGMENTO</th>
+                            <th className="p-3 border text-center w-20">ADM DIREITA</th>
+                            <th className="p-3 border text-center w-20">ADM ESQUERDA</th>
+                            <th className="p-3 border text-center w-20">FORÇA D (0-5)</th>
+                            <th className="p-3 border text-center w-20">FORÇA E (0-5)</th>
+                            <th className="p-3 border text-center w-24">DÉFICIT %</th>
+                            <th className="p-3 border text-center w-40">CLASSIFICAÇÃO CIF</th>
+                            <th className="p-3 border w-10"></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {admForcaFields.map((field, index) => {
+                            const calculateCIF = (deficitValue: number) => {
+                              if (deficitValue === 0) return "XXX.0 Sem déficit";
+                              if (deficitValue < 4) return "XXX.1 Leve (<4%)";
+                              if (deficitValue < 25) return "XXX.2 Moderado (4-24%)";
+                              if (deficitValue < 50) return "XXX.3 Grave (25-49%)";
+                              return "XXX.4 Completo (≥50%)";
+                            };
+
+                            const handleStrengthChange = (val: string, type: 'D' | 'E') => {
+                              const otherVal = type === 'D'
+                                ? form.getValues(`admForca.${index}.forcaE`)
+                                : form.getValues(`admForca.${index}.forcaD`);
+
+                              const d = type === 'D' ? parseFloat(val) : parseFloat(otherVal);
+                              const e = type === 'E' ? parseFloat(val) : parseFloat(otherVal);
+
+                              if (!isNaN(d) && !isNaN(e) && (d > 0 || e > 0)) {
+                                const max = Math.max(d, e);
+                                const min = Math.min(d, e);
+                                const deficit = Math.round(((max - min) / max) * 100);
+                                form.setValue(`admForca.${index}.deficit`, deficit.toString());
+                                form.setValue(`admForca.${index}.cif`, calculateCIF(deficit));
+                              } else {
+                                form.setValue(`admForca.${index}.deficit`, "0");
+                                form.setValue(`admForca.${index}.cif`, "XXX.0 Sem déficit");
+                              }
+                            };
+
+                            return (
+                              <tr key={field.id} className="hover:bg-muted/30 transition-colors">
+                                <td className="p-2 border">
                                   <Input
-                                    placeholder="Nome do músculo ou movimento"
-                                    className="border-0 shadow-none focus-visible:ring-0"
-                                    {...form.register(
-                                      `musculos.${index}.musculo` as any
-                                    )}
+                                    {...form.register(`admForca.${index}.movimento`)}
+                                    className="h-8 border-none bg-transparent shadow-none focus-visible:ring-0 text-xs"
+                                    placeholder="Ex: Flexão de ombro"
                                   />
                                 </td>
-                                <td className="border px-2 py-1">
+                                <td className="p-2 border">
                                   <Input
-                                    type="number"
-                                    min="0"
-                                    max="5"
-                                    placeholder="0–5"
-                                    className="border-0 shadow-none focus-visible:ring-0"
-                                    {...form.register(
-                                      `musculos.${index}.grau` as any
-                                    )}
+                                    {...form.register(`admForca.${index}.admDireita`)}
+                                    className="h-8 border-none bg-transparent shadow-none focus-visible:ring-0 text-xs text-center"
+                                    placeholder="°"
                                   />
                                 </td>
-                                <td className="border px-2 py-1 text-center">
+                                <td className="p-2 border">
+                                  <Input
+                                    {...form.register(`admForca.${index}.admEsquerda`)}
+                                    className="h-8 border-none bg-transparent shadow-none focus-visible:ring-0 text-xs text-center"
+                                    placeholder="°"
+                                  />
+                                </td>
+                                <td className="p-2 border">
+                                  <Select
+                                    onValueChange={(val) => {
+                                      form.setValue(`admForca.${index}.forcaD`, val);
+                                      handleStrengthChange(val, 'D');
+                                    }}
+                                    value={form.watch(`admForca.${index}.forcaD`)}
+                                  >
+                                    <SelectTrigger className="h-8 border-none bg-transparent shadow-none focus:ring-0 text-xs">
+                                      <SelectValue placeholder="-" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                      {["0", "1", "2", "3", "4", "5"].map(v => <SelectItem key={v} value={v}>{v}</SelectItem>)}
+                                    </SelectContent>
+                                  </Select>
+                                </td>
+                                <td className="p-2 border">
+                                  <Select
+                                    onValueChange={(val) => {
+                                      form.setValue(`admForca.${index}.forcaE`, val);
+                                      handleStrengthChange(val, 'E');
+                                    }}
+                                    value={form.watch(`admForca.${index}.forcaE`)}
+                                  >
+                                    <SelectTrigger className="h-8 border-none bg-transparent shadow-none focus:ring-0 text-xs">
+                                      <SelectValue placeholder="-" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                      {["0", "1", "2", "3", "4", "5"].map(v => <SelectItem key={v} value={v}>{v}</SelectItem>)}
+                                    </SelectContent>
+                                  </Select>
+                                </td>
+                                <td className="p-2 border text-center">
+                                  <Input
+                                    {...form.register(`admForca.${index}.deficit`)}
+                                    readOnly
+                                    className="h-8 border-none bg-muted/20 shadow-none text-xs text-center font-bold text-primary"
+                                  />
+                                </td>
+                                <td className="p-2 border">
+                                  <Input
+                                    {...form.register(`admForca.${index}.cif`)}
+                                    readOnly
+                                    className="h-8 border-none bg-muted/20 shadow-none text-[10px] text-center"
+                                  />
+                                </td>
+                                <td className="p-2 border text-center">
                                   <Button
                                     type="button"
                                     variant="ghost"
                                     size="icon"
-                                    onClick={() => removeMusculo(index)}
+                                    className="h-7 w-7"
+                                    onClick={() => removeAdmForca(index)}
                                   >
-                                    <Trash2 className="w-4 h-4 text-destructive" />
+                                    <Trash2 className="h-3 w-3 text-destructive" />
                                   </Button>
                                 </td>
                               </tr>
-                            ))}
-                            {musculoFields.length === 0 && (
-                              <tr>
-                                <td
-                                  colSpan={3}
-                                  className="border px-3 py-4 text-center text-muted-foreground text-sm"
-                                >
-                                  Nenhum músculo adicionado.
-                                </td>
-                              </tr>
-                            )}
-                          </tbody>
-                        </table>
-                      </div>
+                            );
+                          })}
+                        </tbody>
+                      </table>
+                    </div>
 
-                      <Button
-                        type="button"
-                        variant="outline"
-                        size="sm"
-                        onClick={() =>
-                          appendMusculo({ musculo: "", grau: "" } as any)
-                        }
-                        className="mt-3"
-                      >
-                        <Plus className="w-4 h-4 mr-2" />
-                        Adicionar Músculo
-                      </Button>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={() => appendAdmForca({ movimento: "", admDireita: "", admEsquerda: "", forcaD: "", forcaE: "", deficit: "0", cif: "XXX.0 Sem déficit" })}
+                      className="bg-primary/5 hover:bg-primary/10 border-primary/20 text-primary text-[10px] uppercase font-bold"
+                    >
+                      <Plus className="h-4 w-4 mr-2" />
+                      Adicionar linha
+                    </Button>
+
+                    <div className="text-[10px] text-muted-foreground italic">
+                      * Classificação automática baseada na CIF: XXX.0 Sem déficit | XXX.1 Leve (&lt;4%) | XXX.2 Moderado (4-24%) | XXX.3 Grave (25-49%) | XXX.4 Completo (≥50%)
                     </div>
                   </div>
                 </TabsContent>
@@ -1436,47 +1549,133 @@ export default function FichaForm() {
 
                 {/* ══════════════ MAPA DA DOR ══════════════ */}
                 <TabsContent value="mapa-dor" className="space-y-6 mt-0">
-                  <div className="p-6 bg-card rounded-xl border shadow-sm space-y-4">
-                    <h3 className="font-semibold text-sm uppercase text-muted-foreground">
-                      Mapa da Dor (Canvas)
-                    </h3>
-                    <p className="text-sm text-muted-foreground">
-                      Desenhe na área abaixo para marcar os locais de dor do paciente.
+                  <div className="p-6 bg-card rounded-xl border shadow-sm space-y-8">
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-sm font-bold uppercase text-primary flex items-center gap-2">
+                        <Map className="h-4 w-4" />
+                        MAPA DA DOR
+                      </h3>
+                    </div>
+
+                    <p className="text-xs text-muted-foreground uppercase font-bold tracking-tight">
+                      Selecione a intensidade da dor e pinte as áreas afetadas diretamente sobre o corpo humano.
                     </p>
-                    <canvas
-                      ref={canvasRef}
-                      width={400}
-                      height={400}
-                      className="border-2 border-dashed border-muted-foreground rounded cursor-crosshair bg-white"
-                      style={{ display: "block", margin: "0 auto" }}
-                    />
-                    <div className="flex gap-2 justify-center">
-                      <Button
-                        type="button"
-                        variant="outline"
-                        onClick={() => {
-                          if (canvasRef.current) {
-                            const ctx = canvasRef.current.getContext("2d");
-                            if (ctx) {
-                              ctx.clearRect(
-                                0,
-                                0,
-                                canvasRef.current.width,
-                                canvasRef.current.height
-                              );
-                            }
-                          }
-                        }}
-                      >
-                        Limpar Canvas
-                      </Button>
-                      <Button
-                        type="button"
-                        variant="outline"
-                        onClick={salvarMapaDor}
-                      >
-                        Salvar Mapa
-                      </Button>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                      <div className="space-y-6">
+                        {/* Intensidade / Cor */}
+                        <div className="space-y-3">
+                          <label className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">INTENSIDADE / COR</label>
+                          <div className="flex flex-wrap gap-2">
+                            {[
+                              { label: "Leve (1-2)", color: "#4CAF50", value: "leve" },
+                              { label: "Leve-mod (3-4)", color: "#8BC34A", value: "leve-mod" },
+                              { label: "Moderada (5-6)", color: "#FFC107", value: "moderada" },
+                              { label: "Intensa (7-8)", color: "#FF9800", value: "intensa" },
+                              { label: "Severa (9-10)", color: "#F44336", value: "severa" },
+                            ].map((item) => (
+                              <button
+                                key={item.value}
+                                type="button"
+                                onClick={() => setBrushColor(item.color)}
+                                className={`h-8 w-8 rounded-full border-2 transition-all ${brushColor === item.color ? "border-primary scale-110 shadow-md" : "border-transparent opacity-70 hover:opacity-100"}`}
+                                style={{ backgroundColor: item.color }}
+                                title={item.label}
+                              />
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Tamanho do Pincel */}
+                        <div className="space-y-3">
+                          <label className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">TAMANHO DO PINCEL</label>
+                          <div className="flex items-center gap-4">
+                            <Slider
+                              value={[brushSize]}
+                              onValueChange={(val) => setBrushSize(val[0])}
+                              max={20}
+                              min={1}
+                              step={1}
+                              className="w-48"
+                            />
+                            <span className="text-xs font-bold text-primary">{brushSize}px</span>
+                          </div>
+                        </div>
+
+                        <div className="pt-4 border-t space-y-4">
+                          <div className="flex gap-2">
+                            <Button
+                              type="button"
+                              variant="outline"
+                              size="sm"
+                              className="text-[10px] uppercase font-bold flex-1"
+                              onClick={() => {
+                                const canvas = canvasRef.current;
+                                if (canvas) {
+                                  const ctx = canvas.getContext("2d");
+                                  if (ctx) ctx.clearRect(0, 0, canvas.width, canvas.height);
+                                }
+                              }}
+                            >
+                              Limpar
+                            </Button>
+                            <Button
+                              type="button"
+                              variant="default"
+                              size="sm"
+                              className="text-[10px] uppercase font-bold flex-1"
+                              onClick={salvarMapaDor}
+                            >
+                              Salvar Mapa
+                            </Button>
+                          </div>
+
+                          <div className="grid grid-cols-2 gap-2">
+                            <div className="flex items-center gap-2 text-[9px] uppercase font-bold">
+                              <div className="h-2 w-2 rounded-sm bg-[#4CAF50]" />
+                              <span>Leve (1-2)</span>
+                            </div>
+                            <div className="flex items-center gap-2 text-[9px] uppercase font-bold">
+                              <div className="h-2 w-2 rounded-sm bg-[#8BC34A]" />
+                              <span>Leve-mod (3-4)</span>
+                            </div>
+                            <div className="flex items-center gap-2 text-[9px] uppercase font-bold">
+                              <div className="h-2 w-2 rounded-sm bg-[#FFC107]" />
+                              <span>Moderada (5-6)</span>
+                            </div>
+                            <div className="flex items-center gap-2 text-[9px] uppercase font-bold">
+                              <div className="h-2 w-2 rounded-sm bg-[#FF9800]" />
+                              <span>Intensa (7-8)</span>
+                            </div>
+                            <div className="flex items-center gap-2 text-[9px] uppercase font-bold">
+                              <div className="h-2 w-2 rounded-sm bg-[#F44336]" />
+                              <span>Severa (9-10)</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="flex flex-col items-center justify-center p-4 border rounded-xl bg-white shadow-inner relative group">
+                        <canvas
+                          ref={canvasRef}
+                          width={400}
+                          height={500}
+                          className="cursor-crosshair touch-none"
+                          onMouseDown={(e) => {
+                            setIsDrawing(true);
+                            draw(e);
+                          }}
+                          onMouseMove={draw}
+                          onMouseUp={() => setIsDrawing(false)}
+                          onMouseOut={() => setIsDrawing(false)}
+                        />
+                        {/* Instrução overlay */}
+                        {!form.getValues("mapaDor") && (
+                          <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20 transition-opacity group-hover:opacity-10">
+                            <p className="text-xl font-black uppercase text-slate-300 transform -rotate-45">Desenhe Aqui</p>
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </TabsContent>
@@ -1547,6 +1746,165 @@ export default function FichaForm() {
                     >
                       <Plus className="w-4 h-4 mr-2" />
                       Adicionar Prescrição
+                    </Button>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 border-t pt-6 mt-6">
+                      <FormField
+                        control={form.control}
+                        name="prescricoesProgressao"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-[10px] uppercase font-bold text-muted-foreground">PROGRESSÃO DO TRATAMENTO</FormLabel>
+                            <FormControl>
+                              <Textarea
+                                placeholder="Descreva como o tratamento deve progredir..."
+                                className="min-h-[100px] text-xs"
+                                {...field}
+                                value={field.value || ""}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="prescricoesObservacao"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-[10px] uppercase font-bold text-muted-foreground">OBSERVAÇÕES ADICIONAIS</FormLabel>
+                            <FormControl>
+                              <Textarea
+                                placeholder="Observações e cuidados adicionais..."
+                                className="min-h-[100px] text-xs"
+                                {...field}
+                                value={field.value || ""}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+                  </div>
+                </TabsContent>
+
+                {/* ══════════════ EVOLUÇÃO ══════════════ */}
+                <TabsContent value="evolucao" className="space-y-6 mt-0">
+                  <div className="p-6 bg-card rounded-xl border shadow-sm space-y-6">
+                    <div className="flex items-center justify-between border-b pb-4">
+                      <h3 className="text-sm font-bold uppercase text-primary flex items-center gap-2">
+                        <History className="h-4 w-4" />
+                        EVOLUÇÃO DOS ATENDIMENTOS
+                      </h3>
+                    </div>
+
+                    <div className="space-y-6">
+                      {evolucoesFields.map((field, index) => (
+                        <div key={field.id} className="p-4 border rounded-xl bg-muted/10 space-y-4 relative">
+                          <div className="flex justify-between items-center text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-4">
+                            <span>Evolução #{index + 1}</span>
+                            <Button
+                              type="button"
+                              variant="ghost"
+                              size="sm"
+                              className="h-6 text-destructive hover:text-destructive hover:bg-destructive/10"
+                              onClick={() => removeEvolucao(index)}
+                            >
+                              Remover
+                            </Button>
+                          </div>
+
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <FormField
+                              control={form.control}
+                              name={`evolucoes.${index}.data`}
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel className="text-[10px] uppercase font-bold text-muted-foreground">DATA</FormLabel>
+                                  <FormControl>
+                                    <Input type="text" placeholder="DD/MM/AAAA" {...field} className="h-9 text-xs" />
+                                  </FormControl>
+                                </FormItem>
+                              )}
+                            />
+                            <FormField
+                              control={form.control}
+                              name={`evolucoes.${index}.fisioterapeuta`}
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel className="text-[10px] uppercase font-bold text-muted-foreground">FISIOTERAPEUTA / CREFITO</FormLabel>
+                                  <FormControl>
+                                    <Input {...field} className="h-9 text-xs" />
+                                  </FormControl>
+                                </FormItem>
+                              )}
+                            />
+                          </div>
+
+                          <FormField
+                            control={form.control}
+                            name={`evolucoes.${index}.descricao`}
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel className="text-[10px] uppercase font-bold text-muted-foreground">DESCRIÇÃO DA SESSÃO</FormLabel>
+                                <FormControl>
+                                  <Textarea
+                                    placeholder="Descreva o que foi realizado na sessão..."
+                                    className="min-h-[80px] text-xs resize-none"
+                                    {...field}
+                                  />
+                                </FormControl>
+                              </FormItem>
+                            )}
+                          />
+
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <FormField
+                              control={form.control}
+                              name={`evolucoes.${index}.resposta`}
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel className="text-[10px] uppercase font-bold text-muted-foreground">RESPOSTA AO TRATAMENTO</FormLabel>
+                                  <FormControl>
+                                    <Textarea
+                                      placeholder="Como o paciente respondeu..."
+                                      className="min-h-[80px] text-xs resize-none"
+                                      {...field}
+                                    />
+                                  </FormControl>
+                                </FormItem>
+                              )}
+                            />
+                            <FormField
+                              control={form.control}
+                              name={`evolucoes.${index}.ajuste`}
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel className="text-[10px] uppercase font-bold text-muted-foreground">AJUSTE DE CONDUTA</FormLabel>
+                                  <FormControl>
+                                    <Textarea
+                                      placeholder="Alterações na conduta terapêutica..."
+                                      className="min-h-[80px] text-xs resize-none"
+                                      {...field}
+                                    />
+                                  </FormControl>
+                                </FormItem>
+                              )}
+                            />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={() => appendEvolucao({ data: new Date().toLocaleDateString("pt-BR"), fisioterapeuta: "Dr. Daniel Barcellos — CREFITO 10 389091-F", descricao: "", resposta: "", ajuste: "" })}
+                      className="w-full md:w-auto h-10 px-6 border-dashed border-2 hover:bg-muted text-xs font-bold uppercase tracking-wider gap-2"
+                    >
+                      <Plus className="h-4 w-4" />
+                      Adicionar evolução
                     </Button>
                   </div>
                 </TabsContent>
