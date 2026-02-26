@@ -728,22 +728,6 @@ export default function FichaForm() {
                       )}
                     />
                   </div>
-
-                  {/* ── Assinaturas ─────────────────────────────────────── */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-10 p-6 bg-card rounded-xl border shadow-sm">
-                    <div className="text-center">
-                      <div className="border-t mt-10 mb-2" />
-                      <p className="text-sm text-muted-foreground">
-                        {form.watch("nomePaciente") || "Assinatura do Paciente"}
-                      </p>
-                    </div>
-                    <div className="text-center">
-                      <div className="border-t mt-10 mb-2" />
-                      <p className="text-sm text-muted-foreground">
-                        {consultor || "Assinatura do Fisioterapeuta"}
-                      </p>
-                    </div>
-                  </div>
                 </TabsContent>
 
 
@@ -916,13 +900,8 @@ export default function FichaForm() {
                   </div>
                 </TabsContent>
 
-                {/* ══════════════ AVALIAÇÃO ORTOPÉDICA AUTOMATIZADA ══════════════ */}
-                <TabsContent value="ortopedica" className="space-y-6 mt-0">
-                  <AvaliacaoOrtopedicaTab form={form} />
-                </TabsContent>
-
-                {/* ══════════════ ESCALAS FUNCIONAIS ══════════════ */}
-                <TabsContent value="escalas-funcionais" className="space-y-6 mt-0">
+                {/* ══════════════ SINAIS VITAIS ══════════════ */}
+                <TabsContent value="sinais-vitais" className="space-y-6 mt-0">
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-6 p-6 bg-card rounded-xl border shadow-sm">
                     {/* Campos manuais */}
                     {[
@@ -1352,6 +1331,11 @@ export default function FichaForm() {
                   </div>
                 </TabsContent>
 
+                {/* ══════════════ AVALIAÇÃO ORTOPÉDICA AUTOMATIZADA ══════════════ */}
+                <TabsContent value="ortopedica" className="space-y-6 mt-0">
+                  <AvaliacaoOrtopedicaTab form={form} />
+                </TabsContent>
+
                 <TabsContent value="escalas-funcionais" className="space-y-6 mt-0">
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6 bg-card rounded-xl border shadow-sm">
                     <FormField
@@ -1699,7 +1683,6 @@ export default function FichaForm() {
                       <Plus className="w-4 h-4 mr-2" />
                       Adicionar Prescrição
                     </Button>
-                    </div>
                   </div>
                 </TabsContent>
 
@@ -1886,11 +1869,102 @@ export default function FichaForm() {
                     />
                   </div>
                 </TabsContent>
+
+                {/* ══════════════ TERMO DE CONSENTIMENTO ══════════════ */}
+                <TabsContent value="termo" className="space-y-6 mt-0">
+                  <div className="p-8 bg-card rounded-xl border shadow-sm space-y-6">
+                    <div className="flex items-center gap-2 text-primary">
+                      <ShieldCheck className="h-5 w-5" />
+                      <h3 className="font-bold uppercase tracking-tight">Termo de Consentimento Livre e Esclarecido</h3>
+                    </div>
+
+                    <div className="bg-muted/30 p-6 rounded-lg text-sm text-muted-foreground leading-relaxed space-y-4 max-h-[400px] overflow-y-auto border shadow-inner">
+                      <p>
+                        Eu, abaixo assinado, autorizo o(a) fisioterapeuta responsável a realizar os procedimentos de avaliação e tratamento fisioterapêutico necessários ao meu quadro clínico.
+                      </p>
+                      <p>
+                        Fui devidamente informado(a) sobre os objetivos, benefícios, possíveis riscos e alternativas do tratamento proposto. Compreendo que a fisioterapia exige minha participação ativa para o sucesso dos resultados.
+                      </p>
+                      <p>
+                        Declaro que as informações por mim fornecidas nesta ficha de avaliação são verdadeiras. Autorizo também o uso de meus dados clínicos para fins estatísticos e científicos, garantido o total sigilo da minha identidade.
+                      </p>
+                      <p>
+                        Este consentimento poderá ser revogado por mim a qualquer momento, mediante comunicação formal ao profissional responsável.
+                      </p>
+                    </div>
+
+                    <FormField
+                      control={form.control}
+                      name="aceiteTermo"
+                      render={({ field }) => (
+                        <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 bg-primary/5 border-primary/20">
+                          <FormControl>
+                            <Checkbox
+                              checked={field.value}
+                              onCheckedChange={field.onChange}
+                            />
+                          </FormControl>
+                          <div className="space-y-1 leading-none">
+                            <FormLabel className="text-sm font-bold text-primary cursor-pointer">
+                              Li e aceito os termos descritos acima
+                            </FormLabel>
+                            <p className="text-xs text-muted-foreground">
+                              Ao marcar esta opção, você confirma que leu e concorda com o Termo de Consentimento.
+                            </p>
+                          </div>
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                </TabsContent>
+
+                {/* ══════════════ ASSINATURAS ══════════════ */}
+                <TabsContent value="assinaturas" className="space-y-6 mt-0">
+                  <div className="p-8 bg-card rounded-xl border shadow-sm">
+                    <div className="flex items-center gap-2 text-primary mb-8">
+                      <PenTool className="h-5 w-5" />
+                      <h3 className="font-bold uppercase tracking-tight">Assinaturas e Finalização</h3>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12 pt-10 pb-6">
+                      <div className="space-y-4 flex flex-col items-center">
+                        <div className="w-full max-w-xs border-b-2 border-slate-300 h-16 flex items-end justify-center">
+                          {/* Espaço para assinatura digital */}
+                        </div>
+                        <p className="text-xs font-bold uppercase text-slate-500 tracking-wider">
+                          {form.watch("nomePaciente") || "Assinatura do Paciente"}
+                        </p>
+                        <p className="text-[10px] text-muted-foreground">Documento assinado digitalmente</p>
+                      </div>
+
+                      <div className="space-y-4 flex flex-col items-center">
+                        <div className="w-full max-w-xs border-b-2 border-slate-300 h-16 flex items-end justify-center">
+                          {/* Espaço para assinatura digital */}
+                        </div>
+                        <p className="text-xs font-bold uppercase text-primary tracking-wider">
+                          {form.watch("consultor") || "Assinatura do Fisioterapeuta"}
+                        </p>
+                        <p className="text-[10px] text-muted-foreground italic text-center">
+                          Responsável Técnico
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="mt-12 pt-6 border-t flex flex-col md:flex-row items-center justify-between gap-4">
+                      <div className="text-[10px] text-muted-foreground uppercase font-medium">
+                        Local e Data: {new Date().toLocaleDateString('pt-BR')} — Florianópolis, SC
+                      </div>
+                      <p className="text-[10px] text-primary font-bold">
+                        ESTE DOCUMENTO É PARTE INTEGRANTE DO PRONTUÁRIO MÉDICO
+                      </p>
+                    </div>
+                  </div>
+                </TabsContent>
               </CardContent>
             </Card>
           </Tabs>
         </form>
       </Form>
-    </div>
+    </div >
   );
 }
