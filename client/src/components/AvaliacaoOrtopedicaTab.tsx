@@ -109,6 +109,32 @@ function normalizarValor(valor: any): string {
   return String(valor).toLowerCase().trim();
 }
 
+// Função para detectar o nível de probabilidade baseado no texto do resultado
+function detectarProbabilidade(resultado: string): string {
+  const textoLower = resultado.toLowerCase();
+  
+  // Palavras-chave para "Alta" probabilidade
+  if (textoLower.includes("alta probabilidade") || 
+      textoLower.includes("fortemente sugestivo") ||
+      textoLower.includes("confirma") ||
+      textoLower.includes(">90%") ||
+      textoLower.includes("alta especificidade") ||
+      textoLower.includes("padrão-ouro")) {
+    return "Alta";
+  }
+  
+  // Palavras-chave para "Moderada" probabilidade
+  if (textoLower.includes("probabilidade moderada") ||
+      textoLower.includes("possível") ||
+      textoLower.includes("sugere") ||
+      textoLower.includes("isolado")) {
+    return "Moderada";
+  }
+  
+  // Padrão: "Baixa" probabilidade
+  return "Baixa";
+}
+
 // Função para encontrar o resultado baseado nas combinações
 function encontrarResultado(regiao: string, testes: Record<string, any>): string {
   const combinacoes = COMBINACOES_POR_REGIAO[regiao];
@@ -158,6 +184,7 @@ function encontrarResultado(regiao: string, testes: Record<string, any>): string
 export function AvaliacaoOrtopedicaTab({ form }: AvaliacaoOrtopedicaTabProps) {
   const regiao = form.watch("regiaoAvaliada");
   const testesValues = form.watch("testesOrtopedicosJson") || {};
+  const diagnostico = form.watch("diagnosticoFuncionalProvavel");
 
   useEffect(() => {
     if (!regiao) return;
@@ -168,6 +195,10 @@ export function AvaliacaoOrtopedicaTab({ form }: AvaliacaoOrtopedicaTabProps) {
     const currentDiag = form.getValues("diagnosticoFuncionalProvavel");
     if (resultado !== currentDiag) {
       form.setValue("diagnosticoFuncionalProvavel", resultado);
+      
+      // Detectar e atualizar a probabilidade
+      const probabilidade = detectarProbabilidade(resultado);
+      form.setValue("probabilidadeClinica", probabilidade);
     }
   }, [regiao, JSON.stringify(testesValues), form]);
 
@@ -225,6 +256,9 @@ export function AvaliacaoOrtopedicaTab({ form }: AvaliacaoOrtopedicaTabProps) {
     );
   };
 
+  const probabilidadeAtual = diagnostico ? detectarProbabilidade(diagnostico) : "Baixa";
+  const badgeVariant = probabilidadeAtual === "Alta" ? "destructive" : probabilidadeAtual === "Moderada" ? "default" : "secondary";
+
   return (
     <div className="space-y-6 animate-in fade-in slide-in-from-bottom-2 duration-500">
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
@@ -257,6 +291,12 @@ export function AvaliacaoOrtopedicaTab({ form }: AvaliacaoOrtopedicaTabProps) {
                 <BookOpen className="w-3 h-3" />
                 Diagnóstico Automático
               </h4>
+              <div className="flex justify-between items-center">
+                <span className="text-xs">Evidência Clínica:</span>
+                <Badge variant={badgeVariant}>
+                  {probabilidadeAtual}
+                </Badge>
+              </div>
               <p className="text-[10px] text-muted-foreground leading-tight italic">
                 Baseado em combinações de testes clínicos validados.
               </p>
