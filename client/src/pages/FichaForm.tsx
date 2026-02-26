@@ -1091,53 +1091,25 @@ export default function FichaForm() {
 
                 {/* ══════════════ ANAMNESE ══════════════ */}
                 <TabsContent value="anamnese" className="space-y-6 mt-0">
-                  <div className="grid grid-cols-1 gap-6 p-6 bg-card rounded-xl border shadow-sm">
-                    <FormField
-                      control={form.control}
-                      name="hda"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>HDA – História da Doença Atual</FormLabel>
-                          <FormControl>
-                            <Textarea
-                              placeholder="Descreva a evolução dos sintomas atuais..."
-                              className="min-h-[120px]"
-                              {...field}
-                              value={field.value || ""}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="hdp"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>HDP – História Patológica Pregressa</FormLabel>
-                          <FormControl>
-                            <Textarea
-                              placeholder="Antecedentes médicos, cirurgias, alergias..."
-                              className="min-h-[120px]"
-                              {...field}
-                              value={field.value || ""}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
+                  <div className="p-6 bg-card rounded-xl border shadow-sm space-y-6">
+                    {/* Título da Seção */}
+                    <div className="flex items-center gap-3 border-b pb-4">
+                      <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary text-primary-foreground font-bold text-sm">4</div>
+                      <h3 className="text-sm font-bold uppercase tracking-wide">ANAMNESE COMPLETA</h3>
+                    </div>
+
+                    {/* HDA e HDP em duas colunas */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <FormField
                         control={form.control}
-                        name="inicioDor"
+                        name="hda"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Início da Dor</FormLabel>
+                            <FormLabel className="text-[10px] font-bold uppercase text-muted-foreground mb-2 block">HDA — HISTÓRIA DA DOENÇA ATUAL</FormLabel>
                             <FormControl>
-                              <Input
-                                placeholder="Quando a dor começou?"
+                              <Textarea
+                                placeholder="Descreva a história da doença atual..."
+                                className="min-h-[120px] text-xs resize-none"
                                 {...field}
                                 value={field.value || ""}
                               />
@@ -1148,21 +1120,190 @@ export default function FichaForm() {
                       />
                       <FormField
                         control={form.control}
-                        name="eva"
+                        name="hdp"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>EVA – Nível de Dor (0–10)</FormLabel>
+                            <FormLabel className="text-[10px] font-bold uppercase text-muted-foreground mb-2 block">HDP — HISTÓRIA DA DOENÇA PREGRESSA</FormLabel>
+                            <FormControl>
+                              <Textarea
+                                placeholder="Histórico de doenças anteriores..."
+                                className="min-h-[120px] text-xs resize-none"
+                                {...field}
+                                value={field.value || ""}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+
+                    {/* Escala EVA Visual */}
+                    <FormField
+                      control={form.control}
+                      name="eva"
+                      render={({ field }) => {
+                        const evaValue = field.value ?? 0;
+                        const evaColors = [
+                          "bg-green-600",
+                          "bg-green-500",
+                          "bg-green-400",
+                          "bg-lime-400",
+                          "bg-yellow-400",
+                          "bg-yellow-500",
+                          "bg-orange-400",
+                          "bg-orange-500",
+                          "bg-red-500",
+                          "bg-red-600",
+                          "bg-red-700",
+                        ];
+
+                        return (
+                          <FormItem>
+                            <FormLabel className="text-[10px] font-bold uppercase text-muted-foreground mb-3 block">EVA — ESCALA VISUAL ANALÓGICA DE DOR</FormLabel>
+                            <div className="space-y-3">
+                              {/* Barra de cores */}
+                              <div className="flex gap-1 h-8 rounded-lg overflow-hidden border">
+                                {evaColors.map((color, index) => (
+                                  <button
+                                    key={index}
+                                    type="button"
+                                    className={`flex-1 ${color} cursor-pointer transition-all hover:opacity-80 ${
+                                      evaValue === index ? "ring-2 ring-offset-2 ring-foreground" : ""
+                                    }`}
+                                    onClick={() => field.onChange(index)}
+                                    title={`${index} - ${index === 0 ? "Sem dor" : index === 10 ? "Dor máxima" : ""}`}
+                                  />
+                                ))}
+                              </div>
+                              {/* Rótulos e valor selecionado */}
+                              <div className="flex justify-between items-center text-[10px] font-bold">
+                                <span className="text-green-600">0 — Sem dor</span>
+                                <span className="text-muted-foreground">Selecionado: <span className="text-primary">{evaValue}</span></span>
+                                <span className="text-red-600">10 — Dor máxima</span>
+                              </div>
+                            </div>
+                            <FormMessage />
+                          </FormItem>
+                        );
+                      }}
+                    />
+
+                    {/* Campos de Dor em Grade */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 border-t pt-6">
+                      <FormField
+                        control={form.control}
+                        name="inicioDor"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-[10px] font-bold uppercase text-muted-foreground mb-1 block">INÍCIO DA DOR</FormLabel>
                             <FormControl>
                               <Input
-                                type="number"
-                                min="0"
-                                max="10"
-                                placeholder="0 a 10"
+                                placeholder="Ex: há 3 meses"
+                                className="h-9 text-xs"
                                 {...field}
-                                onChange={(e) =>
-                                  field.onChange(parseInt(e.target.value))
-                                }
-                                value={field.value ?? ""}
+                                value={field.value || ""}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="tipoDor"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-[10px] font-bold uppercase text-muted-foreground mb-1 block">TIPO DE DOR</FormLabel>
+                            <FormControl>
+                              <select
+                                className="w-full h-9 px-3 rounded-md border border-input bg-background text-xs"
+                                {...field}
+                                value={field.value || ""}
+                              >
+                                <option value="">Selecione</option>
+                                <option value="aguda">Aguda</option>
+                                <option value="cronica">Crônica</option>
+                                <option value="neuropatica">Neuropática</option>
+                                <option value="inflamatoria">Inflamatória</option>
+                                <option value="mecanica">Mecânica</option>
+                                <option value="outra">Outra</option>
+                              </select>
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="irradiacao"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-[10px] font-bold uppercase text-muted-foreground mb-1 block">IRRADIAÇÃO</FormLabel>
+                            <FormControl>
+                              <Input
+                                placeholder="Para onde irradia?"
+                                className="h-9 text-xs"
+                                {...field}
+                                value={field.value || ""}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+
+                    {/* Fatores e Cirurgias */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      <FormField
+                        control={form.control}
+                        name="fatoresMelhora"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-[10px] font-bold uppercase text-muted-foreground mb-1 block">FATORES DE MELHORA</FormLabel>
+                            <FormControl>
+                              <Input
+                                placeholder="O que melhora a dor?"
+                                className="h-9 text-xs"
+                                {...field}
+                                value={field.value || ""}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="fatoresPiora"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-[10px] font-bold uppercase text-muted-foreground mb-1 block">FATORES DE PIORA</FormLabel>
+                            <FormControl>
+                              <Input
+                                placeholder="O que piora a dor?"
+                                className="h-9 text-xs"
+                                {...field}
+                                value={field.value || ""}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="cirurgias"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-[10px] font-bold uppercase text-muted-foreground mb-1 block">CIRURGIAS ANTERIORES / PREVIAS</FormLabel>
+                            <FormControl>
+                              <Input
+                                placeholder="Descreva cirurgias"
+                                className="h-9 text-xs"
+                                {...field}
+                                value={field.value || ""}
                               />
                             </FormControl>
                             <FormMessage />
