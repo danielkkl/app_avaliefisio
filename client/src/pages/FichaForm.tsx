@@ -339,7 +339,6 @@ export default function FichaForm() {
                     { label: "Sinais Vitais", value: "sinais-vitais" },
                     { label: "Anamnese", value: "anamnese" },
                     { label: "ADM / Força", value: "adm-forca" },
-                    { label: "Testes Ortopédicos", value: "testes-ortopedicos" },
                     { label: "Avaliação Ortopédica", value: "ortopedica" },
                     { label: "Escalas Funcionais", value: "escalas-funcionais" },
                     { label: "Avaliação Física", value: "avaliacao-fisica" },
@@ -917,8 +916,13 @@ export default function FichaForm() {
                   </div>
                 </TabsContent>
 
-                {/* ══════════════ SINAIS VITAIS ══════════════ */}
-                <TabsContent value="sinais-vitais" className="space-y-6 mt-0">
+                {/* ══════════════ AVALIAÇÃO ORTOPÉDICA AUTOMATIZADA ══════════════ */}
+                <TabsContent value="ortopedica" className="space-y-6 mt-0">
+                  <AvaliacaoOrtopedicaTab form={form} />
+                </TabsContent>
+
+                {/* ══════════════ ESCALAS FUNCIONAIS ══════════════ */}
+                <TabsContent value="escalas-funcionais" className="space-y-6 mt-0">
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-6 p-6 bg-card rounded-xl border shadow-sm">
                     {/* Campos manuais */}
                     {[
@@ -1348,93 +1352,6 @@ export default function FichaForm() {
                   </div>
                 </TabsContent>
 
-                {/* ══════════════ TESTES ORTOPÉDICOS ══════════════ */}
-                <TabsContent value="testes-ortopedicos" className="space-y-6 mt-0">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 bg-card rounded-xl border shadow-sm">
-                    <FormField
-                      control={form.control}
-                      name="testeLachman"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Teste de Lachman</FormLabel>
-                          <Select
-                            onValueChange={field.onChange}
-                            value={field.value || ""}
-                          >
-                            <FormControl>
-                              <SelectTrigger>
-                                <SelectValue placeholder="Selecione" />
-                              </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                              <SelectItem value="Negativo">Negativo</SelectItem>
-                              <SelectItem value="Grau 1">Grau 1</SelectItem>
-                              <SelectItem value="Grau 2">Grau 2</SelectItem>
-                              <SelectItem value="Grau 3">Grau 3</SelectItem>
-                            </SelectContent>
-                          </Select>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    <FormField
-                      control={form.control}
-                      name="testeFimDeCurso"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Fim de Curso</FormLabel>
-                          <Select
-                            onValueChange={field.onChange}
-                            value={field.value || ""}
-                          >
-                            <FormControl>
-                              <SelectTrigger>
-                                <SelectValue placeholder="Selecione" />
-                              </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                              <SelectItem value="Duro">Duro</SelectItem>
-                              <SelectItem value="Macio">Macio</SelectItem>
-                            </SelectContent>
-                          </Select>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    <FormField
-                      control={form.control}
-                      name="testeNeer"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Teste de Neer</FormLabel>
-                          <Select
-                            onValueChange={field.onChange}
-                            value={field.value || ""}
-                          >
-                            <FormControl>
-                              <SelectTrigger>
-                                <SelectValue placeholder="Selecione" />
-                              </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                              <SelectItem value="Negativo">Negativo</SelectItem>
-                              <SelectItem value="Positivo">Positivo</SelectItem>
-                            </SelectContent>
-                          </Select>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                </TabsContent>
-
-                {/* ══════════════ AVALIAÇÃO ORTOPÉDICA AUTOMATIZADA ══════════════ */}
-                <TabsContent value="ortopedica" className="space-y-6 mt-0">
-                  <AvaliacaoOrtopedicaTab form={form} />
-                </TabsContent>
-                {/* ══════════════ ESCALAS FUNCIONAIS ══════════════ */}
                 <TabsContent value="escalas-funcionais" className="space-y-6 mt-0">
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6 bg-card rounded-xl border shadow-sm">
                     <FormField

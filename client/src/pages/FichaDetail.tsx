@@ -365,20 +365,6 @@ export default function FichaDetail() {
             </CardContent>
           </Card>
 
-          {/* Testes Ortopédicos */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Zap className="w-5 h-5 text-primary" />
-                Testes Ortopédicos
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="grid grid-cols-3 gap-4 text-sm">
-              <InfoRow label="Teste de Lachman" value={ficha.testeLachman} />
-              <InfoRow label="Fim de Curso" value={ficha.testeFimDeCurso} />
-              <InfoRow label="Teste de Neer" value={ficha.testeNeer} />
-            </CardContent>
-          </Card>
 
           {/* Avaliação Ortopédica Automatizada */}
           {ficha.regiaoAvaliada && (
