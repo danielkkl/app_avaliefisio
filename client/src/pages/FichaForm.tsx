@@ -1610,25 +1610,25 @@ export default function FichaForm() {
                       Prescrições
                     </h3>
 
-                    <div className="space-y-3">
+                    <div className="space-y-4">
                       {prescricaoFields.map((field, index) => (
                         <div
                           key={field.id}
-                          className="grid grid-cols-1 md:grid-cols-2 gap-3 items-end p-3 border rounded-lg"
+                          className="grid grid-cols-1 gap-4 p-4 border rounded-lg bg-muted/5 hover:bg-muted/10 transition-colors"
                         >
-                          <div>
-                            <label className="text-xs font-medium text-muted-foreground mb-1 block">
-                              Descrição
-                            </label>
-                            <Input
-                              placeholder="Descrição do exercício / técnica"
-                              {...form.register(
-                                `prescricoes.${index}.descricao` as any
-                              )}
-                            />
-                          </div>
-                          <div className="flex gap-2">
-                            <div className="flex-1">
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                              <label className="text-xs font-medium text-muted-foreground mb-1 block">
+                                Descrição
+                              </label>
+                              <Input
+                                placeholder="Descrição do exercício / técnica"
+                                {...form.register(
+                                  `prescricoes.${index}.descricao` as any
+                                )}
+                              />
+                            </div>
+                            <div>
                               <label className="text-xs font-medium text-muted-foreground mb-1 block">
                                 Frequência / Quantidade
                               </label>
@@ -1639,22 +1639,51 @@ export default function FichaForm() {
                                 )}
                               />
                             </div>
+                          </div>
+                          <div className="grid grid-cols-1 gap-4">
+                            <div>
+                              <label className="text-xs font-medium text-muted-foreground mb-1 block">
+                                Progressão de Tratamento
+                              </label>
+                              <Textarea
+                                placeholder="Como o exercício deve evoluir..."
+                                className="min-h-[80px] text-xs"
+                                {...form.register(
+                                  `prescricoes.${index}.progressao` as any
+                                )}
+                              />
+                            </div>
+                            <div>
+                              <label className="text-xs font-medium text-muted-foreground mb-1 block">
+                                Observações Adicionais
+                              </label>
+                              <Textarea
+                                placeholder="Cuidados, contraindicações ou observações..."
+                                className="min-h-[80px] text-xs"
+                                {...form.register(
+                                  `prescricoes.${index}.observacoes` as any
+                                )}
+                              />
+                            </div>
+                          </div>
+                          <div className="flex justify-end">
                             <Button
                               type="button"
                               variant="ghost"
-                              size="icon"
-                              className="mt-5"
+                              size="sm"
+                              className="text-destructive hover:text-destructive"
                               onClick={() => removePrescricao(index)}
                             >
-                              <Trash2 className="w-4 h-4 text-destructive" />
+                              <Trash2 className="w-4 h-4 mr-1" />
+                              Remover
                             </Button>
                           </div>
                         </div>
                       ))}
 
                       {prescricaoFields.length === 0 && (
-                        <p className="text-center text-muted-foreground text-sm py-4">
-                          Nenhuma prescrição adicionada.
+                        <p className="text-center text-muted-foreground text-sm py-6 italic">
+                          Nenhuma prescrição adicionada. Clique em "Adicionar Prescrição" para começar.
                         </p>
                       )}
                     </div>
@@ -1664,50 +1693,12 @@ export default function FichaForm() {
                       variant="outline"
                       size="sm"
                       onClick={() =>
-                        appendPrescricao({ descricao: "", frequencia: "" } as any)
+                        appendPrescricao({ descricao: "", frequencia: "", progressao: "", observacoes: "" } as any)
                       }
                     >
                       <Plus className="w-4 h-4 mr-2" />
                       Adicionar Prescrição
                     </Button>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 border-t pt-6 mt-6">
-                      <FormField
-                        control={form.control}
-                        name="prescricoesProgressao"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-[10px] uppercase font-bold text-muted-foreground">PROGRESSÃO DO TRATAMENTO</FormLabel>
-                            <FormControl>
-                              <Textarea
-                                placeholder="Descreva como o tratamento deve progredir..."
-                                className="min-h-[100px] text-xs"
-                                {...field}
-                                value={field.value || ""}
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                      <FormField
-                        control={form.control}
-                        name="prescricoesObservacao"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-[10px] uppercase font-bold text-muted-foreground">OBSERVAÇÕES ADICIONAIS</FormLabel>
-                            <FormControl>
-                              <Textarea
-                                placeholder="Observações e cuidados adicionais..."
-                                className="min-h-[100px] text-xs"
-                                {...field}
-                                value={field.value || ""}
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
                     </div>
                   </div>
                 </TabsContent>

@@ -114,9 +114,7 @@ export const fichas = pgTable("fichas", {
   estrategiasLongo: text("estrategias_longo"),
   interpretacaoAutomatica: text("interpretacao_automatica"),
 
-  // Prescrições - Campos adicionais
-  prescricoesProgressao: text("prescricoes_progressao"),
-  prescricoesObservacao: text("prescricoes_observacao"),
+
 
   // Termo de Consentimento
   aceitoTermo: boolean("aceito_termo").default(false),

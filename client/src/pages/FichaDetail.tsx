@@ -474,37 +474,46 @@ export default function FichaDetail() {
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
-              <div className="space-y-3">
-                {prescricoes.map((p, i) => (
+               <div className="space-y-4">
+                {prescricoes.map((p: any, i: number) => (
                   <div
                     key={i}
-                    className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 border rounded-xl bg-muted/5 hover:bg-muted/10 transition-colors"
+                    className="grid grid-cols-1 gap-4 p-4 border rounded-xl bg-muted/5 hover:bg-muted/10 transition-colors"
                   >
-                    <div className="flex-1">
-                      <p className="text-sm font-bold uppercase tracking-tight">{p.descricao || "-"}</p>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <p className="text-[10px] font-bold uppercase text-muted-foreground mb-1">Descrição</p>
+                        <p className="text-sm font-semibold">{p.descricao || "-"}</p>
+                      </div>
+                      <div>
+                        <p className="text-[10px] font-bold uppercase text-muted-foreground mb-1">Frequência / Quantidade</p>
+                        <Badge variant="secondary" className="text-[10px] font-bold uppercase px-3">
+                          {p.frequencia || "-"}
+                        </Badge>
+                      </div>
                     </div>
-                    <Badge variant="secondary" className="w-fit text-[10px] font-bold uppercase px-3">
-                      {p.frequencia || "-"}
-                    </Badge>
+                    {(p.progressao || p.observacoes) && (
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-t pt-4">
+                        {p.progressao && (
+                          <div>
+                            <p className="text-[10px] font-bold uppercase text-primary mb-1">Progressão de Tratamento</p>
+                            <p className="text-xs text-muted-foreground leading-relaxed italic">{p.progressao}</p>
+                          </div>
+                        )}
+                        {p.observacoes && (
+                          <div>
+                            <p className="text-[10px] font-bold uppercase text-primary mb-1">Observações Adicionais</p>
+                            <p className="text-xs text-muted-foreground leading-relaxed italic">{p.observacoes}</p>
+                          </div>
+                        )}
+                      </div>
+                    )}
                   </div>
                 ))}
                 {prescricoes.length === 0 && (
                   <p className="text-center text-muted-foreground text-xs uppercase font-bold py-6">Nenhuma prescrição registrada.</p>
                 )}
               </div>
-
-              {(ficha.prescricoesProgressao || ficha.prescricoesObservacao) && (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-t pt-6 mt-6">
-                  <div className="p-4 bg-muted/10 rounded-xl space-y-2">
-                    <p className="text-[10px] font-bold uppercase text-primary">Progressão do Tratamento</p>
-                    <p className="text-sm text-muted-foreground italic leading-relaxed">{ficha.prescricoesProgressao || "-"}</p>
-                  </div>
-                  <div className="p-4 bg-muted/10 rounded-xl space-y-2">
-                    <p className="text-[10px] font-bold uppercase text-primary">Observações Adicionais</p>
-                    <p className="text-sm text-muted-foreground italic leading-relaxed">{ficha.prescricoesObservacao || "-"}</p>
-                  </div>
-                </div>
-              )}
             </CardContent>
           </Card>
 
