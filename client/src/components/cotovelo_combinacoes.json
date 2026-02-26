@@ -1,0 +1,22 @@
+[
+  {
+    "cozen": "negativo",
+    "mill": "negativo",
+    "resultado": "Sem evidência clínica significativa de Epicondilite Lateral."
+  },
+  {
+    "cozen": "negativo",
+    "mill": "positivo",
+    "resultado": "Probabilidade moderada de disfunção dos extensores do punho."
+  },
+  {
+    "cozen": "positivo",
+    "mill": "negativo",
+    "resultado": "Probabilidade moderada de disfunção dos extensores do punho."
+  },
+  {
+    "cozen": "positivo",
+    "mill": "positivo",
+    "resultado": "Alta probabilidade de Epicondilite Lateral (Cozen e Mill positivos)."
+  }
+]

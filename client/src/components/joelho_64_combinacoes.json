@@ -1,0 +1,450 @@
+[
+  {
+    "lachman_grau": 0,
+    "lachman_fim": "duro",
+    "pivot_shift": "negativo",
+    "mcmurray": "negativo",
+    "resultado": "Sem evidência clínica significativa de lesão do LCA. Sem evidência clínica de lesão meniscal."
+  },
+  {
+    "lachman_grau": 0,
+    "lachman_fim": "duro",
+    "pivot_shift": "negativo",
+    "mcmurray": "estalido",
+    "resultado": "Sem evidência clínica significativa de lesão do LCA. Estalido isolado pode sugerir alteração meniscal."
+  },
+  {
+    "lachman_grau": 0,
+    "lachman_fim": "duro",
+    "pivot_shift": "negativo",
+    "mcmurray": "dor",
+    "resultado": "Sem evidência clínica significativa de lesão do LCA. Dor isolada no McMurray é inespecífica."
+  },
+  {
+    "lachman_grau": 0,
+    "lachman_fim": "duro",
+    "pivot_shift": "negativo",
+    "mcmurray": "estalido + dor",
+    "resultado": "Sem evidência clínica significativa de lesão do LCA. Achado sugestivo de lesão meniscal."
+  },
+  {
+    "lachman_grau": 0,
+    "lachman_fim": "duro",
+    "pivot_shift": "positivo",
+    "mcmurray": "negativo",
+    "resultado": "Pivot positivo sugere instabilidade rotacional; investigar LCA. Sem evidência clínica de lesão meniscal."
+  },
+  {
+    "lachman_grau": 0,
+    "lachman_fim": "duro",
+    "pivot_shift": "positivo",
+    "mcmurray": "estalido",
+    "resultado": "Pivot positivo sugere instabilidade rotacional; investigar LCA. Estalido isolado pode sugerir alteração meniscal."
+  },
+  {
+    "lachman_grau": 0,
+    "lachman_fim": "duro",
+    "pivot_shift": "positivo",
+    "mcmurray": "dor",
+    "resultado": "Pivot positivo sugere instabilidade rotacional; investigar LCA. Dor isolada no McMurray é inespecífica."
+  },
+  {
+    "lachman_grau": 0,
+    "lachman_fim": "duro",
+    "pivot_shift": "positivo",
+    "mcmurray": "estalido + dor",
+    "resultado": "Pivot positivo sugere instabilidade rotacional; investigar LCA. Achado sugestivo de lesão meniscal."
+  },
+  {
+    "lachman_grau": 0,
+    "lachman_fim": "macio",
+    "pivot_shift": "negativo",
+    "mcmurray": "negativo",
+    "resultado": "Sem evidência clínica significativa de lesão do LCA. Sem evidência clínica de lesão meniscal."
+  },
+  {
+    "lachman_grau": 0,
+    "lachman_fim": "macio",
+    "pivot_shift": "negativo",
+    "mcmurray": "estalido",
+    "resultado": "Sem evidência clínica significativa de lesão do LCA. Estalido isolado pode sugerir alteração meniscal."
+  },
+  {
+    "lachman_grau": 0,
+    "lachman_fim": "macio",
+    "pivot_shift": "negativo",
+    "mcmurray": "dor",
+    "resultado": "Sem evidência clínica significativa de lesão do LCA. Dor isolada no McMurray é inespecífica."
+  },
+  {
+    "lachman_grau": 0,
+    "lachman_fim": "macio",
+    "pivot_shift": "negativo",
+    "mcmurray": "estalido + dor",
+    "resultado": "Sem evidência clínica significativa de lesão do LCA. Achado sugestivo de lesão meniscal."
+  },
+  {
+    "lachman_grau": 0,
+    "lachman_fim": "macio",
+    "pivot_shift": "positivo",
+    "mcmurray": "negativo",
+    "resultado": "Pivot positivo sugere instabilidade rotacional; investigar LCA. Sem evidência clínica de lesão meniscal."
+  },
+  {
+    "lachman_grau": 0,
+    "lachman_fim": "macio",
+    "pivot_shift": "positivo",
+    "mcmurray": "estalido",
+    "resultado": "Pivot positivo sugere instabilidade rotacional; investigar LCA. Estalido isolado pode sugerir alteração meniscal."
+  },
+  {
+    "lachman_grau": 0,
+    "lachman_fim": "macio",
+    "pivot_shift": "positivo",
+    "mcmurray": "dor",
+    "resultado": "Pivot positivo sugere instabilidade rotacional; investigar LCA. Dor isolada no McMurray é inespecífica."
+  },
+  {
+    "lachman_grau": 0,
+    "lachman_fim": "macio",
+    "pivot_shift": "positivo",
+    "mcmurray": "estalido + dor",
+    "resultado": "Pivot positivo sugere instabilidade rotacional; investigar LCA. Achado sugestivo de lesão meniscal."
+  },
+  {
+    "lachman_grau": 1,
+    "lachman_fim": "duro",
+    "pivot_shift": "negativo",
+    "mcmurray": "negativo",
+    "resultado": "Possível frouxidão leve do LCA; correlacionar clinicamente. Sem evidência clínica de lesão meniscal."
+  },
+  {
+    "lachman_grau": 1,
+    "lachman_fim": "duro",
+    "pivot_shift": "negativo",
+    "mcmurray": "estalido",
+    "resultado": "Possível frouxidão leve do LCA; correlacionar clinicamente. Estalido isolado pode sugerir alteração meniscal."
+  },
+  {
+    "lachman_grau": 1,
+    "lachman_fim": "duro",
+    "pivot_shift": "negativo",
+    "mcmurray": "dor",
+    "resultado": "Possível frouxidão leve do LCA; correlacionar clinicamente. Dor isolada no McMurray é inespecífica."
+  },
+  {
+    "lachman_grau": 1,
+    "lachman_fim": "duro",
+    "pivot_shift": "negativo",
+    "mcmurray": "estalido + dor",
+    "resultado": "Possível frouxidão leve do LCA; correlacionar clinicamente. Achado sugestivo de lesão meniscal."
+  },
+  {
+    "lachman_grau": 1,
+    "lachman_fim": "duro",
+    "pivot_shift": "positivo",
+    "mcmurray": "negativo",
+    "resultado": "Possível frouxidão leve do LCA; correlacionar clinicamente. Sem evidência clínica de lesão meniscal."
+  },
+  {
+    "lachman_grau": 1,
+    "lachman_fim": "duro",
+    "pivot_shift": "positivo",
+    "mcmurray": "estalido",
+    "resultado": "Possível frouxidão leve do LCA; correlacionar clinicamente. Estalido isolado pode sugerir alteração meniscal."
+  },
+  {
+    "lachman_grau": 1,
+    "lachman_fim": "duro",
+    "pivot_shift": "positivo",
+    "mcmurray": "dor",
+    "resultado": "Possível frouxidão leve do LCA; correlacionar clinicamente. Dor isolada no McMurray é inespecífica."
+  },
+  {
+    "lachman_grau": 1,
+    "lachman_fim": "duro",
+    "pivot_shift": "positivo",
+    "mcmurray": "estalido + dor",
+    "resultado": "Possível frouxidão leve do LCA; correlacionar clinicamente. Achado sugestivo de lesão meniscal."
+  },
+  {
+    "lachman_grau": 1,
+    "lachman_fim": "macio",
+    "pivot_shift": "negativo",
+    "mcmurray": "negativo",
+    "resultado": "Possível frouxidão leve do LCA; correlacionar clinicamente. Sem evidência clínica de lesão meniscal."
+  },
+  {
+    "lachman_grau": 1,
+    "lachman_fim": "macio",
+    "pivot_shift": "negativo",
+    "mcmurray": "estalido",
+    "resultado": "Possível frouxidão leve do LCA; correlacionar clinicamente. Estalido isolado pode sugerir alteração meniscal."
+  },
+  {
+    "lachman_grau": 1,
+    "lachman_fim": "macio",
+    "pivot_shift": "negativo",
+    "mcmurray": "dor",
+    "resultado": "Possível frouxidão leve do LCA; correlacionar clinicamente. Dor isolada no McMurray é inespecífica."
+  },
+  {
+    "lachman_grau": 1,
+    "lachman_fim": "macio",
+    "pivot_shift": "negativo",
+    "mcmurray": "estalido + dor",
+    "resultado": "Possível frouxidão leve do LCA; correlacionar clinicamente. Achado sugestivo de lesão meniscal."
+  },
+  {
+    "lachman_grau": 1,
+    "lachman_fim": "macio",
+    "pivot_shift": "positivo",
+    "mcmurray": "negativo",
+    "resultado": "Possível frouxidão leve do LCA; correlacionar clinicamente. Sem evidência clínica de lesão meniscal."
+  },
+  {
+    "lachman_grau": 1,
+    "lachman_fim": "macio",
+    "pivot_shift": "positivo",
+    "mcmurray": "estalido",
+    "resultado": "Possível frouxidão leve do LCA; correlacionar clinicamente. Estalido isolado pode sugerir alteração meniscal."
+  },
+  {
+    "lachman_grau": 1,
+    "lachman_fim": "macio",
+    "pivot_shift": "positivo",
+    "mcmurray": "dor",
+    "resultado": "Possível frouxidão leve do LCA; correlacionar clinicamente. Dor isolada no McMurray é inespecífica."
+  },
+  {
+    "lachman_grau": 1,
+    "lachman_fim": "macio",
+    "pivot_shift": "positivo",
+    "mcmurray": "estalido + dor",
+    "resultado": "Possível frouxidão leve do LCA; correlacionar clinicamente. Achado sugestivo de lesão meniscal."
+  },
+  {
+    "lachman_grau": 2,
+    "lachman_fim": "duro",
+    "pivot_shift": "negativo",
+    "mcmurray": "negativo",
+    "resultado": "Sem evidência clínica significativa de lesão do LCA. Sem evidência clínica de lesão meniscal."
+  },
+  {
+    "lachman_grau": 2,
+    "lachman_fim": "duro",
+    "pivot_shift": "negativo",
+    "mcmurray": "estalido",
+    "resultado": "Sem evidência clínica significativa de lesão do LCA. Estalido isolado pode sugerir alteração meniscal."
+  },
+  {
+    "lachman_grau": 2,
+    "lachman_fim": "duro",
+    "pivot_shift": "negativo",
+    "mcmurray": "dor",
+    "resultado": "Sem evidência clínica significativa de lesão do LCA. Dor isolada no McMurray é inespecífica."
+  },
+  {
+    "lachman_grau": 2,
+    "lachman_fim": "duro",
+    "pivot_shift": "negativo",
+    "mcmurray": "estalido + dor",
+    "resultado": "Sem evidência clínica significativa de lesão do LCA. Achado sugestivo de lesão meniscal."
+  },
+  {
+    "lachman_grau": 2,
+    "lachman_fim": "duro",
+    "pivot_shift": "positivo",
+    "mcmurray": "negativo",
+    "resultado": "Pivot positivo sugere instabilidade rotacional; investigar LCA. Sem evidência clínica de lesão meniscal."
+  },
+  {
+    "lachman_grau": 2,
+    "lachman_fim": "duro",
+    "pivot_shift": "positivo",
+    "mcmurray": "estalido",
+    "resultado": "Pivot positivo sugere instabilidade rotacional; investigar LCA. Estalido isolado pode sugerir alteração meniscal."
+  },
+  {
+    "lachman_grau": 2,
+    "lachman_fim": "duro",
+    "pivot_shift": "positivo",
+    "mcmurray": "dor",
+    "resultado": "Pivot positivo sugere instabilidade rotacional; investigar LCA. Dor isolada no McMurray é inespecífica."
+  },
+  {
+    "lachman_grau": 2,
+    "lachman_fim": "duro",
+    "pivot_shift": "positivo",
+    "mcmurray": "estalido + dor",
+    "resultado": "Pivot positivo sugere instabilidade rotacional; investigar LCA. Achado sugestivo de lesão meniscal."
+  },
+  {
+    "lachman_grau": 2,
+    "lachman_fim": "macio",
+    "pivot_shift": "negativo",
+    "mcmurray": "negativo",
+    "resultado": "Alta probabilidade de lesão do LCA. Sem evidência clínica de lesão meniscal."
+  },
+  {
+    "lachman_grau": 2,
+    "lachman_fim": "macio",
+    "pivot_shift": "negativo",
+    "mcmurray": "estalido",
+    "resultado": "Alta probabilidade de lesão do LCA. Estalido isolado pode sugerir alteração meniscal."
+  },
+  {
+    "lachman_grau": 2,
+    "lachman_fim": "macio",
+    "pivot_shift": "negativo",
+    "mcmurray": "dor",
+    "resultado": "Alta probabilidade de lesão do LCA. Dor isolada no McMurray é inespecífica."
+  },
+  {
+    "lachman_grau": 2,
+    "lachman_fim": "macio",
+    "pivot_shift": "negativo",
+    "mcmurray": "estalido + dor",
+    "resultado": "Alta probabilidade de lesão do LCA. Achado sugestivo de lesão meniscal."
+  },
+  {
+    "lachman_grau": 2,
+    "lachman_fim": "macio",
+    "pivot_shift": "positivo",
+    "mcmurray": "negativo",
+    "resultado": "Alta probabilidade de ruptura do LCA com instabilidade rotacional confirmada. Sem evidência clínica de lesão meniscal."
+  },
+  {
+    "lachman_grau": 2,
+    "lachman_fim": "macio",
+    "pivot_shift": "positivo",
+    "mcmurray": "estalido",
+    "resultado": "Alta probabilidade de ruptura do LCA com instabilidade rotacional confirmada. Estalido isolado pode sugerir alteração meniscal."
+  },
+  {
+    "lachman_grau": 2,
+    "lachman_fim": "macio",
+    "pivot_shift": "positivo",
+    "mcmurray": "dor",
+    "resultado": "Alta probabilidade de ruptura do LCA com instabilidade rotacional confirmada. Dor isolada no McMurray é inespecífica."
+  },
+  {
+    "lachman_grau": 2,
+    "lachman_fim": "macio",
+    "pivot_shift": "positivo",
+    "mcmurray": "estalido + dor",
+    "resultado": "Alta probabilidade de ruptura do LCA com instabilidade rotacional confirmada. Achado sugestivo de lesão meniscal."
+  },
+  {
+    "lachman_grau": 3,
+    "lachman_fim": "duro",
+    "pivot_shift": "negativo",
+    "mcmurray": "negativo",
+    "resultado": "Sem evidência clínica significativa de lesão do LCA. Sem evidência clínica de lesão meniscal."
+  },
+  {
+    "lachman_grau": 3,
+    "lachman_fim": "duro",
+    "pivot_shift": "negativo",
+    "mcmurray": "estalido",
+    "resultado": "Sem evidência clínica significativa de lesão do LCA. Estalido isolado pode sugerir alteração meniscal."
+  },
+  {
+    "lachman_grau": 3,
+    "lachman_fim": "duro",
+    "pivot_shift": "negativo",
+    "mcmurray": "dor",
+    "resultado": "Sem evidência clínica significativa de lesão do LCA. Dor isolada no McMurray é inespecífica."
+  },
+  {
+    "lachman_grau": 3,
+    "lachman_fim": "duro",
+    "pivot_shift": "negativo",
+    "mcmurray": "estalido + dor",
+    "resultado": "Sem evidência clínica significativa de lesão do LCA. Achado sugestivo de lesão meniscal."
+  },
+  {
+    "lachman_grau": 3,
+    "lachman_fim": "duro",
+    "pivot_shift": "positivo",
+    "mcmurray": "negativo",
+    "resultado": "Pivot positivo sugere instabilidade rotacional; investigar LCA. Sem evidência clínica de lesão meniscal."
+  },
+  {
+    "lachman_grau": 3,
+    "lachman_fim": "duro",
+    "pivot_shift": "positivo",
+    "mcmurray": "estalido",
+    "resultado": "Pivot positivo sugere instabilidade rotacional; investigar LCA. Estalido isolado pode sugerir alteração meniscal."
+  },
+  {
+    "lachman_grau": 3,
+    "lachman_fim": "duro",
+    "pivot_shift": "positivo",
+    "mcmurray": "dor",
+    "resultado": "Pivot positivo sugere instabilidade rotacional; investigar LCA. Dor isolada no McMurray é inespecífica."
+  },
+  {
+    "lachman_grau": 3,
+    "lachman_fim": "duro",
+    "pivot_shift": "positivo",
+    "mcmurray": "estalido + dor",
+    "resultado": "Pivot positivo sugere instabilidade rotacional; investigar LCA. Achado sugestivo de lesão meniscal."
+  },
+  {
+    "lachman_grau": 3,
+    "lachman_fim": "macio",
+    "pivot_shift": "negativo",
+    "mcmurray": "negativo",
+    "resultado": "Alta probabilidade de lesão do LCA. Sem evidência clínica de lesão meniscal."
+  },
+  {
+    "lachman_grau": 3,
+    "lachman_fim": "macio",
+    "pivot_shift": "negativo",
+    "mcmurray": "estalido",
+    "resultado": "Alta probabilidade de lesão do LCA. Estalido isolado pode sugerir alteração meniscal."
+  },
+  {
+    "lachman_grau": 3,
+    "lachman_fim": "macio",
+    "pivot_shift": "negativo",
+    "mcmurray": "dor",
+    "resultado": "Alta probabilidade de lesão do LCA. Dor isolada no McMurray é inespecífica."
+  },
+  {
+    "lachman_grau": 3,
+    "lachman_fim": "macio",
+    "pivot_shift": "negativo",
+    "mcmurray": "estalido + dor",
+    "resultado": "Alta probabilidade de lesão do LCA. Achado sugestivo de lesão meniscal."
+  },
+  {
+    "lachman_grau": 3,
+    "lachman_fim": "macio",
+    "pivot_shift": "positivo",
+    "mcmurray": "negativo",
+    "resultado": "Alta probabilidade de ruptura do LCA com instabilidade rotacional confirmada. Sem evidência clínica de lesão meniscal."
+  },
+  {
+    "lachman_grau": 3,
+    "lachman_fim": "macio",
+    "pivot_shift": "positivo",
+    "mcmurray": "estalido",
+    "resultado": "Alta probabilidade de ruptura do LCA com instabilidade rotacional confirmada. Estalido isolado pode sugerir alteração meniscal."
+  },
+  {
+    "lachman_grau": 3,
+    "lachman_fim": "macio",
+    "pivot_shift": "positivo",
+    "mcmurray": "dor",
+    "resultado": "Alta probabilidade de ruptura do LCA com instabilidade rotacional confirmada. Dor isolada no McMurray é inespecífica."
+  },
+  {
+    "lachman_grau": 3,
+    "lachman_fim": "macio",
+    "pivot_shift": "positivo",
+    "mcmurray": "estalido + dor",
+    "resultado": "Alta probabilidade de ruptura do LCA com instabilidade rotacional confirmada. Achado sugestivo de lesão meniscal."
+  }
+]

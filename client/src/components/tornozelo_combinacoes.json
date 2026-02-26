@@ -1,0 +1,22 @@
+[
+  {
+    "gaveta_anterior": "negativo",
+    "teste_thompson": "negativo",
+    "resultado": "Sem evidência clínica de instabilidade do Ligamento Talofibular Anterior. Sem evidência clínica de ruptura do Tendão de Aquiles. Sem achados clínicos relevantes para instabilidade ligamentar lateral ou ruptura do Aquiles."
+  },
+  {
+    "gaveta_anterior": "negativo",
+    "teste_thompson": "positivo",
+    "resultado": "Sem evidência clínica de instabilidade do Ligamento Talofibular Anterior. Alta probabilidade de ruptura do Tendão de Aquiles (alta especificidade). Achados isolados; correlacionar com mecanismo de trauma e exame físico complementar."
+  },
+  {
+    "gaveta_anterior": "positivo",
+    "teste_thompson": "negativo",
+    "resultado": "Alta probabilidade de lesão do Ligamento Talofibular Anterior (instabilidade lateral). Sem evidência clínica de ruptura do Tendão de Aquiles. Achados isolados; correlacionar com mecanismo de trauma e exame físico complementar."
+  },
+  {
+    "gaveta_anterior": "positivo",
+    "teste_thompson": "positivo",
+    "resultado": "Alta probabilidade de lesão do Ligamento Talofibular Anterior (instabilidade lateral). Alta probabilidade de ruptura do Tendão de Aquiles (alta especificidade). Possível trauma multiestrutural envolvendo estruturas ligamentares e tendíneas."
+  }
+]

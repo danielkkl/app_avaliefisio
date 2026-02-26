@@ -1,0 +1,1282 @@
+[
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "negativo",
+    "drop_arm": "negativo",
+    "apprehension": "negativo",
+    "relocation": "negativo",
+    "resultado": "Sem evidência clínica significativa de patologia específica do ombro."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "negativo",
+    "drop_arm": "negativo",
+    "apprehension": "negativo",
+    "relocation": "positivo",
+    "resultado": "Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "negativo",
+    "drop_arm": "negativo",
+    "apprehension": "positivo",
+    "relocation": "negativo",
+    "resultado": "Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "negativo",
+    "drop_arm": "negativo",
+    "apprehension": "positivo",
+    "relocation": "positivo",
+    "resultado": "Alta probabilidade de instabilidade anterior do ombro."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "negativo",
+    "drop_arm": "positivo",
+    "apprehension": "negativo",
+    "relocation": "negativo",
+    "resultado": "Possível comprometimento do manguito rotador."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "negativo",
+    "drop_arm": "positivo",
+    "apprehension": "negativo",
+    "relocation": "positivo",
+    "resultado": "Possível comprometimento do manguito rotador. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "negativo",
+    "drop_arm": "positivo",
+    "apprehension": "positivo",
+    "relocation": "negativo",
+    "resultado": "Possível comprometimento do manguito rotador. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "negativo",
+    "drop_arm": "positivo",
+    "apprehension": "positivo",
+    "relocation": "positivo",
+    "resultado": "Possível comprometimento do manguito rotador. Alta probabilidade de instabilidade anterior do ombro."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "positivo",
+    "drop_arm": "negativo",
+    "apprehension": "negativo",
+    "relocation": "negativo",
+    "resultado": "Possível comprometimento do manguito rotador."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "positivo",
+    "drop_arm": "negativo",
+    "apprehension": "negativo",
+    "relocation": "positivo",
+    "resultado": "Possível comprometimento do manguito rotador. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "positivo",
+    "drop_arm": "negativo",
+    "apprehension": "positivo",
+    "relocation": "negativo",
+    "resultado": "Possível comprometimento do manguito rotador. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "positivo",
+    "drop_arm": "negativo",
+    "apprehension": "positivo",
+    "relocation": "positivo",
+    "resultado": "Possível comprometimento do manguito rotador. Alta probabilidade de instabilidade anterior do ombro."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "positivo",
+    "drop_arm": "positivo",
+    "apprehension": "negativo",
+    "relocation": "negativo",
+    "resultado": "Alta probabilidade de lesão do manguito rotador."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "positivo",
+    "drop_arm": "positivo",
+    "apprehension": "negativo",
+    "relocation": "positivo",
+    "resultado": "Alta probabilidade de lesão do manguito rotador. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "positivo",
+    "drop_arm": "positivo",
+    "apprehension": "positivo",
+    "relocation": "negativo",
+    "resultado": "Alta probabilidade de lesão do manguito rotador. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "positivo",
+    "drop_arm": "positivo",
+    "apprehension": "positivo",
+    "relocation": "positivo",
+    "resultado": "Alta probabilidade de lesão do manguito rotador. Alta probabilidade de instabilidade anterior do ombro."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "negativo",
+    "drop_arm": "negativo",
+    "apprehension": "negativo",
+    "relocation": "negativo",
+    "resultado": "Sem evidência clínica significativa de patologia específica do ombro."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "negativo",
+    "drop_arm": "negativo",
+    "apprehension": "negativo",
+    "relocation": "positivo",
+    "resultado": "Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "negativo",
+    "drop_arm": "negativo",
+    "apprehension": "positivo",
+    "relocation": "negativo",
+    "resultado": "Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "negativo",
+    "drop_arm": "negativo",
+    "apprehension": "positivo",
+    "relocation": "positivo",
+    "resultado": "Alta probabilidade de instabilidade anterior do ombro."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "negativo",
+    "drop_arm": "positivo",
+    "apprehension": "negativo",
+    "relocation": "negativo",
+    "resultado": "Possível comprometimento do manguito rotador."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "negativo",
+    "drop_arm": "positivo",
+    "apprehension": "negativo",
+    "relocation": "positivo",
+    "resultado": "Possível comprometimento do manguito rotador. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "negativo",
+    "drop_arm": "positivo",
+    "apprehension": "positivo",
+    "relocation": "negativo",
+    "resultado": "Possível comprometimento do manguito rotador. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "negativo",
+    "drop_arm": "positivo",
+    "apprehension": "positivo",
+    "relocation": "positivo",
+    "resultado": "Possível comprometimento do manguito rotador. Alta probabilidade de instabilidade anterior do ombro."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "positivo",
+    "drop_arm": "negativo",
+    "apprehension": "negativo",
+    "relocation": "negativo",
+    "resultado": "Possível comprometimento do manguito rotador."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "positivo",
+    "drop_arm": "negativo",
+    "apprehension": "negativo",
+    "relocation": "positivo",
+    "resultado": "Possível comprometimento do manguito rotador. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "positivo",
+    "drop_arm": "negativo",
+    "apprehension": "positivo",
+    "relocation": "negativo",
+    "resultado": "Possível comprometimento do manguito rotador. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "positivo",
+    "drop_arm": "negativo",
+    "apprehension": "positivo",
+    "relocation": "positivo",
+    "resultado": "Possível comprometimento do manguito rotador. Alta probabilidade de instabilidade anterior do ombro."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "positivo",
+    "drop_arm": "positivo",
+    "apprehension": "negativo",
+    "relocation": "negativo",
+    "resultado": "Alta probabilidade de lesão do manguito rotador."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "positivo",
+    "drop_arm": "positivo",
+    "apprehension": "negativo",
+    "relocation": "positivo",
+    "resultado": "Alta probabilidade de lesão do manguito rotador. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "positivo",
+    "drop_arm": "positivo",
+    "apprehension": "positivo",
+    "relocation": "negativo",
+    "resultado": "Alta probabilidade de lesão do manguito rotador. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "positivo",
+    "drop_arm": "positivo",
+    "apprehension": "positivo",
+    "relocation": "positivo",
+    "resultado": "Alta probabilidade de lesão do manguito rotador. Alta probabilidade de instabilidade anterior do ombro."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "negativo",
+    "drop_arm": "negativo",
+    "apprehension": "negativo",
+    "relocation": "negativo",
+    "resultado": "Sem evidência clínica significativa de patologia específica do ombro."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "negativo",
+    "drop_arm": "negativo",
+    "apprehension": "negativo",
+    "relocation": "positivo",
+    "resultado": "Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "negativo",
+    "drop_arm": "negativo",
+    "apprehension": "positivo",
+    "relocation": "negativo",
+    "resultado": "Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "negativo",
+    "drop_arm": "negativo",
+    "apprehension": "positivo",
+    "relocation": "positivo",
+    "resultado": "Alta probabilidade de instabilidade anterior do ombro."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "negativo",
+    "drop_arm": "positivo",
+    "apprehension": "negativo",
+    "relocation": "negativo",
+    "resultado": "Possível comprometimento do manguito rotador."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "negativo",
+    "drop_arm": "positivo",
+    "apprehension": "negativo",
+    "relocation": "positivo",
+    "resultado": "Possível comprometimento do manguito rotador. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "negativo",
+    "drop_arm": "positivo",
+    "apprehension": "positivo",
+    "relocation": "negativo",
+    "resultado": "Possível comprometimento do manguito rotador. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "negativo",
+    "drop_arm": "positivo",
+    "apprehension": "positivo",
+    "relocation": "positivo",
+    "resultado": "Possível comprometimento do manguito rotador. Alta probabilidade de instabilidade anterior do ombro."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "positivo",
+    "drop_arm": "negativo",
+    "apprehension": "negativo",
+    "relocation": "negativo",
+    "resultado": "Possível comprometimento do manguito rotador."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "positivo",
+    "drop_arm": "negativo",
+    "apprehension": "negativo",
+    "relocation": "positivo",
+    "resultado": "Possível comprometimento do manguito rotador. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "positivo",
+    "drop_arm": "negativo",
+    "apprehension": "positivo",
+    "relocation": "negativo",
+    "resultado": "Possível comprometimento do manguito rotador. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "positivo",
+    "drop_arm": "negativo",
+    "apprehension": "positivo",
+    "relocation": "positivo",
+    "resultado": "Possível comprometimento do manguito rotador. Alta probabilidade de instabilidade anterior do ombro."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "positivo",
+    "drop_arm": "positivo",
+    "apprehension": "negativo",
+    "relocation": "negativo",
+    "resultado": "Alta probabilidade de lesão do manguito rotador."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "positivo",
+    "drop_arm": "positivo",
+    "apprehension": "negativo",
+    "relocation": "positivo",
+    "resultado": "Alta probabilidade de lesão do manguito rotador. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "positivo",
+    "drop_arm": "positivo",
+    "apprehension": "positivo",
+    "relocation": "negativo",
+    "resultado": "Alta probabilidade de lesão do manguito rotador. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "positivo",
+    "drop_arm": "positivo",
+    "apprehension": "positivo",
+    "relocation": "positivo",
+    "resultado": "Alta probabilidade de lesão do manguito rotador. Alta probabilidade de instabilidade anterior do ombro."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "negativo",
+    "drop_arm": "negativo",
+    "apprehension": "negativo",
+    "relocation": "negativo",
+    "resultado": "Probabilidade moderada de Síndrome do Impacto Subacromial."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "negativo",
+    "drop_arm": "negativo",
+    "apprehension": "negativo",
+    "relocation": "positivo",
+    "resultado": "Probabilidade moderada de Síndrome do Impacto Subacromial. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "negativo",
+    "drop_arm": "negativo",
+    "apprehension": "positivo",
+    "relocation": "negativo",
+    "resultado": "Probabilidade moderada de Síndrome do Impacto Subacromial. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "negativo",
+    "drop_arm": "negativo",
+    "apprehension": "positivo",
+    "relocation": "positivo",
+    "resultado": "Probabilidade moderada de Síndrome do Impacto Subacromial. Alta probabilidade de instabilidade anterior do ombro."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "negativo",
+    "drop_arm": "positivo",
+    "apprehension": "negativo",
+    "relocation": "negativo",
+    "resultado": "Probabilidade moderada de Síndrome do Impacto Subacromial. Possível comprometimento do manguito rotador."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "negativo",
+    "drop_arm": "positivo",
+    "apprehension": "negativo",
+    "relocation": "positivo",
+    "resultado": "Probabilidade moderada de Síndrome do Impacto Subacromial. Possível comprometimento do manguito rotador. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "negativo",
+    "drop_arm": "positivo",
+    "apprehension": "positivo",
+    "relocation": "negativo",
+    "resultado": "Probabilidade moderada de Síndrome do Impacto Subacromial. Possível comprometimento do manguito rotador. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "negativo",
+    "drop_arm": "positivo",
+    "apprehension": "positivo",
+    "relocation": "positivo",
+    "resultado": "Probabilidade moderada de Síndrome do Impacto Subacromial. Possível comprometimento do manguito rotador. Alta probabilidade de instabilidade anterior do ombro."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "positivo",
+    "drop_arm": "negativo",
+    "apprehension": "negativo",
+    "relocation": "negativo",
+    "resultado": "Probabilidade moderada de Síndrome do Impacto Subacromial. Possível comprometimento do manguito rotador."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "positivo",
+    "drop_arm": "negativo",
+    "apprehension": "negativo",
+    "relocation": "positivo",
+    "resultado": "Probabilidade moderada de Síndrome do Impacto Subacromial. Possível comprometimento do manguito rotador. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "positivo",
+    "drop_arm": "negativo",
+    "apprehension": "positivo",
+    "relocation": "negativo",
+    "resultado": "Probabilidade moderada de Síndrome do Impacto Subacromial. Possível comprometimento do manguito rotador. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "positivo",
+    "drop_arm": "negativo",
+    "apprehension": "positivo",
+    "relocation": "positivo",
+    "resultado": "Probabilidade moderada de Síndrome do Impacto Subacromial. Possível comprometimento do manguito rotador. Alta probabilidade de instabilidade anterior do ombro."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "positivo",
+    "drop_arm": "positivo",
+    "apprehension": "negativo",
+    "relocation": "negativo",
+    "resultado": "Probabilidade moderada de Síndrome do Impacto Subacromial. Alta probabilidade de lesão do manguito rotador."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "positivo",
+    "drop_arm": "positivo",
+    "apprehension": "negativo",
+    "relocation": "positivo",
+    "resultado": "Probabilidade moderada de Síndrome do Impacto Subacromial. Alta probabilidade de lesão do manguito rotador. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "positivo",
+    "drop_arm": "positivo",
+    "apprehension": "positivo",
+    "relocation": "negativo",
+    "resultado": "Probabilidade moderada de Síndrome do Impacto Subacromial. Alta probabilidade de lesão do manguito rotador. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "negativo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "positivo",
+    "drop_arm": "positivo",
+    "apprehension": "positivo",
+    "relocation": "positivo",
+    "resultado": "Probabilidade moderada de Síndrome do Impacto Subacromial. Alta probabilidade de lesão do manguito rotador. Alta probabilidade de instabilidade anterior do ombro."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "negativo",
+    "drop_arm": "negativo",
+    "apprehension": "negativo",
+    "relocation": "negativo",
+    "resultado": "Sem evidência clínica significativa de patologia específica do ombro."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "negativo",
+    "drop_arm": "negativo",
+    "apprehension": "negativo",
+    "relocation": "positivo",
+    "resultado": "Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "negativo",
+    "drop_arm": "negativo",
+    "apprehension": "positivo",
+    "relocation": "negativo",
+    "resultado": "Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "negativo",
+    "drop_arm": "negativo",
+    "apprehension": "positivo",
+    "relocation": "positivo",
+    "resultado": "Alta probabilidade de instabilidade anterior do ombro."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "negativo",
+    "drop_arm": "positivo",
+    "apprehension": "negativo",
+    "relocation": "negativo",
+    "resultado": "Possível comprometimento do manguito rotador."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "negativo",
+    "drop_arm": "positivo",
+    "apprehension": "negativo",
+    "relocation": "positivo",
+    "resultado": "Possível comprometimento do manguito rotador. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "negativo",
+    "drop_arm": "positivo",
+    "apprehension": "positivo",
+    "relocation": "negativo",
+    "resultado": "Possível comprometimento do manguito rotador. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "negativo",
+    "drop_arm": "positivo",
+    "apprehension": "positivo",
+    "relocation": "positivo",
+    "resultado": "Possível comprometimento do manguito rotador. Alta probabilidade de instabilidade anterior do ombro."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "positivo",
+    "drop_arm": "negativo",
+    "apprehension": "negativo",
+    "relocation": "negativo",
+    "resultado": "Possível comprometimento do manguito rotador."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "positivo",
+    "drop_arm": "negativo",
+    "apprehension": "negativo",
+    "relocation": "positivo",
+    "resultado": "Possível comprometimento do manguito rotador. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "positivo",
+    "drop_arm": "negativo",
+    "apprehension": "positivo",
+    "relocation": "negativo",
+    "resultado": "Possível comprometimento do manguito rotador. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "positivo",
+    "drop_arm": "negativo",
+    "apprehension": "positivo",
+    "relocation": "positivo",
+    "resultado": "Possível comprometimento do manguito rotador. Alta probabilidade de instabilidade anterior do ombro."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "positivo",
+    "drop_arm": "positivo",
+    "apprehension": "negativo",
+    "relocation": "negativo",
+    "resultado": "Alta probabilidade de lesão do manguito rotador."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "positivo",
+    "drop_arm": "positivo",
+    "apprehension": "negativo",
+    "relocation": "positivo",
+    "resultado": "Alta probabilidade de lesão do manguito rotador. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "positivo",
+    "drop_arm": "positivo",
+    "apprehension": "positivo",
+    "relocation": "negativo",
+    "resultado": "Alta probabilidade de lesão do manguito rotador. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "positivo",
+    "drop_arm": "positivo",
+    "apprehension": "positivo",
+    "relocation": "positivo",
+    "resultado": "Alta probabilidade de lesão do manguito rotador. Alta probabilidade de instabilidade anterior do ombro."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "negativo",
+    "drop_arm": "negativo",
+    "apprehension": "negativo",
+    "relocation": "negativo",
+    "resultado": "Probabilidade moderada de Síndrome do Impacto Subacromial."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "negativo",
+    "drop_arm": "negativo",
+    "apprehension": "negativo",
+    "relocation": "positivo",
+    "resultado": "Probabilidade moderada de Síndrome do Impacto Subacromial. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "negativo",
+    "drop_arm": "negativo",
+    "apprehension": "positivo",
+    "relocation": "negativo",
+    "resultado": "Probabilidade moderada de Síndrome do Impacto Subacromial. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "negativo",
+    "drop_arm": "negativo",
+    "apprehension": "positivo",
+    "relocation": "positivo",
+    "resultado": "Probabilidade moderada de Síndrome do Impacto Subacromial. Alta probabilidade de instabilidade anterior do ombro."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "negativo",
+    "drop_arm": "positivo",
+    "apprehension": "negativo",
+    "relocation": "negativo",
+    "resultado": "Probabilidade moderada de Síndrome do Impacto Subacromial. Possível comprometimento do manguito rotador."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "negativo",
+    "drop_arm": "positivo",
+    "apprehension": "negativo",
+    "relocation": "positivo",
+    "resultado": "Probabilidade moderada de Síndrome do Impacto Subacromial. Possível comprometimento do manguito rotador. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "negativo",
+    "drop_arm": "positivo",
+    "apprehension": "positivo",
+    "relocation": "negativo",
+    "resultado": "Probabilidade moderada de Síndrome do Impacto Subacromial. Possível comprometimento do manguito rotador. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "negativo",
+    "drop_arm": "positivo",
+    "apprehension": "positivo",
+    "relocation": "positivo",
+    "resultado": "Probabilidade moderada de Síndrome do Impacto Subacromial. Possível comprometimento do manguito rotador. Alta probabilidade de instabilidade anterior do ombro."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "positivo",
+    "drop_arm": "negativo",
+    "apprehension": "negativo",
+    "relocation": "negativo",
+    "resultado": "Probabilidade moderada de Síndrome do Impacto Subacromial. Possível comprometimento do manguito rotador."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "positivo",
+    "drop_arm": "negativo",
+    "apprehension": "negativo",
+    "relocation": "positivo",
+    "resultado": "Probabilidade moderada de Síndrome do Impacto Subacromial. Possível comprometimento do manguito rotador. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "positivo",
+    "drop_arm": "negativo",
+    "apprehension": "positivo",
+    "relocation": "negativo",
+    "resultado": "Probabilidade moderada de Síndrome do Impacto Subacromial. Possível comprometimento do manguito rotador. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "positivo",
+    "drop_arm": "negativo",
+    "apprehension": "positivo",
+    "relocation": "positivo",
+    "resultado": "Probabilidade moderada de Síndrome do Impacto Subacromial. Possível comprometimento do manguito rotador. Alta probabilidade de instabilidade anterior do ombro."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "positivo",
+    "drop_arm": "positivo",
+    "apprehension": "negativo",
+    "relocation": "negativo",
+    "resultado": "Probabilidade moderada de Síndrome do Impacto Subacromial. Alta probabilidade de lesão do manguito rotador."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "positivo",
+    "drop_arm": "positivo",
+    "apprehension": "negativo",
+    "relocation": "positivo",
+    "resultado": "Probabilidade moderada de Síndrome do Impacto Subacromial. Alta probabilidade de lesão do manguito rotador. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "positivo",
+    "drop_arm": "positivo",
+    "apprehension": "positivo",
+    "relocation": "negativo",
+    "resultado": "Probabilidade moderada de Síndrome do Impacto Subacromial. Alta probabilidade de lesão do manguito rotador. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "negativo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "positivo",
+    "drop_arm": "positivo",
+    "apprehension": "positivo",
+    "relocation": "positivo",
+    "resultado": "Probabilidade moderada de Síndrome do Impacto Subacromial. Alta probabilidade de lesão do manguito rotador. Alta probabilidade de instabilidade anterior do ombro."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "negativo",
+    "drop_arm": "negativo",
+    "apprehension": "negativo",
+    "relocation": "negativo",
+    "resultado": "Probabilidade moderada de Síndrome do Impacto Subacromial."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "negativo",
+    "drop_arm": "negativo",
+    "apprehension": "negativo",
+    "relocation": "positivo",
+    "resultado": "Probabilidade moderada de Síndrome do Impacto Subacromial. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "negativo",
+    "drop_arm": "negativo",
+    "apprehension": "positivo",
+    "relocation": "negativo",
+    "resultado": "Probabilidade moderada de Síndrome do Impacto Subacromial. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "negativo",
+    "drop_arm": "negativo",
+    "apprehension": "positivo",
+    "relocation": "positivo",
+    "resultado": "Probabilidade moderada de Síndrome do Impacto Subacromial. Alta probabilidade de instabilidade anterior do ombro."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "negativo",
+    "drop_arm": "positivo",
+    "apprehension": "negativo",
+    "relocation": "negativo",
+    "resultado": "Probabilidade moderada de Síndrome do Impacto Subacromial. Possível comprometimento do manguito rotador."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "negativo",
+    "drop_arm": "positivo",
+    "apprehension": "negativo",
+    "relocation": "positivo",
+    "resultado": "Probabilidade moderada de Síndrome do Impacto Subacromial. Possível comprometimento do manguito rotador. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "negativo",
+    "drop_arm": "positivo",
+    "apprehension": "positivo",
+    "relocation": "negativo",
+    "resultado": "Probabilidade moderada de Síndrome do Impacto Subacromial. Possível comprometimento do manguito rotador. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "negativo",
+    "drop_arm": "positivo",
+    "apprehension": "positivo",
+    "relocation": "positivo",
+    "resultado": "Probabilidade moderada de Síndrome do Impacto Subacromial. Possível comprometimento do manguito rotador. Alta probabilidade de instabilidade anterior do ombro."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "positivo",
+    "drop_arm": "negativo",
+    "apprehension": "negativo",
+    "relocation": "negativo",
+    "resultado": "Probabilidade moderada de Síndrome do Impacto Subacromial. Possível comprometimento do manguito rotador."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "positivo",
+    "drop_arm": "negativo",
+    "apprehension": "negativo",
+    "relocation": "positivo",
+    "resultado": "Probabilidade moderada de Síndrome do Impacto Subacromial. Possível comprometimento do manguito rotador. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "positivo",
+    "drop_arm": "negativo",
+    "apprehension": "positivo",
+    "relocation": "negativo",
+    "resultado": "Probabilidade moderada de Síndrome do Impacto Subacromial. Possível comprometimento do manguito rotador. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "positivo",
+    "drop_arm": "negativo",
+    "apprehension": "positivo",
+    "relocation": "positivo",
+    "resultado": "Probabilidade moderada de Síndrome do Impacto Subacromial. Possível comprometimento do manguito rotador. Alta probabilidade de instabilidade anterior do ombro."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "positivo",
+    "drop_arm": "positivo",
+    "apprehension": "negativo",
+    "relocation": "negativo",
+    "resultado": "Probabilidade moderada de Síndrome do Impacto Subacromial. Alta probabilidade de lesão do manguito rotador."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "positivo",
+    "drop_arm": "positivo",
+    "apprehension": "negativo",
+    "relocation": "positivo",
+    "resultado": "Probabilidade moderada de Síndrome do Impacto Subacromial. Alta probabilidade de lesão do manguito rotador. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "positivo",
+    "drop_arm": "positivo",
+    "apprehension": "positivo",
+    "relocation": "negativo",
+    "resultado": "Probabilidade moderada de Síndrome do Impacto Subacromial. Alta probabilidade de lesão do manguito rotador. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "negativo",
+    "infraespinhal": "positivo",
+    "drop_arm": "positivo",
+    "apprehension": "positivo",
+    "relocation": "positivo",
+    "resultado": "Probabilidade moderada de Síndrome do Impacto Subacromial. Alta probabilidade de lesão do manguito rotador. Alta probabilidade de instabilidade anterior do ombro."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "negativo",
+    "drop_arm": "negativo",
+    "apprehension": "negativo",
+    "relocation": "negativo",
+    "resultado": "Alta probabilidade de Síndrome do Impacto Subacromial (Cluster de Park completo)."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "negativo",
+    "drop_arm": "negativo",
+    "apprehension": "negativo",
+    "relocation": "positivo",
+    "resultado": "Alta probabilidade de Síndrome do Impacto Subacromial (Cluster de Park completo). Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "negativo",
+    "drop_arm": "negativo",
+    "apprehension": "positivo",
+    "relocation": "negativo",
+    "resultado": "Alta probabilidade de Síndrome do Impacto Subacromial (Cluster de Park completo). Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "negativo",
+    "drop_arm": "negativo",
+    "apprehension": "positivo",
+    "relocation": "positivo",
+    "resultado": "Alta probabilidade de Síndrome do Impacto Subacromial (Cluster de Park completo). Alta probabilidade de instabilidade anterior do ombro."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "negativo",
+    "drop_arm": "positivo",
+    "apprehension": "negativo",
+    "relocation": "negativo",
+    "resultado": "Alta probabilidade de Síndrome do Impacto Subacromial (Cluster de Park completo). Possível comprometimento do manguito rotador."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "negativo",
+    "drop_arm": "positivo",
+    "apprehension": "negativo",
+    "relocation": "positivo",
+    "resultado": "Alta probabilidade de Síndrome do Impacto Subacromial (Cluster de Park completo). Possível comprometimento do manguito rotador. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "negativo",
+    "drop_arm": "positivo",
+    "apprehension": "positivo",
+    "relocation": "negativo",
+    "resultado": "Alta probabilidade de Síndrome do Impacto Subacromial (Cluster de Park completo). Possível comprometimento do manguito rotador. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "negativo",
+    "drop_arm": "positivo",
+    "apprehension": "positivo",
+    "relocation": "positivo",
+    "resultado": "Alta probabilidade de Síndrome do Impacto Subacromial (Cluster de Park completo). Possível comprometimento do manguito rotador. Alta probabilidade de instabilidade anterior do ombro."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "positivo",
+    "drop_arm": "negativo",
+    "apprehension": "negativo",
+    "relocation": "negativo",
+    "resultado": "Alta probabilidade de Síndrome do Impacto Subacromial (Cluster de Park completo). Possível comprometimento do manguito rotador."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "positivo",
+    "drop_arm": "negativo",
+    "apprehension": "negativo",
+    "relocation": "positivo",
+    "resultado": "Alta probabilidade de Síndrome do Impacto Subacromial (Cluster de Park completo). Possível comprometimento do manguito rotador. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "positivo",
+    "drop_arm": "negativo",
+    "apprehension": "positivo",
+    "relocation": "negativo",
+    "resultado": "Alta probabilidade de Síndrome do Impacto Subacromial (Cluster de Park completo). Possível comprometimento do manguito rotador. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "positivo",
+    "drop_arm": "negativo",
+    "apprehension": "positivo",
+    "relocation": "positivo",
+    "resultado": "Alta probabilidade de Síndrome do Impacto Subacromial (Cluster de Park completo). Possível comprometimento do manguito rotador. Alta probabilidade de instabilidade anterior do ombro."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "positivo",
+    "drop_arm": "positivo",
+    "apprehension": "negativo",
+    "relocation": "negativo",
+    "resultado": "Alta probabilidade de Síndrome do Impacto Subacromial (Cluster de Park completo). Alta probabilidade de lesão do manguito rotador."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "positivo",
+    "drop_arm": "positivo",
+    "apprehension": "negativo",
+    "relocation": "positivo",
+    "resultado": "Alta probabilidade de Síndrome do Impacto Subacromial (Cluster de Park completo). Alta probabilidade de lesão do manguito rotador. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "positivo",
+    "drop_arm": "positivo",
+    "apprehension": "positivo",
+    "relocation": "negativo",
+    "resultado": "Alta probabilidade de Síndrome do Impacto Subacromial (Cluster de Park completo). Alta probabilidade de lesão do manguito rotador. Possível instabilidade anterior do ombro."
+  },
+  {
+    "neer": "positivo",
+    "hawkins_kennedy": "positivo",
+    "arco_doloroso": "positivo",
+    "infraespinhal": "positivo",
+    "drop_arm": "positivo",
+    "apprehension": "positivo",
+    "relocation": "positivo",
+    "resultado": "Alta probabilidade de Síndrome do Impacto Subacromial (Cluster de Park completo). Alta probabilidade de lesão do manguito rotador. Alta probabilidade de instabilidade anterior do ombro."
+  }
+]

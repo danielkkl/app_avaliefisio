@@ -1,0 +1,74 @@
+[
+  {
+    "faber": "negativo",
+    "fadir": "negativo",
+    "trendelenburg": "negativo",
+    "resultado": "Sem forte evidência clínica de impacto femoroacetabular. Sem evidência clínica de fraqueza significativa do glúteo médio."
+  },
+  {
+    "faber": "negativo",
+    "fadir": "negativo",
+    "trendelenburg": "positivo",
+    "resultado": "Sem forte evidência clínica de impacto femoroacetabular. Trendelenburg positivo indica fraqueza do glúteo médio."
+  },
+  {
+    "faber": "negativo",
+    "fadir": "positivo",
+    "trendelenburg": "negativo",
+    "resultado": "FADIR positivo sugere possível impacto femoroacetabular. Sem evidência clínica de fraqueza significativa do glúteo médio."
+  },
+  {
+    "faber": "negativo",
+    "fadir": "positivo",
+    "trendelenburg": "positivo",
+    "resultado": "FADIR positivo sugere possível impacto femoroacetabular. Trendelenburg positivo indica fraqueza do glúteo médio."
+  },
+  {
+    "faber": "dor anterior",
+    "fadir": "negativo",
+    "trendelenburg": "negativo",
+    "resultado": "Sem forte evidência clínica de impacto femoroacetabular. Sem evidência clínica de fraqueza significativa do glúteo médio."
+  },
+  {
+    "faber": "dor anterior",
+    "fadir": "negativo",
+    "trendelenburg": "positivo",
+    "resultado": "Sem forte evidência clínica de impacto femoroacetabular. Trendelenburg positivo indica fraqueza do glúteo médio."
+  },
+  {
+    "faber": "dor anterior",
+    "fadir": "positivo",
+    "trendelenburg": "negativo",
+    "resultado": "Alta probabilidade de Impacto Femoroacetabular (IFA). Sem evidência clínica de fraqueza significativa do glúteo médio."
+  },
+  {
+    "faber": "dor anterior",
+    "fadir": "positivo",
+    "trendelenburg": "positivo",
+    "resultado": "Alta probabilidade de Impacto Femoroacetabular (IFA). Trendelenburg positivo indica fraqueza do glúteo médio."
+  },
+  {
+    "faber": "dor posterior",
+    "fadir": "negativo",
+    "trendelenburg": "negativo",
+    "resultado": "Sem forte evidência clínica de impacto femoroacetabular. Dor posterior no FABER sugere possível disfunção sacroilíaca. Sem evidência clínica de fraqueza significativa do glúteo médio."
+  },
+  {
+    "faber": "dor posterior",
+    "fadir": "negativo",
+    "trendelenburg": "positivo",
+    "resultado": "Sem forte evidência clínica de impacto femoroacetabular. Dor posterior no FABER sugere possível disfunção sacroilíaca. Trendelenburg positivo indica fraqueza do glúteo médio."
+  },
+  {
+    "faber": "dor posterior",
+    "fadir": "positivo",
+    "trendelenburg": "negativo",
+    "resultado": "FADIR positivo sugere possível impacto femoroacetabular. Dor posterior no FABER sugere possível disfunção sacroilíaca. Sem evidência clínica de fraqueza significativa do glúteo médio."
+  },
+  {
+    "faber": "dor posterior",
+    "fadir": "positivo",
+    "trendelenburg": "positivo",
+    "resultado": "FADIR positivo sugere possível impacto femoroacetabular. Dor posterior no FABER sugere possível disfunção sacroilíaca. Trendelenburg positivo indica fraqueza do glúteo médio."
+  }
+]

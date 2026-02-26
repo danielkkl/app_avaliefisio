@@ -1,0 +1,50 @@
+[
+  {
+    "lasegue": "negativo",
+    "slump": "negativo",
+    "schober": "normal",
+    "resultado": "Sem forte evidência clínica de compressão radicular. Mobilidade lombar preservada no Teste de Schober."
+  },
+  {
+    "lasegue": "negativo",
+    "slump": "negativo",
+    "schober": "reduzido",
+    "resultado": "Sem forte evidência clínica de compressão radicular. Teste de Schober reduzido sugere hipomobilidade lombar."
+  },
+  {
+    "lasegue": "negativo",
+    "slump": "positivo",
+    "schober": "normal",
+    "resultado": "Probabilidade moderada de envolvimento neural lombar. Mobilidade lombar preservada no Teste de Schober."
+  },
+  {
+    "lasegue": "negativo",
+    "slump": "positivo",
+    "schober": "reduzido",
+    "resultado": "Probabilidade moderada de envolvimento neural lombar. Teste de Schober reduzido sugere hipomobilidade lombar."
+  },
+  {
+    "lasegue": "positivo",
+    "slump": "negativo",
+    "schober": "normal",
+    "resultado": "Probabilidade moderada de envolvimento neural lombar. Mobilidade lombar preservada no Teste de Schober."
+  },
+  {
+    "lasegue": "positivo",
+    "slump": "negativo",
+    "schober": "reduzido",
+    "resultado": "Probabilidade moderada de envolvimento neural lombar. Teste de Schober reduzido sugere hipomobilidade lombar."
+  },
+  {
+    "lasegue": "positivo",
+    "slump": "positivo",
+    "schober": "normal",
+    "resultado": "Alta probabilidade de compressão radicular lombar (Lasègue + Slump positivos). Mobilidade lombar preservada no Teste de Schober."
+  },
+  {
+    "lasegue": "positivo",
+    "slump": "positivo",
+    "schober": "reduzido",
+    "resultado": "Alta probabilidade de compressão radicular lombar (Lasègue + Slump positivos). Teste de Schober reduzido sugere hipomobilidade lombar."
+  }
+]

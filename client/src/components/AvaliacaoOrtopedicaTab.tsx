@@ -25,6 +25,15 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
+// Importar os dados de combinações
+import ombroData from "./ombro_combinacoes_completas.json";
+import cotoveloData from "./cotovelo_combinacoes.json";
+import cervicalData from "./coluna_cervical_cluster_wainner.json";
+import lombarData from "./coluna_lombar_combinacoes.json";
+import quadrilData from "./quadril_combinacoes.json";
+import joelhoData from "./joelho_64_combinacoes.json";
+import tornozoloData from "./tornozelo_combinacoes.json";
+
 interface AvaliacaoOrtopedicaTabProps {
   form: UseFormReturn<any>;
 }
@@ -39,14 +48,26 @@ const REGIOES = [
   { value: "tornozelo", label: "Tornozelo" },
 ];
 
+// Mapeamento de regiões para dados de combinações
+const COMBINACOES_POR_REGIAO: Record<string, any[]> = {
+  ombro: ombroData,
+  cotovelo: cotoveloData,
+  cervical: cervicalData,
+  lombar: lombarData,
+  quadril: quadrilData,
+  joelho: joelhoData,
+  tornozelo: tornozoloData,
+};
+
+// Definição dos testes por região com suas opções
 const TESTES_POR_REGIAO: Record<string, any[]> = {
   ombro: [
-    { id: "neer", label: "Teste de Neer", type: "boolean", ref: "Hegedus, 2012", info: "Sens: 0.72, Spec: 0.60. Útil para excluir quando negativo." },
-    { id: "hawkins", label: "Hawkins-Kennedy", type: "boolean", ref: "Park et al., 2005", info: "Parte do cluster de impacto subacromial." },
-    { id: "painful_arc", label: "Arco Doloroso", type: "boolean", ref: "Park et al., 2005", info: "Teste individual mais forte para impacto (LR+ 3.7)." },
-    { id: "infraspinatus", label: "Teste do Infraespinhal", type: "boolean", ref: "Park et al., 2005", info: "Resistência à rotação externa. LR+ 3.9 para impacto." },
-    { id: "drop_arm", label: "Drop Arm Test", type: "boolean", ref: "Park et al., 2005", info: "Alta especificidade para ruptura total (Spec: 0.92)." },
-    { id: "apprehension", label: "Apprehension Test", type: "boolean", ref: "Farber et al., 2006", info: "LR+ 39.68 quando combinado com Relocation." },
+    { id: "neer", label: "Teste de Neer", type: "boolean", ref: "Hegedus, 2012" },
+    { id: "hawkins_kennedy", label: "Hawkins-Kennedy", type: "boolean", ref: "Park et al., 2005" },
+    { id: "arco_doloroso", label: "Arco Doloroso", type: "boolean", ref: "Park et al., 2005" },
+    { id: "infraespinhal", label: "Teste do Infraespinhal", type: "boolean", ref: "Park et al., 2005" },
+    { id: "drop_arm", label: "Drop Arm Test", type: "boolean", ref: "Park et al., 2005" },
+    { id: "apprehension", label: "Apprehension Test", type: "boolean", ref: "Farber et al., 2006" },
     { id: "relocation", label: "Relocation Test", type: "boolean", ref: "Farber et al., 2006" },
   ],
   cotovelo: [
@@ -54,105 +75,100 @@ const TESTES_POR_REGIAO: Record<string, any[]> = {
     { id: "mill", label: "Teste de Mill", type: "boolean", ref: "Smidt et al., 2002" },
   ],
   cervical: [
-    { id: "spurling", label: "Teste de Spurling", type: "boolean", ref: "Wainner et al., 2003", info: "Spec: 0.92. Excelente para confirmar radiculopatia." },
-    { id: "distracao", label: "Teste de Distração", type: "boolean", ref: "Wainner et al., 2003", info: "Spec: 0.90. Alívio de sintomas confirma radiculopatia." },
-    { id: "ultt", label: "ULTT A (Mediano)", type: "boolean", ref: "Wainner et al., 2003", info: "Sens: 0.97. Teste de 'padrão-ouro' para exclusão." },
-    { id: "rotacao", label: "Rotação Cervical < 60°", type: "boolean", ref: "Wainner et al., 2003" },
+    { id: "spurling", label: "Teste de Spurling", type: "boolean", ref: "Wainner et al., 2003" },
+    { id: "distracao", label: "Teste de Distração", type: "boolean", ref: "Wainner et al., 2003" },
+    { id: "ultt_mediano", label: "ULTT A (Mediano)", type: "boolean", ref: "Wainner et al., 2003" },
+    { id: "rotacao_menor_60", label: "Rotação Cervical < 60°", type: "boolean", ref: "Wainner et al., 2003" },
   ],
   lombar: [
-    { id: "lasegue", label: "Lasègue (SLR)", type: "number", unit: "°", ref: "Deville, 2000", info: "Sens: 0.91. Se negativo, exclui hérnia discal com 90% de confiança." },
-    { id: "slump", label: "Teste de Slump", type: "boolean", ref: "Majlesi, 2008", info: "Mais sensível e específico que o SLR para radiculopatia." },
-    { id: "schober", label: "Teste de Schober", type: "number", unit: "cm", ref: "Moll & Wright, 1971" },
+    { id: "lasegue", label: "Lasègue (SLR)", type: "boolean", ref: "Deville, 2000" },
+    { id: "slump", label: "Teste de Slump", type: "boolean", ref: "Majlesi, 2008" },
+    { id: "schober", label: "Teste de Schober", type: "select", options: ["normal", "reduzido"], ref: "Moll & Wright, 1971" },
   ],
   quadril: [
-    { id: "faber", label: "FABER (Patrick)", type: "select", options: ["Negativo", "Dor Anterior", "Dor Posterior"], ref: "Reiman, 2013" },
-    { id: "fadir", label: "FADIR", type: "boolean", ref: "Reiman, 2013", info: "Sens: 0.95. Ótimo para excluir impacto femoroacetabular." },
+    { id: "faber", label: "FABER (Patrick)", type: "select", options: ["negativo", "dor anterior", "dor posterior"], ref: "Reiman, 2013" },
+    { id: "fadir", label: "FADIR", type: "boolean", ref: "Reiman, 2013" },
     { id: "trendelenburg", label: "Sinal de Trendelenburg", type: "boolean", ref: "Hardcastle, 1985" },
   ],
   joelho: [
-    { id: "lachman_grau", label: "Lachman (Grau)", type: "select", options: ["0", "1", "2", "3"], ref: "Benjaminse, 2006", info: "Sens: 0.85, Spec: 0.94. Teste individual mais acurado para LCA." },
-    { id: "lachman_fim", label: "Lachman (Fim de Curso)", type: "select", options: ["Duro", "Macio"] },
-    { id: "pivot_shift", label: "Pivot Shift", type: "boolean", ref: "Benjaminse, 2006", info: "Spec: 0.98. Se positivo, confirma lesão do LCA (LR+ 8.5)." },
-    { id: "mcmurray", label: "McMurray", type: "select", options: ["Negativo", "Estalido", "Dor", "Estalido + Dor"], ref: "Hegedus, 2007" },
+    { id: "lachman_grau", label: "Lachman (Grau)", type: "select", options: ["0", "1", "2", "3"], ref: "Benjaminse, 2006" },
+    { id: "lachman_fim", label: "Lachman (Fim de Curso)", type: "select", options: ["duro", "macio"], ref: "Benjaminse, 2006" },
+    { id: "pivot_shift", label: "Pivot Shift", type: "boolean", ref: "Benjaminse, 2006" },
+    { id: "mcmurray", label: "McMurray", type: "select", options: ["negativo", "estalido", "dor", "estalido + dor"], ref: "Hegedus, 2007" },
   ],
   tornozelo: [
-    { id: "gaveta_ant_tornozelo", label: "Gaveta Anterior", type: "boolean", ref: "van Dijk, 1996" },
-    { id: "thompson", label: "Teste de Thompson", type: "boolean", ref: "Maffulli, 1998", info: "Spec: 0.96. Padrão-ouro para ruptura de Aquiles." },
+    { id: "gaveta_anterior", label: "Gaveta Anterior", type: "boolean", ref: "van Dijk, 1996" },
+    { id: "teste_thompson", label: "Teste de Thompson", type: "boolean", ref: "Maffulli, 1998" },
   ],
 };
+
+// Função para normalizar valores para comparação
+function normalizarValor(valor: any): string {
+  if (valor === true || valor === "true") return "positivo";
+  if (valor === false || valor === "false") return "negativo";
+  return String(valor).toLowerCase().trim();
+}
+
+// Função para encontrar o resultado baseado nas combinações
+function encontrarResultado(regiao: string, testes: Record<string, any>): string {
+  const combinacoes = COMBINACOES_POR_REGIAO[regiao];
+  if (!combinacoes || combinacoes.length === 0) return "";
+
+  // Normalizar os testes para comparação
+  const testesNormalizados: Record<string, string> = {};
+  for (const [chave, valor] of Object.entries(testes)) {
+    if (valor !== null && valor !== undefined && valor !== "") {
+      testesNormalizados[chave] = normalizarValor(valor);
+    }
+  }
+
+  // Procurar pela combinação correspondente
+  for (const combinacao of combinacoes) {
+    let match = true;
+    let testesChecados = 0;
+    
+    for (const [chave, valor] of Object.entries(combinacao)) {
+      if (chave === "resultado") continue;
+      
+      const valorNormalizado = normalizarValor(valor);
+      const testeNormalizado = testesNormalizados[chave];
+      
+      if (testeNormalizado === undefined) {
+        // Teste não foi preenchido
+        match = false;
+        break;
+      }
+      
+      if (testeNormalizado !== valorNormalizado) {
+        match = false;
+        break;
+      }
+      
+      testesChecados++;
+    }
+    
+    if (match && testesChecados > 0) {
+      return combinacao.resultado;
+    }
+  }
+
+  return "Preencha todos os testes para gerar o diagnóstico automático.";
+}
 
 export function AvaliacaoOrtopedicaTab({ form }: AvaliacaoOrtopedicaTabProps) {
   const regiao = form.watch("regiaoAvaliada");
   const testesValues = form.watch("testesOrtopedicosJson") || {};
 
   useEffect(() => {
-    let diagnostico = "";
-    let probabilidade = "Baixa";
-
     if (!regiao) return;
 
-    // LÓGICA DE CLUSTERS ENDOSSADA
-    if (regiao === "cervical") {
-      let count = 0;
-      if (testesValues.spurling === "true") count++;
-      if (testesValues.distracao === "true") count++;
-      if (testesValues.ultt === "true") count++;
-      if (testesValues.rotacao === "true") count++;
-
-      if (count === 4) {
-        diagnostico = "Cluster de Wainner completo (4/4). Probabilidade de Radiculopatia Cervical > 90% (LR+ 30.3).";
-        probabilidade = "Alta";
-      } else if (count === 3) {
-        diagnostico = "Cluster de Wainner (3/4). Probabilidade de Radiculopatia Cervical ~ 65% (LR+ 6.1).";
-        probabilidade = "Alta";
-      } else if (testesValues.ultt === "false") {
-        diagnostico = "ULTT negativo. Alta probabilidade de EXCLUSÃO de radiculopatia (Sens: 0.97).";
-        probabilidade = "Baixa";
-      }
-    } else if (regiao === "ombro") {
-      // Impacto (Park et al.)
-      let impCount = 0;
-      if (testesValues.hawkins === "true") impCount++;
-      if (testesValues.painful_arc === "true") impCount++;
-      if (testesValues.infraspinatus === "true") impCount++;
-
-      if (impCount === 3) {
-        diagnostico = "Cluster de Park para Impacto (3/3) positivo. Alta probabilidade (LR+ 10.56).";
-        probabilidade = "Alta";
-      } else if (testesValues.drop_arm === "true" && testesValues.painful_arc === "true" && testesValues.infraspinatus === "true") {
-        diagnostico = "Cluster para Ruptura de Manguito (Park) positivo. Alta probabilidade (LR+ 28.0).";
-        probabilidade = "Alta";
-      } else if (testesValues.apprehension === "true" && testesValues.relocation === "true") {
-        diagnostico = "Cluster de Farber para Instabilidade Anterior positivo. Alta especificidade (LR+ 39.68).";
-        probabilidade = "Alta";
-      }
-    } else if (regiao === "joelho") {
-      if (testesValues.lachman_fim === "Macio" || testesValues.pivot_shift === "true") {
-        diagnostico = "Alta suspeita de lesão do LCA. ";
-        if (testesValues.pivot_shift === "true") diagnostico += "Pivot Shift positivo confirma instabilidade rotatória (LR+ 8.5).";
-        probabilidade = "Alta";
-      }
-    } else if (regiao === "lombar") {
-      const lasegueVal = parseFloat(testesValues.lasegue);
-      if (testesValues.slump === "true" && !isNaN(lasegueVal) && lasegueVal < 60) {
-        diagnostico = "Alta probabilidade de compressão radicular (Slump + Lasègue positivos).";
-        probabilidade = "Alta";
-      } else if (!isNaN(lasegueVal) && lasegueVal > 70 && testesValues.slump === "false") {
-        diagnostico = "Baixa probabilidade de hérnia discal compressiva (Testes de tensão neural negativos).";
-        probabilidade = "Baixa";
-      }
-    } else if (regiao === "tornozelo") {
-      if (testesValues.thompson === "false") {
-        diagnostico = "Ruptura de Tendão de Aquiles confirmada pelo Teste de Thompson (Alta Especificidade).";
-        probabilidade = "Alta";
-      }
-    }
-
+    // Encontrar o resultado baseado nas combinações JSON
+    const resultado = encontrarResultado(regiao, testesValues);
+    
     const currentDiag = form.getValues("diagnosticoFuncionalProvavel");
-    const currentProb = form.getValues("probabilidadeClinica");
-
-    if (diagnostico !== currentDiag) form.setValue("diagnosticoFuncionalProvavel", diagnostico);
-    if (probabilidade !== currentProb) form.setValue("probabilidadeClinica", probabilidade);
+    if (resultado !== currentDiag) {
+      form.setValue("diagnosticoFuncionalProvavel", resultado);
+    }
   }, [regiao, JSON.stringify(testesValues), form]);
 
   const renderTesteField = (teste: any) => {
@@ -182,18 +198,18 @@ export function AvaliacaoOrtopedicaTab({ form }: AvaliacaoOrtopedicaTabProps) {
             </div>
             <FormControl>
               {teste.type === "boolean" ? (
-                <Select onValueChange={field.onChange} value={field.value}>
+                <Select onValueChange={field.onChange} value={field.value || ""}>
                   <SelectTrigger className="h-9"><SelectValue placeholder="Selecione..." /></SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="true">Positivo / Sim</SelectItem>
-                    <SelectItem value="false">Negativo / Não</SelectItem>
+                    <SelectItem value="positivo">Positivo / Sim</SelectItem>
+                    <SelectItem value="negativo">Negativo / Não</SelectItem>
                   </SelectContent>
                 </Select>
               ) : teste.type === "select" ? (
-                <Select onValueChange={field.onChange} value={field.value}>
+                <Select onValueChange={field.onChange} value={field.value || ""}>
                   <SelectTrigger className="h-9"><SelectValue placeholder="Selecione..." /></SelectTrigger>
                   <SelectContent>
-                    {teste.options.map((opt: string) => <SelectItem key={opt} value={opt}>{opt}</SelectItem>)}
+                    {teste.options.map((opt: string) => <SelectItem key={opt} value={opt}>{opt.charAt(0).toUpperCase() + opt.slice(1)}</SelectItem>)}
                   </SelectContent>
                 </Select>
               ) : (
@@ -222,7 +238,7 @@ export function AvaliacaoOrtopedicaTab({ form }: AvaliacaoOrtopedicaTabProps) {
                   <Activity className="w-4 h-4 text-primary" />
                   Região Corporal
                 </FormLabel>
-                <Select onValueChange={field.onChange} value={field.value}>
+                <Select onValueChange={field.onChange} value={field.value || ""}>
                   <FormControl>
                     <SelectTrigger className="bg-primary/5 border-primary/20 font-medium">
                       <SelectValue placeholder="Selecione..." />
@@ -239,16 +255,10 @@ export function AvaliacaoOrtopedicaTab({ form }: AvaliacaoOrtopedicaTabProps) {
             <div className="p-4 rounded-lg bg-muted/30 border space-y-3">
               <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-2">
                 <BookOpen className="w-3 h-3" />
-                Acurácia Diagnóstica
+                Diagnóstico Automático
               </h4>
-              <div className="flex justify-between items-center">
-                <span className="text-xs">Probabilidade:</span>
-                <Badge variant={form.watch("probabilidadeClinica") === "Alta" ? "destructive" : form.watch("probabilidadeClinica") === "Moderada" ? "default" : "secondary"}>
-                  {form.watch("probabilidadeClinica") || "Baixa"}
-                </Badge>
-              </div>
               <p className="text-[10px] text-muted-foreground leading-tight italic">
-                Cálculos baseados em Razões de Verossimilhança (Likelihood Ratios) de meta-análises (Hegedus, Park, Wainner).
+                Baseado em combinações de testes clínicos validados.
               </p>
             </div>
           )}
@@ -257,7 +267,7 @@ export function AvaliacaoOrtopedicaTab({ form }: AvaliacaoOrtopedicaTabProps) {
           {!regiao ? (
             <div className="h-full flex flex-col items-center justify-center p-12 border-2 border-dashed rounded-xl text-muted-foreground">
               <Activity className="w-12 h-12 mb-4 opacity-20" />
-              <p className="text-sm">Selecione uma região para carregar os testes e clusters científicos.</p>
+              <p className="text-sm">Selecione uma região para carregar os testes clínicos.</p>
             </div>
           ) : (
             <div className="space-y-6">
@@ -265,14 +275,14 @@ export function AvaliacaoOrtopedicaTab({ form }: AvaliacaoOrtopedicaTabProps) {
                 {TESTES_POR_REGIAO[regiao]?.map(renderTesteField)}
               </div>
               <div className="p-6 bg-primary/5 border border-primary/10 rounded-xl space-y-4">
-                <div className="flex items-center gap-2 text-primary font-semibold"><CheckCircle2 className="w-5 h-5" />Diagnóstico Funcional Endossado</div>
+                <div className="flex items-center gap-2 text-primary font-semibold"><CheckCircle2 className="w-5 h-5" />Diagnóstico Funcional Baseado em Evidência</div>
                 <FormField
                   control={form.control}
                   name="diagnosticoFuncionalProvavel"
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                        <Textarea {...field} className="bg-background min-h-[100px] border-primary/20 resize-none" placeholder="O sistema interpretará os clusters automaticamente..." />
+                        <Textarea {...field} className="bg-background min-h-[100px] border-primary/20 resize-none" placeholder="O sistema interpretará os testes automaticamente..." />
                       </FormControl>
                     </FormItem>
                   )}
@@ -280,7 +290,7 @@ export function AvaliacaoOrtopedicaTab({ form }: AvaliacaoOrtopedicaTabProps) {
                 <div className="flex items-start gap-2 p-3 bg-blue-50 border border-blue-100 rounded-lg">
                   <AlertTriangle className="w-4 h-4 text-blue-600 mt-0.5" />
                   <p className="text-[10px] text-blue-800 leading-normal">
-                    <strong>Nota Científica:</strong> Este sistema utiliza <strong>Likelihood Ratios (LR)</strong> para calcular a probabilidade pós-teste. Clusters com LR+ &gt; 10 indicam uma mudança clínica significativa na probabilidade de patologia.
+                    <strong>Nota Clínica:</strong> Este sistema utiliza combinações de testes ortopédicos validados em literatura científica para gerar diagnósticos funcionais prováveis. Sempre correlacionar com achados clínicos adicionais e história do paciente.
                   </p>
                 </div>
               </div>

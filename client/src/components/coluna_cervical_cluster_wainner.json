@@ -1,0 +1,114 @@
+[
+  {
+    "spurling": "negativo",
+    "distracao": "negativo",
+    "ultt_mediano": "negativo",
+    "rotacao_menor_60": "negativo",
+    "resultado": "Sem evidência clínica significativa de Radiculopatia Cervical."
+  },
+  {
+    "spurling": "negativo",
+    "distracao": "negativo",
+    "ultt_mediano": "negativo",
+    "rotacao_menor_60": "positivo",
+    "resultado": "Baixa probabilidade isolada; correlacionar clinicamente."
+  },
+  {
+    "spurling": "negativo",
+    "distracao": "negativo",
+    "ultt_mediano": "positivo",
+    "rotacao_menor_60": "negativo",
+    "resultado": "Baixa probabilidade isolada; correlacionar clinicamente."
+  },
+  {
+    "spurling": "negativo",
+    "distracao": "negativo",
+    "ultt_mediano": "positivo",
+    "rotacao_menor_60": "positivo",
+    "resultado": "Probabilidade moderada de Radiculopatia Cervical."
+  },
+  {
+    "spurling": "negativo",
+    "distracao": "positivo",
+    "ultt_mediano": "negativo",
+    "rotacao_menor_60": "negativo",
+    "resultado": "Baixa probabilidade isolada; correlacionar clinicamente."
+  },
+  {
+    "spurling": "negativo",
+    "distracao": "positivo",
+    "ultt_mediano": "negativo",
+    "rotacao_menor_60": "positivo",
+    "resultado": "Probabilidade moderada de Radiculopatia Cervical."
+  },
+  {
+    "spurling": "negativo",
+    "distracao": "positivo",
+    "ultt_mediano": "positivo",
+    "rotacao_menor_60": "negativo",
+    "resultado": "Probabilidade moderada de Radiculopatia Cervical."
+  },
+  {
+    "spurling": "negativo",
+    "distracao": "positivo",
+    "ultt_mediano": "positivo",
+    "rotacao_menor_60": "positivo",
+    "resultado": "Cluster fortemente sugestivo (3/4). Alta probabilidade de Radiculopatia Cervical."
+  },
+  {
+    "spurling": "positivo",
+    "distracao": "negativo",
+    "ultt_mediano": "negativo",
+    "rotacao_menor_60": "negativo",
+    "resultado": "Baixa probabilidade isolada; correlacionar clinicamente."
+  },
+  {
+    "spurling": "positivo",
+    "distracao": "negativo",
+    "ultt_mediano": "negativo",
+    "rotacao_menor_60": "positivo",
+    "resultado": "Probabilidade moderada de Radiculopatia Cervical."
+  },
+  {
+    "spurling": "positivo",
+    "distracao": "negativo",
+    "ultt_mediano": "positivo",
+    "rotacao_menor_60": "negativo",
+    "resultado": "Probabilidade moderada de Radiculopatia Cervical."
+  },
+  {
+    "spurling": "positivo",
+    "distracao": "negativo",
+    "ultt_mediano": "positivo",
+    "rotacao_menor_60": "positivo",
+    "resultado": "Cluster fortemente sugestivo (3/4). Alta probabilidade de Radiculopatia Cervical."
+  },
+  {
+    "spurling": "positivo",
+    "distracao": "positivo",
+    "ultt_mediano": "negativo",
+    "rotacao_menor_60": "negativo",
+    "resultado": "Probabilidade moderada de Radiculopatia Cervical."
+  },
+  {
+    "spurling": "positivo",
+    "distracao": "positivo",
+    "ultt_mediano": "negativo",
+    "rotacao_menor_60": "positivo",
+    "resultado": "Cluster fortemente sugestivo (3/4). Alta probabilidade de Radiculopatia Cervical."
+  },
+  {
+    "spurling": "positivo",
+    "distracao": "positivo",
+    "ultt_mediano": "positivo",
+    "rotacao_menor_60": "negativo",
+    "resultado": "Cluster fortemente sugestivo (3/4). Alta probabilidade de Radiculopatia Cervical."
+  },
+  {
+    "spurling": "positivo",
+    "distracao": "positivo",
+    "ultt_mediano": "positivo",
+    "rotacao_menor_60": "positivo",
+    "resultado": "Cluster de Wainner completo (4/4). Probabilidade >90% de Radiculopatia Cervical."
+  }
+]
