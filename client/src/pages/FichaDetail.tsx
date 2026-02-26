@@ -18,6 +18,8 @@ import {
   History,
   ShieldCheck,
   PenTool,
+  CheckCircle2,
+  AlertTriangle,
 } from "lucide-react";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
@@ -378,6 +380,52 @@ export default function FichaDetail() {
             </CardContent>
           </Card>
 
+          {/* Avaliação Ortopédica Automatizada */}
+          {ficha.regiaoAvaliada && (
+            <Card className="border-primary/20 bg-primary/5">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Activity className="w-5 h-5 text-primary" />
+                  Avaliação Ortopédica Automatizada: {ficha.regiaoAvaliada.charAt(0).toUpperCase() + ficha.regiaoAvaliada.slice(1)}
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {Object.entries((ficha.testesOrtopedicosJson as Record<string, unknown>) || {}).map(([key, value]) => (
+                    <div key={key} className="flex justify-between items-center p-2 border-b border-primary/10">
+                      <span className="text-sm font-medium text-muted-foreground">
+                        {key.split('_').map((w: string) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')}
+                      </span>
+                      <Badge variant="outline">
+                        {value === "true" ? "Positivo" : value === "false" ? "Negativo" : String(value)}
+                      </Badge>
+                    </div>
+                  ))}
+                </div>
+                <div className="p-4 bg-background border border-primary/20 rounded-lg space-y-3">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2 font-semibold text-primary">
+                      <CheckCircle2 className="w-4 h-4" />
+                      Diagnóstico Funcional Provável
+                    </div>
+                    <Badge variant={
+                      ficha.probabilidadeClinica === "Alta" ? "destructive" :
+                      ficha.probabilidadeClinica === "Moderada" ? "default" : "secondary"
+                    }>
+                      Probabilidade {ficha.probabilidadeClinica || "Baixa"}
+                    </Badge>
+                  </div>
+                  <p className="text-sm leading-relaxed">
+                    {ficha.diagnosticoFuncionalProvavel || "Nenhum diagnóstico gerado."}
+                  </p>
+                  <p className="text-[10px] text-muted-foreground flex items-center gap-1 italic">
+                    <AlertTriangle className="w-3 h-3" />
+                    Classificação funcional baseada em evidência clínica.
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          )}
           {/* Escalas Funcionais */}
           <Card>
             <CardHeader>

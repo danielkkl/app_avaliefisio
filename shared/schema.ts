@@ -136,6 +136,12 @@ export const fichas = pgTable("fichas", {
   admForca: jsonb("adm_forca"), // Nova estrutura de tabela
   mapaDor: text("mapa_dor"), // Base64 da imagem do canvas
 
+  // Avaliação Ortopédica Automatizada
+  regiaoAvaliada: varchar("regiao_avaliada"),
+  testesOrtopedicosJson: jsonb("testes_ortopedicos_json"),
+  diagnosticoFuncionalProvavel: text("diagnostico_funcional_provavel"),
+  probabilidadeClinica: varchar("probabilidade_clinica"),
+
   // PDF e integração
   pdfUrl: text("pdf_url"),
   googleDriveFileId: varchar("google_drive_file_id"),

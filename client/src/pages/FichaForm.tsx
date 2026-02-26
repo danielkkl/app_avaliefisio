@@ -33,6 +33,7 @@ import {
 } from "lucide-react";
 import React, { useEffect, useCallback, useRef, useState } from "react";
 import { Slider } from "@/components/ui/slider";
+import { AvaliacaoOrtopedicaTab } from "@/components/AvaliacaoOrtopedicaTab";
 import { z } from "zod";
 
 const formSchema = insertFichaSchema;
@@ -339,6 +340,7 @@ export default function FichaForm() {
                     { label: "Anamnese", value: "anamnese" },
                     { label: "ADM / Força", value: "adm-forca" },
                     { label: "Testes Ortopédicos", value: "testes-ortopedicos" },
+                    { label: "Avaliação Ortopédica", value: "ortopedica" },
                     { label: "Escalas Funcionais", value: "escalas-funcionais" },
                     { label: "Avaliação Física", value: "avaliacao-fisica" },
                     { label: "Mapa da Dor", value: "mapa-dor" },
@@ -1428,6 +1430,10 @@ export default function FichaForm() {
                   </div>
                 </TabsContent>
 
+                {/* ══════════════ AVALIAÇÃO ORTOPÉDICA AUTOMATIZADA ══════════════ */}
+                <TabsContent value="ortopedica" className="space-y-6 mt-0">
+                  <AvaliacaoOrtopedicaTab form={form} />
+                </TabsContent>
                 {/* ══════════════ ESCALAS FUNCIONAIS ══════════════ */}
                 <TabsContent value="escalas-funcionais" className="space-y-6 mt-0">
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6 bg-card rounded-xl border shadow-sm">
