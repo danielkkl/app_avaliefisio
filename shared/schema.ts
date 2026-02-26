@@ -73,8 +73,11 @@ export const fichas = pgTable("fichas", {
   glicemia: varchar("glicemia"),
 
   // Anamnese
+  queixaPrincipal: text("queixa_principal"),
   hda: text("hda"),
   hdp: text("hdp"),
+  mecanismoLesao: text("mecanismo_lesao"),
+  tratamentosAnteriores: text("tratamentos_anteriores"),
   eva: integer("eva"),
   inicioDor: text("inicio_dor"),
   tipoDor: varchar("tipo_dor"),

@@ -21,10 +21,10 @@ export function AppLayout({ children }: { children: ReactNode }) {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-[#f3f4f6]">
       <Sidebar />
-      <main className="lg:pl-72 min-h-screen">
-        <div className="px-4 py-8 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <main className="lg:pl-64 min-h-screen">
+        <div className="px-4 py-6 sm:px-6 lg:px-8 max-w-[1400px] mx-auto">
           {children}
         </div>
       </main>

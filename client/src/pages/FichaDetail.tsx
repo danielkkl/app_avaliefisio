@@ -445,24 +445,29 @@ export default function FichaDetail() {
             </CardContent>
           </Card>
 
-          {/* Avaliação Física */}
+          {/* Exame Físico */}
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Activity className="w-5 h-5 text-primary" />
-                Avaliação Física
+                Exame Físico
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4 text-sm">
-              <TextRow label="Inspeção / Palpação / Sensibilidade" value={ficha.inspecao} />
-              <div className="border-t pt-4">
-                <TextRow label="Postura Dinâmica – Marcha / Cinturas" value={ficha.posturaDinamica} />
-              </div>
-              <div className="border-t pt-4">
-                <TextRow label="Perimetria" value={ficha.perimetria} />
-              </div>
-              <div className="border-t pt-4">
-                <TextRow label="Testes Especiais" value={ficha.testesEspeciais} />
+            <CardContent className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <TextRow label="Inspeção" value={ficha.inspecao} />
+                <TextRow label="Palpação" value={ficha.palpacao} />
+                <div className="md:col-span-2 border-t pt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <TextRow label="Postura Estática" value={ficha.posturaEstatica} />
+                  <TextRow label="Postura Dinâmica" value={ficha.posturaDinamica} />
+                </div>
+                <div className="md:col-span-2 border-t pt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <TextRow label="Marcha" value={ficha.marcha} />
+                  <TextRow label="Perimetria" value={ficha.perimetria} />
+                </div>
+                <div className="md:col-span-2 border-t pt-4">
+                  <TextRow label="Testes Especiais" value={ficha.testesEspeciais} />
+                </div>
               </div>
             </CardContent>
           </Card>
