@@ -34,6 +34,8 @@ import {
 import React, { useEffect, useCallback, useRef, useState } from "react";
 import { Slider } from "@/components/ui/slider";
 import { AvaliacaoOrtopedicaTab } from "@/components/AvaliacaoOrtopedicaTab";
+import { PainelMapaDor } from "@/components/PainelMapaDor";
+import { useForm, useFieldArray } from "react-hook-form";
 import { z } from "zod";
 
 const formSchema = insertFichaSchema;
@@ -93,10 +95,7 @@ export default function FichaForm() {
   const createMutation = useCreateFicha();
   const updateMutation = useUpdateFicha();
 
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [brushColor, setBrushColor] = useState("#4CAF50");
-  const [brushSize, setBrushSize] = useState(5);
-  const [isDrawing, setIsDrawing] = useState(false);
+  // Estados do mapa da dor removidos pois agora estão no componente PainelMapaDor
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -261,13 +260,7 @@ export default function FichaForm() {
     document.title = titulo;
   };
 
-  // ── salvar mapa da dor ──────────────────────────────────────────────────
-  const salvarMapaDor = () => {
-    if (canvasRef.current) {
-      const dataUrl = canvasRef.current.toDataURL("image/png");
-      form.setValue("mapaDor", dataUrl);
-    }
-  };
+  // O salvamento agora é automático via onChange no componente PainelMapaDor
 
   if (isEdit && isLoadingFicha) {
     return (
@@ -279,32 +272,7 @@ export default function FichaForm() {
 
   const consultor = form.watch("consultor");
 
-  const draw = (e: React.MouseEvent | React.TouchEvent) => {
-    if (!isDrawing || !canvasRef.current) return;
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    const rect = canvas.getBoundingClientRect();
-    let x, y;
-
-    if ("touches" in e) {
-      x = e.touches[0].clientX - rect.left;
-      y = e.touches[0].clientY - rect.top;
-    } else {
-      x = e.clientX - rect.left;
-      y = e.clientY - rect.top;
-    }
-
-    ctx.lineWidth = brushSize;
-    ctx.lineCap = "round";
-    ctx.strokeStyle = brushColor;
-
-    ctx.lineTo(x, y);
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.moveTo(x, y);
-  };
+  // Função draw removida pois agora está no componente PainelMapaDor
 
   return (
     <div className="max-w-5xl mx-auto pb-12 animate-in fade-in duration-500">
@@ -1609,122 +1577,21 @@ export default function FichaForm() {
                       Selecione a intensidade da dor e pinte as áreas afetadas diretamente sobre o corpo humano.
                     </p>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-                      <div className="space-y-6">
-                        {/* Intensidade / Cor */}
-                        <div className="space-y-3">
-                          <label className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">INTENSIDADE / COR</label>
-                          <div className="flex flex-wrap gap-2">
-                            {[
-                              { label: "Leve (1-2)", color: "#4CAF50", value: "leve" },
-                              { label: "Leve-mod (3-4)", color: "#8BC34A", value: "leve-mod" },
-                              { label: "Moderada (5-6)", color: "#FFC107", value: "moderada" },
-                              { label: "Intensa (7-8)", color: "#FF9800", value: "intensa" },
-                              { label: "Severa (9-10)", color: "#F44336", value: "severa" },
-                            ].map((item) => (
-                              <button
-                                key={item.value}
-                                type="button"
-                                onClick={() => setBrushColor(item.color)}
-                                className={`h-8 w-8 rounded-full border-2 transition-all ${brushColor === item.color ? "border-primary scale-110 shadow-md" : "border-transparent opacity-70 hover:opacity-100"}`}
-                                style={{ backgroundColor: item.color }}
-                                title={item.label}
-                              />
-                            ))}
-                          </div>
-                        </div>
-
-                        {/* Tamanho do Pincel */}
-                        <div className="space-y-3">
-                          <label className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">TAMANHO DO PINCEL</label>
-                          <div className="flex items-center gap-4">
-                            <Slider
-                              value={[brushSize]}
-                              onValueChange={(val) => setBrushSize(val[0])}
-                              max={20}
-                              min={1}
-                              step={1}
-                              className="w-48"
+                    <FormField
+                      control={form.control}
+                      name="mapaDor"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormControl>
+                            <PainelMapaDor 
+                              value={field.value} 
+                              onChange={(dataUrl) => field.onChange(dataUrl)} 
                             />
-                            <span className="text-xs font-bold text-primary">{brushSize}px</span>
-                          </div>
-                        </div>
-
-                        <div className="pt-4 border-t space-y-4">
-                          <div className="flex gap-2">
-                            <Button
-                              type="button"
-                              variant="outline"
-                              size="sm"
-                              className="text-[10px] uppercase font-bold flex-1"
-                              onClick={() => {
-                                const canvas = canvasRef.current;
-                                if (canvas) {
-                                  const ctx = canvas.getContext("2d");
-                                  if (ctx) ctx.clearRect(0, 0, canvas.width, canvas.height);
-                                }
-                              }}
-                            >
-                              Limpar
-                            </Button>
-                            <Button
-                              type="button"
-                              variant="default"
-                              size="sm"
-                              className="text-[10px] uppercase font-bold flex-1"
-                              onClick={salvarMapaDor}
-                            >
-                              Salvar Mapa
-                            </Button>
-                          </div>
-
-                          <div className="grid grid-cols-2 gap-2">
-                            <div className="flex items-center gap-2 text-[9px] uppercase font-bold">
-                              <div className="h-2 w-2 rounded-sm bg-[#4CAF50]" />
-                              <span>Leve (1-2)</span>
-                            </div>
-                            <div className="flex items-center gap-2 text-[9px] uppercase font-bold">
-                              <div className="h-2 w-2 rounded-sm bg-[#8BC34A]" />
-                              <span>Leve-mod (3-4)</span>
-                            </div>
-                            <div className="flex items-center gap-2 text-[9px] uppercase font-bold">
-                              <div className="h-2 w-2 rounded-sm bg-[#FFC107]" />
-                              <span>Moderada (5-6)</span>
-                            </div>
-                            <div className="flex items-center gap-2 text-[9px] uppercase font-bold">
-                              <div className="h-2 w-2 rounded-sm bg-[#FF9800]" />
-                              <span>Intensa (7-8)</span>
-                            </div>
-                            <div className="flex items-center gap-2 text-[9px] uppercase font-bold">
-                              <div className="h-2 w-2 rounded-sm bg-[#F44336]" />
-                              <span>Severa (9-10)</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="flex flex-col items-center justify-center p-4 border rounded-xl bg-white shadow-inner relative group">
-                        <canvas
-                          ref={canvasRef}
-                          width={400}
-                          height={500}
-                          className="cursor-crosshair touch-none"
-                          onMouseDown={(e) => {
-                            setIsDrawing(true);
-                            draw(e);
-                          }}
-                          onMouseMove={draw}
-                          onMouseUp={() => setIsDrawing(false)}
-                          onMouseOut={() => setIsDrawing(false)}
-                        />
-                        {/* Instrução overlay */}
-                        {!form.getValues("mapaDor") && (
-                          <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20 transition-opacity group-hover:opacity-10">
-                            <p className="text-xl font-black uppercase text-slate-300 transform -rotate-45">Desenhe Aqui</p>
-                          </div>
-                        )}
-                      </div>
-                    </div>
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
                   </div>
                 </TabsContent>
 

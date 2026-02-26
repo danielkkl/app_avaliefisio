@@ -20,6 +20,7 @@ import {
   PenTool,
   CheckCircle2,
   AlertTriangle,
+  Map,
 } from "lucide-react";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
@@ -313,6 +314,23 @@ export default function FichaDetail() {
                   <span className="font-bold text-lg">{ficha.eva || 0}/10</span>
                 </div>
               </div>
+
+              {ficha.mapaDor && (
+                <div className="border-t pt-6">
+                  <p className="text-xs font-bold text-primary uppercase mb-4 flex items-center gap-2">
+                    <Map className="w-4 h-4" />
+                    Mapa da Dor
+                  </p>
+                  <div className="bg-white border rounded-2xl p-4 shadow-inner flex justify-center">
+                    <img 
+                      src={ficha.mapaDor} 
+                      alt="Mapa da Dor" 
+                      className="max-w-full h-auto rounded-lg shadow-sm"
+                      style={{ maxHeight: '500px' }}
+                    />
+                  </div>
+                </div>
+              )}
             </CardContent>
           </Card>
 
