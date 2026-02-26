@@ -1,6 +1,5 @@
 import { useFicha, useDeleteFicha } from "@/hooks/use-fichas";
 import { useRoute, Link, useLocation } from "wouter";
-import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -21,6 +20,10 @@ import {
   CheckCircle2,
   AlertTriangle,
   Map,
+  Target,
+  Scale,
+  HeartPulse,
+  Calendar
 } from "lucide-react";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
@@ -42,35 +45,32 @@ import { Badge } from "@/components/ui/badge";
 function InfoRow({
   label,
   value,
+  icon: Icon,
 }: {
   label: string;
   value?: string | number | null;
+  icon?: any;
 }) {
   return (
-    <div>
-      <p className="text-xs font-medium text-muted-foreground uppercase">
-        {label}
-      </p>
-      <p className="font-mono">{value ?? "-"}</p>
+    <div className="flex items-start gap-3 p-3 bg-slate-50/50 rounded-lg border border-slate-100/50">
+      {Icon && <Icon className="w-4 h-4 text-blue-500 mt-0.5" />}
+      <div>
+        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+          {label}
+        </p>
+        <p className="text-sm font-bold text-slate-700">{value ?? "-"}</p>
+      </div>
     </div>
   );
 }
 
-function TextRow({
-  label,
-  value,
-}: {
-  label: string;
-  value?: string | null;
-}) {
+function SectionTitle({ icon: Icon, title, color = "blue" }: { icon: any, title: string, color?: string }) {
   return (
-    <div>
-      <p className="text-xs font-medium text-muted-foreground uppercase mb-1">
-        {label}
-      </p>
-      <p className="text-sm leading-relaxed whitespace-pre-wrap">
-        {value || "Nenhuma informação registrada."}
-      </p>
+    <div className="flex items-center gap-2 mb-4">
+      <div className={`w-8 h-8 rounded-lg bg-${color}-50 flex items-center justify-center`}>
+        <Icon className={`w-4 h-4 text-${color}-600`} />
+      </div>
+      <h3 className="text-sm font-bold text-slate-800 uppercase tracking-tight">{title}</h3>
     </div>
   );
 }
@@ -86,7 +86,12 @@ export default function FichaDetail() {
   const { mutateAsync: deleteFicha } = useDeleteFicha();
 
   if (isLoading) {
-    return <div className="flex justify-center p-12">Carregando...</div>;
+    return (
+      <div className="flex flex-col items-center justify-center p-20 space-y-4">
+        <Activity className="w-10 h-10 text-blue-600 animate-pulse" />
+        <p className="text-slate-500 font-medium">Carregando prontuário completo...</p>
+      </div>
+    );
   }
 
   if (!ficha) {
@@ -106,600 +111,261 @@ export default function FichaDetail() {
   };
 
   const gerarPDF = () => {
-    const titulo = document.title;
-    document.title = `Ficha - ${ficha.nomePaciente || "Paciente"}`;
     window.print();
-    document.title = titulo;
   };
 
-  const musculos: Array<{ musculo: string; grau: string }> = Array.isArray(
-    ficha.musculos
-  )
-    ? (ficha.musculos as any[])
-    : [];
-
-  const prescricoes: Array<{ descricao: string; frequencia: string }> =
-    Array.isArray(ficha.prescricoes) ? (ficha.prescricoes as any[]) : [];
-
-  const admForca: Array<{ movimento: string; admDireita: string; admEsquerda: string; forcaD: string; forcaE: string; deficit: string; cif: string }> =
-    Array.isArray(ficha.admForca) ? (ficha.admForca as any[]) : [];
-
-  const evolucoes: Array<{ data: string; fisioterapeuta: string; descricao: string; resposta: string; ajuste: string }> =
-    Array.isArray(ficha.evolucoes) ? (ficha.evolucoes as any[]) : [];
+  const prescricoes: any[] = Array.isArray(ficha.prescricoes) ? (ficha.prescricoes as any[]) : [];
+  const admForca: any[] = Array.isArray(ficha.admForca) ? (ficha.admForca as any[]) : [];
+  const evolucoes: any[] = Array.isArray(ficha.evolucoes) ? (ficha.evolucoes as any[]) : [];
 
   return (
-    <div className="max-w-6xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <Button
-        variant="ghost"
-        className="pl-0 hover:pl-2 transition-all"
-        onClick={() => setLocation("/fichas")}
-      >
-        <ArrowLeft className="w-4 h-4 mr-2" />
-        Voltar para Avaliações
-      </Button>
-
-      <PageHeader
-        title={ficha.nomePaciente || "Avaliação do Paciente"}
-        description={`Avaliado em ${format(
-          new Date(ficha.createdAt),
-          "d ' de ' MMMM, yyyy",
-          { locale: ptBR }
-        )}`}
-      >
-        <div className="flex gap-2 flex-wrap">
-          <Button type="button" variant="outline" onClick={gerarPDF}>
-            <Printer className="w-4 h-4 mr-2" />
-            Gerar PDF
+    <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-700 pb-20 print:p-0 print:space-y-4">
+      
+      {/* Top Navigation */}
+      <div className="flex items-center justify-between print:hidden">
+        <Button
+          variant="ghost"
+          className="text-slate-500 hover:text-blue-600 transition-colors"
+          onClick={() => setLocation("/fichas")}
+        >
+          <ArrowLeft className="w-4 h-4 mr-2" />
+          Voltar para Lista
+        </Button>
+        <div className="flex gap-2">
+          <Button variant="outline" size="sm" onClick={gerarPDF} className="border-slate-200 text-slate-600">
+            <Printer className="w-4 h-4 mr-2" /> Imprimir / PDF
           </Button>
           <Link href={`/fichas/${id}/edit`}>
-            <Button variant="outline">
-              <Edit className="w-4 h-4 mr-2" />
-              Editar
+            <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-600/20">
+              <Edit className="w-4 h-4 mr-2" /> Editar Prontuário
             </Button>
           </Link>
-          <AlertDialog>
-            <AlertDialogTrigger asChild>
-              <Button variant="destructive">
-                <Trash2 className="w-4 h-4 mr-2" />
-                Excluir
-              </Button>
-            </AlertDialogTrigger>
-            <AlertDialogContent>
-              <AlertDialogHeader>
-                <AlertDialogTitle>Você tem certeza?</AlertDialogTitle>
-                <AlertDialogDescription>
-                  Esta ação excluirá permanentemente este registro de avaliação.
-                </AlertDialogDescription>
-              </AlertDialogHeader>
-              <AlertDialogFooter>
-                <AlertDialogCancel>Cancelar</AlertDialogCancel>
-                <AlertDialogAction
-                  onClick={handleDelete}
-                  className="bg-destructive hover:bg-destructive/90"
-                >
-                  Excluir
-                </AlertDialogAction>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
         </div>
-      </PageHeader>
+      </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-        {/* ── Sidebar: Informações do Paciente ─────────────────────────── */}
-        <Card className="col-span-1 h-fit">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <User className="w-5 h-5 text-primary" />
-              Identificação
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4 text-sm">
-            <InfoRow label="Idade" value={ficha.idadeAtual ? `${ficha.idadeAtual} anos` : null} />
-            <InfoRow label="Data de Nascimento" value={ficha.dataNascimento} />
-            <InfoRow label="Sexo" value={ficha.sexo} />
-            <InfoRow label="Perfil Étnico" value={ficha.perfilEtnico} />
-            <InfoRow label="Estado Civil" value={ficha.estadoCivil} />
-            <InfoRow label="Profissão" value={ficha.profissao} />
-            <InfoRow label="CPF" value={ficha.cpf} />
-            <InfoRow label="Telefone" value={ficha.telefone} />
-            <InfoRow label="Email" value={ficha.email} />
-            <InfoRow label="Plano de Saúde" value={ficha.planoSaude} />
-            <InfoRow label="Data da Avaliação" value={ficha.dataAvaliacao} />
-            <InfoRow label="Data da Consulta" value={ficha.dataConsulta} />
-            <InfoRow label="Médico Responsável" value={ficha.nomeMedico} />
-            <InfoRow label="Fisioterapeuta" value={ficha.consultor} />
-
-            <div className="pt-4 space-y-4 border-t">
-              {[
-                { key: "alimentacao", label: "Alimentação" },
-                { key: "sono", label: "Sono" },
-                { key: "ingestaoHidrica", label: "Ingestão Hídrica" },
-                { key: "rotinaDiaria", label: "Rotina Diária" },
-                { key: "atividadeFisica", label: "Atividade Física" },
-                { key: "medicamentos", label: "Medicamentos" },
-                { key: "tabagismo", label: "Tabagismo" },
-                { key: "etilismo", label: "Etilismo" },
-                { key: "estresse", label: "Estresse" },
-                { key: "trabalhoRepetitivo", label: "Trabalho Repetitivo" },
-                { key: "historicoEsportivo", label: "Histórico Esportivo" },
-              ].map((item) => {
-                const value = (ficha as any)[item.key];
-                if (!value) return null;
-
-                return (
-                  <div key={item.key}>
-                    <p className="text-xs font-bold text-primary uppercase mb-1">{item.label}</p>
-                    <p className="text-[11px] text-muted-foreground">{value}</p>
-                  </div>
-                );
-              })}
+      {/* Main Header Card */}
+      <Card className="border-none shadow-sm overflow-hidden print:shadow-none print:border">
+        <div className="h-2 bg-blue-600 print:hidden"></div>
+        <CardContent className="p-8">
+          <div className="flex flex-col md:flex-row justify-between gap-6">
+            <div className="flex items-center gap-6">
+              <div className="w-20 h-20 rounded-2xl bg-blue-50 flex items-center justify-center text-blue-600 text-3xl font-bold border border-blue-100">
+                {ficha.nomePaciente?.[0] || "P"}
+              </div>
+              <div>
+                <h1 className="text-3xl font-bold text-slate-800 tracking-tight">{ficha.nomePaciente}</h1>
+                <div className="flex flex-wrap items-center gap-4 mt-2 text-sm text-slate-500 font-medium">
+                  <span className="flex items-center gap-1"><User className="w-3 h-3" /> {ficha.idadeAtual} anos</span>
+                  <span className="w-1 h-1 rounded-full bg-slate-300"></span>
+                  <span className="flex items-center gap-1"><Calendar className="w-3 h-3" /> Avaliado em {format(new Date(ficha.createdAt), "dd/MM/yyyy", { locale: ptBR })}</span>
+                  <span className="w-1 h-1 rounded-full bg-slate-300"></span>
+                  <Badge variant="outline" className="bg-emerald-50 text-emerald-700 border-emerald-100 uppercase text-[10px] font-bold">Prontuário Ativo</Badge>
+                </div>
+              </div>
             </div>
-          </CardContent>
-        </Card>
+            <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 flex flex-col justify-center min-w-[200px]">
+              <p className="text-[10px] font-bold text-slate-400 uppercase mb-1">Diagnóstico Clínico</p>
+              <p className="text-sm font-bold text-slate-700 leading-tight">{ficha.diagnosticoClinico || "Não informado"}</p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
 
-        {/* ── Main Content ─────────────────────────────────────────────── */}
-        <div className="col-span-1 lg:col-span-3 space-y-6">
-          {/* Diagnóstico */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Stethoscope className="w-5 h-5 text-primary" />
-                Diagnóstico Clínico
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm leading-relaxed">
-                {ficha.diagnosticoClinico || "-"}
-              </p>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        {/* Coluna Esquerda: Dados Gerais e Sinais Vitais */}
+        <div className="space-y-6">
+          <Card className="border-none shadow-sm">
+            <CardContent className="p-6">
+              <SectionTitle icon={User} title="Dados do Paciente" />
+              <div className="grid grid-cols-1 gap-3">
+                <InfoRow label="CPF" value={ficha.cpf} />
+                <InfoRow label="Telefone" value={ficha.telefone} />
+                <InfoRow label="Profissão" value={ficha.profissao} />
+                <InfoRow label="Sexo" value={ficha.sexo} />
+                <InfoRow label="Plano" value={ficha.planoSaude} />
+              </div>
             </CardContent>
           </Card>
 
-          {/* Sinais Vitais */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Activity className="w-5 h-5 text-primary" />
-                Sinais Vitais &amp; Antropometria
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-              <InfoRow label="Pressão Arterial" value={ficha.pa} />
-              <InfoRow label="FC" value={ficha.fc ? `${ficha.fc} bpm` : null} />
-              <InfoRow label="FR" value={ficha.fr ? `${ficha.fr} rpm` : null} />
-              <InfoRow label="SatO2" value={ficha.satO2} />
-              <InfoRow label="Temperatura" value={ficha.temperatura} />
-              <InfoRow label="Peso" value={ficha.peso ? `${ficha.peso} kg` : null} />
-              <InfoRow label="Altura" value={ficha.altura ? `${ficha.altura} m` : null} />
-              <InfoRow label="IMC" value={ficha.imc} />
-              <InfoRow label="Classificação IMC" value={ficha.classificacaoIMC} />
-              <InfoRow label="FC Máx" value={ficha.fcMax ? `${ficha.fcMax} bpm` : null} />
-              <InfoRow label="Zona de Treino (60–80%)" value={ficha.zonaTreino} />
-              <InfoRow label="FR Máx" value={ficha.frMax ? `${ficha.frMax} rpm` : null} />
-            </CardContent>
-          </Card>
-
-          {/* Anamnese */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <FileText className="w-5 h-5 text-primary" />
-                Anamnese
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4 text-sm">
-              <TextRow label="HDA – História da Doença Atual" value={ficha.hda} />
-              <div className="border-t pt-4">
-                <TextRow label="HDP – História Patológica Pregressa" value={ficha.hdp} />
+          <Card className="border-none shadow-sm">
+            <CardContent className="p-6">
+              <SectionTitle icon={Activity} title="Sinais Vitais" color="emerald" />
+              <div className="grid grid-cols-2 gap-3">
+                <InfoRow label="P.A." value={ficha.pa} />
+                <InfoRow label="F.C." value={ficha.fc ? `${ficha.fc} bpm` : null} />
+                <InfoRow label="Peso" value={ficha.peso ? `${ficha.peso} kg` : null} />
+                <InfoRow label="Altura" value={ficha.altura ? `${ficha.altura} m` : null} />
               </div>
-              <div className="border-t pt-4">
-                <InfoRow label="Início da Dor" value={ficha.inicioDor} />
-              </div>
-              <div className="border-t pt-4">
-                <p className="text-xs font-medium text-muted-foreground uppercase mb-1">
-                  EVA – Avaliação da Dor
-                </p>
-                <div className="flex items-center gap-3">
-                  <div className="h-2 flex-1 bg-secondary rounded-full overflow-hidden">
-                    <div
-                      className={`h-full transition-all ${ficha.eva && ficha.eva > 7
-                        ? "bg-red-500"
-                        : ficha.eva && ficha.eva > 4
-                          ? "bg-yellow-500"
-                          : "bg-green-500"
-                        }`}
-                      style={{ width: `${(ficha.eva || 0) * 10}%` }}
-                    />
+              <div className="mt-4 p-4 bg-emerald-50 rounded-xl border border-emerald-100">
+                <div className="flex justify-between items-end">
+                  <div>
+                    <p className="text-[10px] font-bold text-emerald-600 uppercase">IMC</p>
+                    <p className="text-2xl font-black text-emerald-900 leading-none">{ficha.imc || "0.00"}</p>
                   </div>
-                  <span className="font-bold text-lg">{ficha.eva || 0}/10</span>
+                  <Badge className="bg-emerald-600 text-white border-none text-[10px]">{ficha.classificacaoIMC || "Eutrofia"}</Badge>
                 </div>
               </div>
-
-              {ficha.mapaDor && (
-                <div className="border-t pt-6">
-                  <p className="text-xs font-bold text-primary uppercase mb-4 flex items-center gap-2">
-                    <Map className="w-4 h-4" />
-                    Mapa da Dor
-                  </p>
-                  <div className="bg-white border rounded-2xl p-4 shadow-inner flex justify-center">
-                    <img 
-                      src={ficha.mapaDor} 
-                      alt="Mapa da Dor" 
-                      className="max-w-full h-auto rounded-lg shadow-sm"
-                      style={{ maxHeight: '500px' }}
-                    />
-                  </div>
-                </div>
-              )}
             </CardContent>
           </Card>
 
-          {/* ADM / Força Muscular — CLASSIFICAÇÃO CIF */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Dumbbell className="w-5 h-5 text-primary" />
-                ADM / Força Muscular — CIF
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="overflow-x-auto border rounded-xl">
-                <table className="w-full text-xs text-left border-collapse">
-                  <thead className="bg-muted/50 uppercase font-bold text-muted-foreground">
-                    <tr>
-                      <th className="px-4 py-3 border-b border-r">Movimento</th>
-                      <th className="px-4 py-3 border-b border-r text-center">ADM D</th>
-                      <th className="px-4 py-3 border-b border-r text-center">ADM E</th>
-                      <th className="px-4 py-3 border-b border-r text-center">Força D</th>
-                      <th className="px-4 py-3 border-b border-r text-center">Força E</th>
-                      <th className="px-4 py-3 border-b border-r text-center">Déficit %</th>
-                      <th className="px-4 py-3 border-b text-center">Classificação CIF</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {admForca.map((row, idx) => (
-                      <tr key={idx} className="hover:bg-muted/5 transition-colors">
-                        <td className="px-4 py-3 border-b border-r font-bold">{row.movimento}</td>
-                        <td className="px-4 py-3 border-b border-r text-center">{row.admDireita}</td>
-                        <td className="px-4 py-3 border-b border-r text-center">{row.admEsquerda}</td>
-                        <td className="px-4 py-3 border-b border-r text-center font-mono">{row.forcaD}</td>
-                        <td className="px-4 py-3 border-b border-r text-center font-mono">{row.forcaE}</td>
-                        <td className="px-4 py-3 border-b border-r text-center font-bold text-primary">{row.deficit}%</td>
-                        <td className="px-4 py-3 border-b text-center">
-                          <Badge variant="outline" className="text-[10px] font-bold uppercase">{row.cif}</Badge>
-                        </td>
-                      </tr>
-                    ))}
-                    {admForca.length === 0 && (
-                      <tr>
-                        <td colSpan={7} className="px-4 py-8 text-center text-muted-foreground uppercase font-bold text-[10px]">
-                          Nenhum dado de ADM/Força registrado
-                        </td>
-                      </tr>
-                    )}
-                  </tbody>
-                </table>
+          <Card className="border-none shadow-sm">
+            <CardContent className="p-6">
+              <SectionTitle icon={HeartPulse} title="Hábitos de Vida" color="rose" />
+              <div className="space-y-3">
+                <div className="flex justify-between text-xs py-1 border-b border-slate-50">
+                  <span className="text-slate-400 font-bold uppercase">Tabagismo</span>
+                  <span className="font-bold text-slate-700">{ficha.tabagismo}</span>
+                </div>
+                <div className="flex justify-between text-xs py-1 border-b border-slate-50">
+                  <span className="text-slate-400 font-bold uppercase">Etilismo</span>
+                  <span className="font-bold text-slate-700">{ficha.etilismo}</span>
+                </div>
+                <div className="flex justify-between text-xs py-1 border-b border-slate-50">
+                  <span className="text-slate-400 font-bold uppercase">Estresse</span>
+                  <span className="font-bold text-slate-700">{ficha.estresse}</span>
+                </div>
+                <div className="pt-2">
+                  <p className="text-[10px] font-bold text-slate-400 uppercase mb-1">Atividade Física</p>
+                  <p className="text-xs font-medium text-slate-600">{ficha.atividadeFisica || "Não pratica"}</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Coluna Central: Avaliação e Mapa da Dor */}
+        <div className="lg:col-span-2 space-y-6">
+          
+          {/* Anamnese e Exame Físico */}
+          <Card className="border-none shadow-sm">
+            <CardContent className="p-6">
+              <SectionTitle icon={ClipboardList} title="Avaliação Clínica" />
+              <div className="space-y-6">
+                <div>
+                  <h4 className="text-[11px] font-black text-blue-600 uppercase mb-2">Queixa Principal</h4>
+                  <p className="text-sm text-slate-700 leading-relaxed font-medium bg-blue-50/30 p-4 rounded-xl border border-blue-50">
+                    {ficha.queixaPrincipal || "Nenhuma queixa registrada."}
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <h4 className="text-[11px] font-black text-slate-400 uppercase mb-2">História Atual (HDA)</h4>
+                    <p className="text-xs text-slate-600 leading-relaxed">{ficha.hda || "-"}</p>
+                  </div>
+                  <div>
+                    <h4 className="text-[11px] font-black text-slate-400 uppercase mb-2">Inspeção / Palpação</h4>
+                    <p className="text-xs text-slate-600 leading-relaxed">{ficha.inspecao || "-"}</p>
+                    <p className="text-xs text-slate-600 leading-relaxed mt-2">{ficha.palpacao || "-"}</p>
+                  </div>
+                </div>
               </div>
             </CardContent>
           </Card>
 
-
-          {/* Avaliação Ortopédica Automatizada */}
-          {ficha.regiaoAvaliada && (
-            <Card className="border-primary/20 bg-primary/5">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Activity className="w-5 h-5 text-primary" />
-                  Avaliação Ortopédica Automatizada: {ficha.regiaoAvaliada.charAt(0).toUpperCase() + ficha.regiaoAvaliada.slice(1)}
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {Object.entries((ficha.testesOrtopedicosJson as Record<string, unknown>) || {}).map(([key, value]) => (
-                    <div key={key} className="flex justify-between items-center p-2 border-b border-primary/10">
-                      <span className="text-sm font-medium text-muted-foreground">
-                        {key.split('_').map((w: string) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')}
-                      </span>
-                      <Badge variant="outline">
-                        {value === "true" ? "Positivo" : value === "false" ? "Negativo" : String(value)}
-                      </Badge>
-                    </div>
-                  ))}
-                </div>
-                <div className="p-4 bg-background border border-primary/20 rounded-lg space-y-3">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2 font-semibold text-primary">
-                      <CheckCircle2 className="w-4 h-4" />
-                      Diagnóstico Funcional Provável
-                    </div>
-                    <Badge variant={
-                      ficha.probabilidadeClinica === "Alta" ? "destructive" :
-                      ficha.probabilidadeClinica === "Moderada" ? "default" : "secondary"
-                    }>
-                      Probabilidade {ficha.probabilidadeClinica || "Baixa"}
-                    </Badge>
+          {/* Mapa da Dor e Diagnóstico Funcional */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <Card className="border-none shadow-sm overflow-hidden">
+              <CardContent className="p-6">
+                <SectionTitle icon={Map} title="Mapa da Dor" color="rose" />
+                <div className="aspect-[3/4] bg-slate-50 rounded-xl border border-slate-100 flex items-center justify-center relative overflow-hidden">
+                  {ficha.mapaDor ? (
+                    <img src={ficha.mapaDor} alt="Mapa da Dor" className="w-full h-full object-contain" />
+                  ) : (
+                    <p className="text-xs text-slate-400">Nenhum mapa desenhado.</p>
+                  )}
+                  <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur px-3 py-1.5 rounded-lg border shadow-sm">
+                    <p className="text-[10px] font-bold text-slate-400 uppercase">EVA</p>
+                    <p className="text-lg font-black text-rose-600 leading-none">{ficha.eva || 0}/10</p>
                   </div>
-                  <p className="text-sm leading-relaxed">
-                    {ficha.diagnosticoFuncionalProvavel || "Nenhum diagnóstico gerado."}
-                  </p>
-                  <p className="text-[10px] text-muted-foreground flex items-center gap-1 italic">
-                    <AlertTriangle className="w-3 h-3" />
-                    Classificação funcional baseada em evidência clínica.
-                  </p>
                 </div>
               </CardContent>
             </Card>
-          )}
-          {/* Escalas Funcionais */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Activity className="w-5 h-5 text-primary" />
-                Escalas Funcionais
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="grid grid-cols-3 gap-4 text-sm">
-              <InfoRow label="Escala de Berg (0-56)" value={ficha.escalaBerg} />
-              <InfoRow label="Escala de Ashworth (0-4)" value={ficha.escalaAshworth} />
-              <InfoRow label="TC6 Distância (m)" value={ficha.escalaTC6} />
-            </CardContent>
-          </Card>
 
-          {/* Exame Físico */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Activity className="w-5 h-5 text-primary" />
-                Exame Físico
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <TextRow label="Inspeção" value={ficha.inspecao} />
-                <TextRow label="Palpação" value={ficha.palpacao} />
-                <div className="md:col-span-2 border-t pt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <TextRow label="Postura Estática" value={ficha.posturaEstatica} />
-                  <TextRow label="Postura Dinâmica" value={ficha.posturaDinamica} />
-                </div>
-                <div className="md:col-span-2 border-t pt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <TextRow label="Marcha" value={ficha.marcha} />
-                  <TextRow label="Perimetria" value={ficha.perimetria} />
-                </div>
-                <div className="md:col-span-2 border-t pt-4">
-                  <TextRow label="Testes Especiais" value={ficha.testesEspeciais} />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+            <div className="space-y-6">
+              <Card className="border-none shadow-sm bg-blue-900 text-white">
+                <CardContent className="p-6">
+                  <SectionTitle icon={Zap} title="Diagnóstico Funcional" color="blue" />
+                  <div className="space-y-4">
+                    <div>
+                      <p className="text-[10px] font-bold text-blue-300 uppercase tracking-widest mb-2">Conclusão Clínica</p>
+                      <p className="text-sm font-bold leading-relaxed">{ficha.diagnosticoFuncionalProvavel || "Aguardando diagnóstico..."}</p>
+                    </div>
+                    <div className="flex items-center gap-2 pt-4 border-t border-blue-800">
+                      <Badge className="bg-blue-600 text-white border-none">{ficha.probabilidadeClinica || "Baixa"} Probabilidade</Badge>
+                      <span className="text-[10px] text-blue-300 font-medium">Baseado em clusters clínicos</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
 
-          {/* Mapa da Dor */}
-          {ficha.mapaDor && (
-            <Card>
-              <CardHeader>
-                <CardTitle>Mapa da Dor</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <img
-                  src={ficha.mapaDor}
-                  alt="Mapa da Dor"
-                  className="max-w-full border rounded"
-                />
-              </CardContent>
-            </Card>
-          )}
+              <Card className="border-none shadow-sm">
+                <CardContent className="p-6">
+                  <SectionTitle icon={Target} title="Objetivos e Plano" color="indigo" />
+                  <div className="space-y-4">
+                    <div>
+                      <h4 className="text-[10px] font-black text-slate-400 uppercase mb-1">Curto Prazo</h4>
+                      <p className="text-xs text-slate-600 leading-relaxed">{ficha.estrategiasCurto || "-"}</p>
+                    </div>
+                    <div>
+                      <h4 className="text-[10px] font-black text-slate-400 uppercase mb-1">Longo Prazo</h4>
+                      <p className="text-xs text-slate-600 leading-relaxed">{ficha.estrategiasLongo || "-"}</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
 
-          {/* Prescrições */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <ClipboardList className="w-5 h-5 text-primary" />
-                Prescrições & Condutas
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-6">
-               <div className="space-y-4">
-                {prescricoes.map((p: any, i: number) => (
-                  <div
-                    key={i}
-                    className="grid grid-cols-1 gap-4 p-4 border rounded-xl bg-muted/5 hover:bg-muted/10 transition-colors"
-                  >
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* Prescrições e Exercícios */}
+          <Card className="border-none shadow-sm">
+            <CardContent className="p-6">
+              <SectionTitle icon={Dumbbell} title="Prescrição de Exercícios" color="emerald" />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {prescricoes.length > 0 ? (
+                  prescricoes.map((p, i) => (
+                    <div key={i} className="p-4 bg-slate-50 rounded-xl border border-slate-100 flex items-center justify-between">
                       <div>
-                        <p className="text-[10px] font-bold uppercase text-muted-foreground mb-1">Descrição</p>
-                        <p className="text-sm font-semibold">{p.descricao || "-"}</p>
+                        <p className="text-sm font-bold text-slate-700">{p.descricao}</p>
+                        <p className="text-[10px] font-medium text-slate-400 uppercase">{p.frequencia}</p>
                       </div>
-                      <div>
-                        <p className="text-[10px] font-bold uppercase text-muted-foreground mb-1">Frequência / Quantidade</p>
-                        <Badge variant="secondary" className="text-[10px] font-bold uppercase px-3">
-                          {p.frequencia || "-"}
-                        </Badge>
+                      <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                       </div>
                     </div>
-                    {(p.progressao || p.observacoes) && (
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-t pt-4">
-                        {p.progressao && (
-                          <div>
-                            <p className="text-[10px] font-bold uppercase text-primary mb-1">Progressão de Tratamento</p>
-                            <p className="text-xs text-muted-foreground leading-relaxed italic">{p.progressao}</p>
-                          </div>
-                        )}
-                        {p.observacoes && (
-                          <div>
-                            <p className="text-[10px] font-bold uppercase text-primary mb-1">Observações Adicionais</p>
-                            <p className="text-xs text-muted-foreground leading-relaxed italic">{p.observacoes}</p>
-                          </div>
-                        )}
-                      </div>
-                    )}
-                  </div>
-                ))}
-                {prescricoes.length === 0 && (
-                  <p className="text-center text-muted-foreground text-xs uppercase font-bold py-6">Nenhuma prescrição registrada.</p>
+                  ))
+                ) : (
+                  <p className="text-xs text-slate-400 col-span-2 py-4 text-center">Nenhum exercício prescrito.</p>
                 )}
               </div>
             </CardContent>
           </Card>
 
-          {/* Evoluções */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <History className="w-5 h-5 text-primary" />
-                Histórico de Evolução
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              {evolucoes.map((ev, i) => (
-                <div key={i} className="p-6 border rounded-xl bg-muted/5 space-y-6 relative overflow-hidden group">
-                  <div className="absolute top-0 right-0 h-1 w-full bg-primary/20 group-hover:bg-primary transition-all" />
-                  <div className="flex justify-between items-center text-[10px] font-black uppercase tracking-widest text-primary/50">
-                    <span>SE- {ev.data}</span>
-                    <span>{ev.fisioterapeuta}</span>
-                  </div>
-
-                  <div className="space-y-4">
-                    <div>
-                      <p className="text-[10px] font-bold text-primary uppercase mb-1">Descrição do Atendimento</p>
-                      <p className="text-sm text-muted-foreground leading-relaxed">{ev.descricao}</p>
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div>
-                        <p className="text-[10px] font-bold text-primary uppercase mb-1">Resposta</p>
-                        <p className="text-[11px] text-muted-foreground italic">{ev.resposta}</p>
-                      </div>
-                      <div>
-                        <p className="text-[10px] font-bold text-primary uppercase mb-1">Ajuste de Conduta</p>
-                        <p className="text-[11px] text-muted-foreground italic">{ev.ajuste}</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-              {evolucoes.length === 0 && (
-                <p className="text-center text-muted-foreground text-xs uppercase font-bold py-6">Nenhuma evolução registrada.</p>
-              )}
-            </CardContent>
-          </Card>
-
-          {/* Estratégias */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <ClipboardList className="w-5 h-5 text-primary" />
-                Plano de Tratamento – Estratégias
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-                <div className="p-3 bg-muted/30 rounded-lg">
-                  <p className="text-xs font-medium text-primary uppercase mb-2">
-                    Curto Prazo
-                  </p>
-                  <p className="text-muted-foreground">
-                    {ficha.estrategiasCurto || "-"}
-                  </p>
-                </div>
-                <div className="p-3 bg-muted/30 rounded-lg">
-                  <p className="text-xs font-medium text-primary uppercase mb-2">
-                    Médio Prazo
-                  </p>
-                  <p className="text-muted-foreground">
-                    {ficha.estrategiasMedio || "-"}
-                  </p>
-                </div>
-                <div className="p-3 bg-muted/30 rounded-lg">
-                  <p className="text-xs font-medium text-primary uppercase mb-2">
-                    Longo Prazo
-                  </p>
-                  <p className="text-muted-foreground">
-                    {ficha.estrategiasLongo || "-"}
-                  </p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Interpretação Automática */}
-          {ficha.interpretacaoAutomatica && (
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Zap className="w-5 h-5 text-primary" />
-                  Interpretação Automática
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm leading-relaxed whitespace-pre-wrap">
-                  {ficha.interpretacaoAutomatica}
-                </p>
-              </CardContent>
-            </Card>
-          )}
-
-          {/* Termo de Consentimento */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <ShieldCheck className="w-5 h-5 text-primary" />
-                Termo de Consentimento
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4 text-[11px] uppercase font-bold">
-              <div className="flex items-center gap-2">
-                <Badge className="h-5 px-1.5">{ficha.termoConsentimentoFoto ? "X" : " "}</Badge>
-                <span>Consentimento Fotográfico</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Badge className="h-5 px-1.5">{ficha.termoConsentimentoFaltas ? "X" : " "}</Badge>
-                <span>Política de Faltas (24h)</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Badge className="h-5 px-1.5">{ficha.termoConsentimentoReposicao ? "X" : " "}</Badge>
-                <span>Política de Reposição</span>
-              </div>
-              <div className="pt-2 text-muted-foreground">
-                Data de Assinatura: {ficha.dataAssinaturaTermo || "-"}
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Assinaturas */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <PenTool className="w-5 h-5 text-primary" />
-                Assinaturas
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="pt-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                <div className="space-y-4 text-center">
-                  <div className="h-24 flex items-center justify-center bg-white border rounded-xl overflow-hidden p-2 group relative">
-                    {ficha.assinaturaPaciente ? (
-                      <img src={ficha.assinaturaPaciente} alt="Assinatura Paciente" className="max-h-full object-contain" />
-                    ) : (
-                      <div className="w-32 border-b border-primary/20" />
-                    )}
-                  </div>
-                  <div className="space-y-1">
-                    <p className="text-[10px] font-black uppercase text-primary">Assinatura do Paciente</p>
-                    <p className="text-[9px] text-muted-foreground italic">{ficha.nomePaciente}</p>
-                  </div>
-                </div>
-
-                <div className="space-y-4 text-center">
-                  <div className="h-24 flex items-center justify-center bg-white border rounded-xl overflow-hidden p-2 group relative">
-                    {ficha.assinaturaFisioterapeuta ? (
-                      <img src={ficha.assinaturaFisioterapeuta} alt="Assinatura Profissional" className="max-h-full object-contain" />
-                    ) : (
-                      <div className="w-32 border-b border-primary/20" />
-                    )}
-                  </div>
-                  <div className="space-y-1">
-                    <p className="text-[10px] font-black uppercase text-primary">Assinatura do Profissional</p>
-                    <p className="text-[9px] text-muted-foreground italic">Dr. Daniel Barcellos — CREFITO 10 389091-F</p>
-                  </div>
-                </div>
+          {/* ADM e Força Tabela */}
+          <Card className="border-none shadow-sm overflow-hidden">
+            <CardContent className="p-6">
+              <SectionTitle icon={Scale} title="Amplitude de Movimento e Força" color="amber" />
+              <div className="overflow-x-auto">
+                <table className="w-full text-left border-collapse">
+                  <thead>
+                    <tr className="border-b border-slate-100">
+                      <th className="py-3 text-[10px] font-black text-slate-400 uppercase">Movimento</th>
+                      <th className="py-3 text-[10px] font-black text-slate-400 uppercase text-center">Dir.</th>
+                      <th className="py-3 text-[10px] font-black text-slate-400 uppercase text-center">Esq.</th>
+                      <th className="py-3 text-[10px] font-black text-slate-400 uppercase text-center">Força (MRC)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {admForca.map((item, i) => (
+                      <tr key={i} className="border-b border-slate-50 last:border-0">
+                        <td className="py-3 text-xs font-bold text-slate-700">{item.movimento}</td>
+                        <td className="py-3 text-xs font-mono text-center text-blue-600">{item.admDireita}°</td>
+                        <td className="py-3 text-xs font-mono text-center text-blue-600">{item.admEsquerda}°</td>
+                        <td className="py-3 text-xs font-bold text-center text-amber-600">{item.forcaD || item.forcaE || "-"}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             </CardContent>
           </Card>
