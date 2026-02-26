@@ -5,8 +5,14 @@ import { createServer } from "http";
 import path from "path";
 import { fileURLToPath } from "url";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+let __dirname: string;
+try {
+  const __filename = fileURLToPath(import.meta.url);
+  __dirname = path.dirname(__filename);
+} catch (e) {
+  // Fallback para quando import.meta.url não está disponível (ex: em arquivos compilados CJS)
+  __dirname = process.cwd();
+}
 
 const app = express();
 const httpServer = createServer(app);
@@ -27,8 +33,11 @@ app.use(
 );
 
   app.use(express.urlencoded({ extended: false }));
-  // Servir arquivos estáticos da pasta public do cliente explicitamente se necessário
-  app.use("/assets", express.static(path.resolve(__dirname, "..", "client", "public", "assets")));
+  // Servir arquivos estáticos da pasta public do cliente
+  const assetsPath = process.env.NODE_ENV === "production" 
+    ? path.resolve(__dirname, "public", "assets")
+    : path.resolve(__dirname, "..", "client", "public", "assets");
+  app.use("/assets", express.static(assetsPath));
 
 export function log(message: string, source = "express") {
   const formattedTime = new Date().toLocaleTimeString("en-US", {
