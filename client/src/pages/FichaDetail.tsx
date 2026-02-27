@@ -323,6 +323,7 @@ export default function FichaDetail() {
           </Card>
 >>>>>>> parent of cc61847 (Novo Layout)
 
+<<<<<<< HEAD
               <Card className="border-none shadow-sm">
                 <CardContent className="p-6">
                   <SectionTitle icon={Target} title="Objetivos e Plano" color="indigo" />
@@ -351,6 +352,8 @@ export default function FichaDetail() {
                   prescricoes.map((p, i) => (
                     <div key={i} className="p-4 bg-slate-50 rounded-xl border border-slate-100 flex items-center justify-between">
 =======
+=======
+>>>>>>> parent of cc61847 (Novo Layout)
           {/* Avaliação Física */}
           <Card>
             <CardHeader>

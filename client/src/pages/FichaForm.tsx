@@ -30,6 +30,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   ChevronRight,
   Plus, 
   Trash2, 
@@ -58,6 +59,10 @@ import {
   Plus, Trash2, Printer, Map, Activity, History, ShieldCheck, PenTool,
   Loader2, Save, ArrowLeft
 >>>>>>> parent of cc61847 (Novo Layout)
+=======
+  Plus, Trash2, Printer, Map, Activity, History, ShieldCheck, PenTool,
+  Loader2, Save, ArrowLeft
+>>>>>>> parent of cc61847 (Novo Layout)
 } from "lucide-react";
 import React, { useEffect, useCallback, useRef, useState } from "react";
 import { Slider } from "@/components/ui/slider";
@@ -67,8 +72,11 @@ import { useForm, useFieldArray } from "react-hook-form";
 import { z } from "zod";
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
+=======
+>>>>>>> parent of cc61847 (Novo Layout)
 =======
 >>>>>>> parent of cc61847 (Novo Layout)
 =======
@@ -183,6 +191,7 @@ export default function FichaForm() {
       ],
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       inspecao: "",
       palpacao: "",
       posturaEstatica: "",
@@ -200,6 +209,8 @@ export default function FichaForm() {
 =======
 =======
 >>>>>>> parent of cc61847 (Novo Layout)
+=======
+>>>>>>> parent of cc61847 (Novo Layout)
       termoConsentimentoFoto: false,
       termoConsentimentoFaltas: false,
       termoConsentimentoReposicao: false,
@@ -207,6 +218,9 @@ export default function FichaForm() {
       assinaturaPaciente: "",
       assinaturaFisioterapeuta: "",
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of cc61847 (Novo Layout)
+=======
 >>>>>>> parent of cc61847 (Novo Layout)
 =======
 >>>>>>> parent of cc61847 (Novo Layout)
@@ -334,6 +348,7 @@ export default function FichaForm() {
   // Função draw removida pois agora está no componente PainelMapaDor
 
   return (
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     <div className="animate-in fade-in duration-500 pb-20">
@@ -996,6 +1011,503 @@ export default function FichaForm() {
                         )}
                       />
                     </div>
+=======
+    <div className="max-w-5xl mx-auto pb-12 animate-in fade-in duration-500">
+      <Button
+        variant="ghost"
+        className="mb-4 pl-0 hover:pl-2 transition-all"
+        onClick={() => setLocation(isEdit ? `/fichas/${id}` : "/fichas")}
+      >
+        <ArrowLeft className="w-4 h-4 mr-2" />
+        Voltar
+      </Button>
+
+      <PageHeader
+        title={isEdit ? "Editar Avaliação" : "Nova Avaliação"}
+        description={
+          isEdit
+            ? `Editando registro de ${ficha?.nomePaciente}`
+            : "Crie um novo registro de avaliação de paciente."
+        }
+      />
+
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          <Tabs defaultValue="identificacao" className="w-full">
+            {/* ── sticky header ─────────────────────────────────────────── */}
+            <div className="sticky top-0 z-40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 py-4 border-b mb-8">
+              <div className="flex items-center justify-between">
+                <TabsList className="w-full justify-start overflow-x-auto no-scrollbar h-auto p-1 bg-transparent gap-2">
+                  {[
+                    { label: "Identificação", value: "identificacao" },
+                    { label: "Hábitos de Vida", value: "habitos-de-vida" },
+                    { label: "Sinais Vitais", value: "sinais-vitais" },
+                    { label: "Anamnese", value: "anamnese" },
+                    { label: "ADM / Força", value: "adm-forca" },
+                    { label: "Avaliação Ortopédica", value: "ortopedica" },
+                    { label: "Escalas Funcionais", value: "escalas-funcionais" },
+                    { label: "Avaliação Física", value: "avaliacao-fisica" },
+                    { label: "Mapa da Dor", value: "mapa-dor" },
+                    { label: "Prescrições", value: "prescricoes" },
+                    { label: "Evolução", value: "evolucao" },
+                    { label: "Estratégias", value: "estrategias" },
+                    { label: "Termo", value: "termo" },
+                    { label: "Assinaturas", value: "assinaturas" },
+                  ].map((tab) => (
+                    <TabsTrigger
+                      key={tab.value}
+                      value={tab.value}
+                      className="data-[state=active]:bg-primary/10 data-[state=active]:text-primary rounded-full px-4 py-2"
+                    >
+                      {tab.label}
+                    </TabsTrigger>
+                  ))}
+                </TabsList>
+
+                <div className="flex gap-2 ml-4">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={gerarPDF}
+                    title="Gerar PDF / Imprimir"
+                  >
+                    <Printer className="w-4 h-4 mr-2" />
+                    PDF
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => setLocation("/fichas")}
+                  >
+                    Cancelar
+                  </Button>
+                  <Button
+                    type="submit"
+                    disabled={isPending}
+                    className="shadow-lg shadow-primary/20"
+                  >
+                    {isPending && (
+                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    )}
+                    <Save className="w-4 h-4 mr-2" />
+                    Salvar Registro
+                  </Button>
+                </div>
+              </div>
+            </div>
+
+            <Card className="border-none shadow-none bg-transparent">
+              <CardContent className="p-0">
+                {/* ══════════════ IDENTIFICAÇÃO ══════════════ */}
+                <TabsContent value="identificacao" className="space-y-6 mt-0">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 bg-card rounded-xl border shadow-sm">
+                    {/* Nome */}
+                    <FormField
+                      control={form.control}
+                      name="nomePaciente"
+                      render={({ field }) => (
+                        <FormItem className="col-span-2">
+                          <FormLabel>Nome Completo</FormLabel>
+                          <FormControl>
+                            <Input
+                              placeholder="Nome completo do paciente"
+                              {...field}
+                              value={field.value || ""}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    {/* Data de Nascimento — dispara cálculo de idade + cardio */}
+                    <FormField
+                      control={form.control}
+                      name="dataNascimento"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Data de Nascimento</FormLabel>
+                          <FormControl>
+                            <Input
+                              type="date"
+                              {...field}
+                              value={field.value || ""}
+                              onChange={(e) => {
+                                field.onChange(e);
+                                handleDataNascimentoChange(e.target.value);
+                              }}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    {/* Idade (calculada automaticamente) */}
+                    <FormField
+                      control={form.control}
+                      name="idadeAtual"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Idade (calculada)</FormLabel>
+                          <FormControl>
+                            <Input
+                              type="number"
+                              placeholder="Calculada automaticamente"
+                              readOnly
+                              className="bg-muted/50"
+                              {...field}
+                              value={field.value ?? ""}
+                              onChange={(e) =>
+                                field.onChange(parseInt(e.target.value))
+                              }
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    {/* Sexo */}
+                    <FormField
+                      control={form.control}
+                      name="sexo"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Sexo</FormLabel>
+                          <Select
+                            onValueChange={field.onChange}
+                            value={field.value || ""}
+                          >
+                            <FormControl>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Selecione" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              <SelectItem value="Masculino">Masculino</SelectItem>
+                              <SelectItem value="Feminino">Feminino</SelectItem>
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    {/* Perfil Étnico */}
+                    <FormField
+                      control={form.control}
+                      name="perfilEtnico"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Perfil Étnico</FormLabel>
+                          <Select
+                            onValueChange={field.onChange}
+                            value={field.value || ""}
+                          >
+                            <FormControl>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Selecione" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              <SelectItem value="Branco">Branco</SelectItem>
+                              <SelectItem value="Preto">Preto</SelectItem>
+                              <SelectItem value="Pardo">Pardo</SelectItem>
+                              <SelectItem value="Indígena">Indígena</SelectItem>
+                              <SelectItem value="Amarelo">Amarelo</SelectItem>
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    {/* Estado Civil */}
+                    <FormField
+                      control={form.control}
+                      name="estadoCivil"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Estado Civil</FormLabel>
+                          <Select
+                            onValueChange={field.onChange}
+                            value={field.value || ""}
+                          >
+                            <FormControl>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Selecione" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              <SelectItem value="Solteiro(a)">Solteiro(a)</SelectItem>
+                              <SelectItem value="Casado(a)">Casado(a)</SelectItem>
+                              <SelectItem value="Divorciado(a)">Divorciado(a)</SelectItem>
+                              <SelectItem value="Viúvo(a)">Viúvo(a)</SelectItem>
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    {/* Profissão */}
+                    <FormField
+                      control={form.control}
+                      name="profissao"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Profissão / Ocupação</FormLabel>
+                          <FormControl>
+                            <Input
+                              placeholder="Cargo ou atividade"
+                              {...field}
+                              value={field.value || ""}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    {/* Diagnóstico Clínico */}
+                    <FormField
+                      control={form.control}
+                      name="diagnosticoClinico"
+                      render={({ field }) => (
+                        <FormItem className="col-span-2">
+                          <FormLabel>Diagnóstico Clínico</FormLabel>
+                          <FormControl>
+                            <Textarea
+                              placeholder="Descreva o diagnóstico clínico do paciente..."
+                              {...field}
+                              value={field.value || ""}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    {/* Nome do Médico */}
+                    <FormField
+                      control={form.control}
+                      name="nomeMedico"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Nome do Médico</FormLabel>
+                          <FormControl>
+                            <Input
+                              placeholder="Dr(a). ..."
+                              {...field}
+                              value={field.value || ""}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    {/* Plano de Saúde */}
+                    <FormField
+                      control={form.control}
+                      name="planoSaude"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Plano de Saúde / Particular</FormLabel>
+                          <FormControl>
+                            <Input
+                              placeholder="Plano ou particular"
+                              {...field}
+                              value={field.value || ""}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    {/* Data da Consulta */}
+                    <FormField
+                      control={form.control}
+                      name="dataConsulta"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Data da Consulta</FormLabel>
+                          <FormControl>
+                            <Input placeholder="DD/MM/AAAA" {...field} value={field.value || ""} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    {/* Consultor — atualiza assinatura */}
+                    <FormField
+                      control={form.control}
+                      name="consultor"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Fisioterapeuta Responsável</FormLabel>
+                          <Select
+                            onValueChange={(v) => {
+                              field.onChange(v);
+                              handleConsultorChange(v);
+                            }}
+                            value={field.value || ""}
+                          >
+                            <FormControl>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Selecione" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              <SelectItem value="Dr. Daniel Barcellos">
+                                Dr. Daniel Barcellos
+                              </SelectItem>
+                              <SelectItem value="Dra. Natália Macedo">
+                                Dra. Natália Macedo
+                              </SelectItem>
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    {/* CPF */}
+                    <FormField
+                      control={form.control}
+                      name="cpf"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>CPF</FormLabel>
+                          <FormControl>
+                            <Input
+                              placeholder="000.000.000-00"
+                              {...field}
+                              value={field.value || ""}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    {/* Telefone */}
+                    <FormField
+                      control={form.control}
+                      name="telefone"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Telefone</FormLabel>
+                          <FormControl>
+                            <Input
+                              placeholder="(00) 00000-0000"
+                              {...field}
+                              value={field.value || ""}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    {/* Email */}
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Email</FormLabel>
+                          <FormControl>
+                            <Input
+                              type="email"
+                              placeholder="paciente@exemplo.com"
+                              {...field}
+                              value={field.value || ""}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                </TabsContent>
+
+
+                <TabsContent value="habitos-de-vida" className="space-y-6 mt-0">
+                  <div className="p-6 bg-card rounded-xl border shadow-sm space-y-8">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                      <FormField
+                        control={form.control}
+                        name="alimentacao"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="font-bold text-xs uppercase">Alimentação</FormLabel>
+                            <Select onValueChange={field.onChange} value={field.value}>
+                              <FormControl>
+                                <SelectTrigger>
+                                  <SelectValue placeholder="Selecione" />
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent>
+                                <SelectItem value="Saudável">Saudável</SelectItem>
+                                <SelectItem value="Regular">Regular</SelectItem>
+                                <SelectItem value="Inadequada">Inadequada</SelectItem>
+                              </SelectContent>
+                            </Select>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="sono"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="font-bold text-xs uppercase">Sono</FormLabel>
+                            <Select onValueChange={field.onChange} value={field.value}>
+                              <FormControl>
+                                <SelectTrigger>
+                                  <SelectValue placeholder="Selecione" />
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent>
+                                <SelectItem value="Bom (7-9h)">Bom (7-9h)</SelectItem>
+                                <SelectItem value="Regular (5-7h)">Regular (5-7h)</SelectItem>
+                                <SelectItem value="Ruim (<5h)">Ruim (&lt;5h)</SelectItem>
+                                <SelectItem value="Insônia">Insônia</SelectItem>
+                              </SelectContent>
+                            </Select>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="ingestaoHidrica"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="font-bold text-xs uppercase">Ingestão Hídrica</FormLabel>
+                            <Select onValueChange={field.onChange} value={field.value}>
+                              <FormControl>
+                                <SelectTrigger>
+                                  <SelectValue placeholder="Selecione" />
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent>
+                                <SelectItem value="Adequada (>2L/dia)">Adequada (&gt;2L/dia)</SelectItem>
+                                <SelectItem value="Regular (1-2L/dia)">Regular (1-2L/dia)</SelectItem>
+                                <SelectItem value="Insuficiente (<1L/dia)">Insuficiente (&lt;1L/dia)</SelectItem>
+                              </SelectContent>
+                            </Select>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+>>>>>>> parent of cc61847 (Novo Layout)
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <FormField
@@ -1293,6 +1805,7 @@ export default function FichaForm() {
                     </div>
 
                     {/* HDA e HDP em duas colunas */}
+<<<<<<< HEAD
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <FormField
                         control={form.control}
@@ -3267,6 +3780,536 @@ export default function FichaForm() {
                   </div>
                 </TabsContent>
 
+=======
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <FormField
+                        control={form.control}
+                        name="hda"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-[10px] font-bold uppercase text-muted-foreground mb-2 block">HDA — HISTÓRIA DA DOENÇA ATUAL</FormLabel>
+                            <FormControl>
+                              <Textarea
+                                placeholder="Descreva a história da doença atual..."
+                                className="min-h-[120px] text-xs resize-none"
+                                {...field}
+                                value={field.value || ""}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="hdp"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-[10px] font-bold uppercase text-muted-foreground mb-2 block">HDP — HISTÓRIA DA DOENÇA PREGRESSA</FormLabel>
+                            <FormControl>
+                              <Textarea
+                                placeholder="Histórico de doenças anteriores..."
+                                className="min-h-[120px] text-xs resize-none"
+                                {...field}
+                                value={field.value || ""}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+
+                    {/* Escala EVA Visual */}
+                    <FormField
+                      control={form.control}
+                      name="eva"
+                      render={({ field }) => {
+                        const evaValue = field.value ?? 0;
+                        const evaColors = [
+                          "bg-green-600",
+                          "bg-green-500",
+                          "bg-green-400",
+                          "bg-lime-400",
+                          "bg-yellow-400",
+                          "bg-yellow-500",
+                          "bg-orange-400",
+                          "bg-orange-500",
+                          "bg-red-500",
+                          "bg-red-600",
+                          "bg-red-700",
+                        ];
+
+                        return (
+                          <FormItem>
+                            <FormLabel className="text-[10px] font-bold uppercase text-muted-foreground mb-3 block">EVA — ESCALA VISUAL ANALÓGICA DE DOR</FormLabel>
+                            <div className="space-y-3">
+                              {/* Barra de cores */}
+                              <div className="flex gap-1 h-8 rounded-lg overflow-hidden border">
+                                {evaColors.map((color, index) => (
+                                  <button
+                                    key={index}
+                                    type="button"
+                                    className={`flex-1 ${color} cursor-pointer transition-all hover:opacity-80 ${
+                                      evaValue === index ? "ring-2 ring-offset-2 ring-foreground" : ""
+                                    }`}
+                                    onClick={() => field.onChange(index)}
+                                    title={`${index} - ${index === 0 ? "Sem dor" : index === 10 ? "Dor máxima" : ""}`}
+                                  />
+                                ))}
+                              </div>
+                              {/* Rótulos e valor selecionado */}
+                              <div className="flex justify-between items-center text-[10px] font-bold">
+                                <span className="text-green-600">0 — Sem dor</span>
+                                <span className="text-muted-foreground">Selecionado: <span className="text-primary">{evaValue}</span></span>
+                                <span className="text-red-600">10 — Dor máxima</span>
+                              </div>
+                            </div>
+                            <FormMessage />
+                          </FormItem>
+                        );
+                      }}
+                    />
+
+                    {/* Campos de Dor em Grade */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 border-t pt-6">
+                      <FormField
+                        control={form.control}
+                        name="inicioDor"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-[10px] font-bold uppercase text-muted-foreground mb-1 block">INÍCIO DA DOR</FormLabel>
+                            <FormControl>
+                              <Input
+                                placeholder="Ex: há 3 meses"
+                                className="h-9 text-xs"
+                                {...field}
+                                value={field.value || ""}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="tipoDor"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-[10px] font-bold uppercase text-muted-foreground mb-1 block">TIPO DE DOR</FormLabel>
+                            <FormControl>
+                              <select
+                                className="w-full h-9 px-3 rounded-md border border-input bg-background text-xs"
+                                {...field}
+                                value={field.value || ""}
+                              >
+                                <option value="">Selecione</option>
+                                <option value="aguda">Aguda</option>
+                                <option value="cronica">Crônica</option>
+                                <option value="neuropatica">Neuropática</option>
+                                <option value="inflamatoria">Inflamatória</option>
+                                <option value="mecanica">Mecânica</option>
+                                <option value="outra">Outra</option>
+                              </select>
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="irradiacao"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-[10px] font-bold uppercase text-muted-foreground mb-1 block">IRRADIAÇÃO</FormLabel>
+                            <FormControl>
+                              <Input
+                                placeholder="Para onde irradia?"
+                                className="h-9 text-xs"
+                                {...field}
+                                value={field.value || ""}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+
+                    {/* Fatores e Cirurgias */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      <FormField
+                        control={form.control}
+                        name="fatoresMelhora"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-[10px] font-bold uppercase text-muted-foreground mb-1 block">FATORES DE MELHORA</FormLabel>
+                            <FormControl>
+                              <Input
+                                placeholder="O que melhora a dor?"
+                                className="h-9 text-xs"
+                                {...field}
+                                value={field.value || ""}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="fatoresPiora"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-[10px] font-bold uppercase text-muted-foreground mb-1 block">FATORES DE PIORA</FormLabel>
+                            <FormControl>
+                              <Input
+                                placeholder="O que piora a dor?"
+                                className="h-9 text-xs"
+                                {...field}
+                                value={field.value || ""}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="cirurgias"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-[10px] font-bold uppercase text-muted-foreground mb-1 block">CIRURGIAS ANTERIORES / PREVIAS</FormLabel>
+                            <FormControl>
+                              <Input
+                                placeholder="Descreva cirurgias"
+                                className="h-9 text-xs"
+                                {...field}
+                                value={field.value || ""}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+                  </div>
+                </TabsContent>
+
+                {/* ══════════════ ADM / FORÇA ══════════════ */}
+                <TabsContent value="adm-forca" className="space-y-6 mt-0">
+                  <div className="p-6 bg-card rounded-xl border shadow-sm space-y-6">
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-sm font-bold uppercase text-primary flex items-center gap-2">
+                        <Activity className="h-4 w-4" />
+                        ADM / FORÇA MUSCULAR — CLASSIFICAÇÃO CIF
+                      </h3>
+                    </div>
+
+                    <div className="overflow-x-auto border rounded-xl">
+                      <table className="w-full text-xs text-left border-collapse">
+                        <thead className="bg-muted/50 uppercase font-bold text-[10px] tracking-wider">
+                          <tr>
+                            <th className="p-3 border">MOVIMENTO / SEGMENTO</th>
+                            <th className="p-3 border text-center w-20">ADM DIREITA</th>
+                            <th className="p-3 border text-center w-20">ADM ESQUERDA</th>
+                            <th className="p-3 border text-center w-20">FORÇA D (0-5)</th>
+                            <th className="p-3 border text-center w-20">FORÇA E (0-5)</th>
+                            <th className="p-3 border text-center w-24">DÉFICIT %</th>
+                            <th className="p-3 border text-center w-40">CLASSIFICAÇÃO CIF</th>
+                            <th className="p-3 border w-10"></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {admForcaFields.map((field, index) => {
+                            const calculateCIF = (deficitValue: number) => {
+                              if (deficitValue === 0) return "XXX.0 Sem déficit";
+                              if (deficitValue < 4) return "XXX.1 Leve (<4%)";
+                              if (deficitValue < 25) return "XXX.2 Moderado (4-24%)";
+                              if (deficitValue < 50) return "XXX.3 Grave (25-49%)";
+                              return "XXX.4 Completo (≥50%)";
+                            };
+
+                            const handleStrengthChange = (val: string, type: 'D' | 'E') => {
+                              const otherVal = type === 'D'
+                                ? form.getValues(`admForca.${index}.forcaE`)
+                                : form.getValues(`admForca.${index}.forcaD`);
+
+                              const d = type === 'D' ? parseFloat(val) : parseFloat(otherVal);
+                              const e = type === 'E' ? parseFloat(val) : parseFloat(otherVal);
+
+                              if (!isNaN(d) && !isNaN(e) && (d > 0 || e > 0)) {
+                                const max = Math.max(d, e);
+                                const min = Math.min(d, e);
+                                const deficit = Math.round(((max - min) / max) * 100);
+                                form.setValue(`admForca.${index}.deficit`, deficit.toString());
+                                form.setValue(`admForca.${index}.cif`, calculateCIF(deficit));
+                              } else {
+                                form.setValue(`admForca.${index}.deficit`, "0");
+                                form.setValue(`admForca.${index}.cif`, "XXX.0 Sem déficit");
+                              }
+                            };
+
+                            return (
+                              <tr key={field.id} className="hover:bg-muted/30 transition-colors">
+                                <td className="p-2 border">
+                                  <Input
+                                    {...form.register(`admForca.${index}.movimento`)}
+                                    className="h-8 border-none bg-transparent shadow-none focus-visible:ring-0 text-xs"
+                                    placeholder="Ex: Flexão de ombro"
+                                  />
+                                </td>
+                                <td className="p-2 border">
+                                  <Input
+                                    {...form.register(`admForca.${index}.admDireita`)}
+                                    className="h-8 border-none bg-transparent shadow-none focus-visible:ring-0 text-xs text-center"
+                                    placeholder="°"
+                                  />
+                                </td>
+                                <td className="p-2 border">
+                                  <Input
+                                    {...form.register(`admForca.${index}.admEsquerda`)}
+                                    className="h-8 border-none bg-transparent shadow-none focus-visible:ring-0 text-xs text-center"
+                                    placeholder="°"
+                                  />
+                                </td>
+                                <td className="p-2 border">
+                                  <Select
+                                    onValueChange={(val) => {
+                                      form.setValue(`admForca.${index}.forcaD`, val);
+                                      handleStrengthChange(val, 'D');
+                                    }}
+                                    value={form.watch(`admForca.${index}.forcaD`)}
+                                  >
+                                    <SelectTrigger className="h-8 border-none bg-transparent shadow-none focus:ring-0 text-xs">
+                                      <SelectValue placeholder="-" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                      {["0", "1", "2", "3", "4", "5"].map(v => <SelectItem key={v} value={v}>{v}</SelectItem>)}
+                                    </SelectContent>
+                                  </Select>
+                                </td>
+                                <td className="p-2 border">
+                                  <Select
+                                    onValueChange={(val) => {
+                                      form.setValue(`admForca.${index}.forcaE`, val);
+                                      handleStrengthChange(val, 'E');
+                                    }}
+                                    value={form.watch(`admForca.${index}.forcaE`)}
+                                  >
+                                    <SelectTrigger className="h-8 border-none bg-transparent shadow-none focus:ring-0 text-xs">
+                                      <SelectValue placeholder="-" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                      {["0", "1", "2", "3", "4", "5"].map(v => <SelectItem key={v} value={v}>{v}</SelectItem>)}
+                                    </SelectContent>
+                                  </Select>
+                                </td>
+                                <td className="p-2 border text-center">
+                                  <Input
+                                    {...form.register(`admForca.${index}.deficit`)}
+                                    readOnly
+                                    className="h-8 border-none bg-muted/20 shadow-none text-xs text-center font-bold text-primary"
+                                  />
+                                </td>
+                                <td className="p-2 border">
+                                  <Input
+                                    {...form.register(`admForca.${index}.cif`)}
+                                    readOnly
+                                    className="h-8 border-none bg-muted/20 shadow-none text-[10px] text-center"
+                                  />
+                                </td>
+                                <td className="p-2 border text-center">
+                                  <Button
+                                    type="button"
+                                    variant="ghost"
+                                    size="icon"
+                                    className="h-7 w-7"
+                                    onClick={() => removeAdmForca(index)}
+                                  >
+                                    <Trash2 className="h-3 w-3 text-destructive" />
+                                  </Button>
+                                </td>
+                              </tr>
+                            );
+                          })}
+                        </tbody>
+                      </table>
+                    </div>
+
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={() => appendAdmForca({ movimento: "", admDireita: "", admEsquerda: "", forcaD: "", forcaE: "", deficit: "0", cif: "XXX.0 Sem déficit" })}
+                      className="bg-primary/5 hover:bg-primary/10 border-primary/20 text-primary text-[10px] uppercase font-bold"
+                    >
+                      <Plus className="h-4 w-4 mr-2" />
+                      Adicionar linha
+                    </Button>
+
+                    <div className="text-[10px] text-muted-foreground italic">
+                      * Classificação automática baseada na CIF: XXX.0 Sem déficit | XXX.1 Leve (&lt;4%) | XXX.2 Moderado (4-24%) | XXX.3 Grave (25-49%) | XXX.4 Completo (≥50%)
+                    </div>
+                  </div>
+                </TabsContent>
+
+                {/* ══════════════ AVALIAÇÃO ORTOPÉDICA AUTOMATIZADA ══════════════ */}
+                <TabsContent value="ortopedica" className="space-y-6 mt-0">
+                  <AvaliacaoOrtopedicaTab form={form} />
+                </TabsContent>
+
+                <TabsContent value="escalas-funcionais" className="space-y-6 mt-0">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6 bg-card rounded-xl border shadow-sm">
+                    <FormField
+                      control={form.control}
+                      name="escalaBerg"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Escala de Berg (0-56)</FormLabel>
+                          <FormControl>
+                            <Input
+                              type="number"
+                              min="0"
+                              max="56"
+                              placeholder="0-56"
+                              {...field}
+                              onChange={(e) =>
+                                field.onChange(
+                                  e.target.value ? parseInt(e.target.value) : undefined
+                                )
+                              }
+                              value={field.value ?? ""}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="escalaAshworth"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Escala de Ashworth (0-4)</FormLabel>
+                          <FormControl>
+                            <Input
+                              type="number"
+                              min="0"
+                              max="4"
+                              placeholder="0-4"
+                              {...field}
+                              onChange={(e) =>
+                                field.onChange(
+                                  e.target.value ? parseInt(e.target.value) : undefined
+                                )
+                              }
+                              value={field.value ?? ""}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="escalaTC6"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>TC6 Distância (m)</FormLabel>
+                          <FormControl>
+                            <Input
+                              type="number"
+                              placeholder="Metros"
+                              {...field}
+                              onChange={(e) =>
+                                field.onChange(
+                                  e.target.value ? parseInt(e.target.value) : undefined
+                                )
+                              }
+                              value={field.value ?? ""}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                </TabsContent>
+
+                {/* ══════════════ AVALIAÇÃO FÍSICA ══════════════ */}
+                <TabsContent value="avaliacao-fisica" className="space-y-6 mt-0">
+                  <div className="grid grid-cols-1 gap-6 p-6 bg-card rounded-xl border shadow-sm">
+                    {[
+                      {
+                        key: "inspecao",
+                        label: "Inspeção / Palpação / Sensibilidade – Postura Estática",
+                      },
+                      {
+                        key: "posturaDinamica",
+                        label: "Postural Dinâmica – Marcha / Cinturas",
+                      },
+                      { key: "perimetria", label: "Perimetria" },
+                      { key: "testesEspeciais", label: "Testes Especiais" },
+                    ].map((item) => (
+                      <FormField
+                        key={item.key}
+                        control={form.control}
+                        name={item.key as any}
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>{item.label}</FormLabel>
+                            <FormControl>
+                              <Textarea
+                                placeholder={`Registre ${item.label.toLowerCase()}...`}
+                                className="min-h-[100px]"
+                                {...field}
+                                value={field.value || ""}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    ))}
+                  </div>
+                </TabsContent>
+
+                {/* ══════════════ MAPA DA DOR ══════════════ */}
+                <TabsContent value="mapa-dor" className="space-y-6 mt-0">
+                  <div className="p-6 bg-card rounded-xl border shadow-sm space-y-8">
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-sm font-bold uppercase text-primary flex items-center gap-2">
+                        <Map className="h-4 w-4" />
+                        MAPA DA DOR
+                      </h3>
+                    </div>
+
+                    <p className="text-xs text-muted-foreground uppercase font-bold tracking-tight">
+                      Selecione a intensidade da dor e pinte as áreas afetadas diretamente sobre o corpo humano.
+                    </p>
+
+                    <FormField
+                      control={form.control}
+                      name="mapaDor"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormControl>
+                            <PainelMapaDor 
+                              value={field.value} 
+                              onChange={(dataUrl) => field.onChange(dataUrl)} 
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                </TabsContent>
+
+>>>>>>> parent of cc61847 (Novo Layout)
                 {/* ══════════════ PRESCRIÇÕES ══════════════ */}
                 <TabsContent value="prescricoes" className="space-y-6 mt-0">
                   <div className="p-6 bg-card rounded-xl border shadow-sm space-y-4">
@@ -3350,6 +4393,9 @@ export default function FichaForm() {
                           Nenhuma prescrição adicionada. Clique em "Adicionar Prescrição" para começar.
                         </p>
                       )}
+<<<<<<< HEAD
+>>>>>>> parent of cc61847 (Novo Layout)
+=======
 >>>>>>> parent of cc61847 (Novo Layout)
                     </div>
 
@@ -3357,6 +4403,7 @@ export default function FichaForm() {
                       type="button"
                       variant="outline"
                       size="sm"
+<<<<<<< HEAD
 <<<<<<< HEAD
                       onClick={() => appendAdmForca({ movimento: "", admDireita: "", admEsquerda: "", forcaD: "", forcaE: "", deficit: "0", cif: "XXX.0 Sem déficit" })}
                       className="bg-primary/5 hover:bg-primary/10 border-primary/20 text-primary text-[10px] uppercase font-bold"
@@ -3660,10 +4707,19 @@ export default function FichaForm() {
                       <Plus className="w-4 h-4 mr-2" />
                       Adicionar Prescrição
 >>>>>>> parent of cc61847 (Novo Layout)
+=======
+                      onClick={() =>
+                        appendPrescricao({ descricao: "", frequencia: "", progressao: "", observacoes: "" } as any)
+                      }
+                    >
+                      <Plus className="w-4 h-4 mr-2" />
+                      Adicionar Prescrição
+>>>>>>> parent of cc61847 (Novo Layout)
                     </Button>
                   </div>
                 </TabsContent>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
           {/* Navegação Inferior Fixa */}
@@ -3694,6 +4750,8 @@ export default function FichaForm() {
 =======
 =======
 >>>>>>> parent of cc61847 (Novo Layout)
+=======
+>>>>>>> parent of cc61847 (Novo Layout)
                 {/* ══════════════ EVOLUÇÃO ══════════════ */}
                 <TabsContent value="evolucao" className="space-y-6 mt-0">
                   <div className="p-6 bg-card rounded-xl border shadow-sm space-y-6">
@@ -3704,6 +4762,9 @@ export default function FichaForm() {
                       </h3>
                     </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of cc61847 (Novo Layout)
+=======
 >>>>>>> parent of cc61847 (Novo Layout)
 =======
 >>>>>>> parent of cc61847 (Novo Layout)
