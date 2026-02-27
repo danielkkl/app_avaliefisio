@@ -6,6 +6,7 @@ import { createServer } from "http";
 import path from "path";
 import { fileURLToPath } from "url";
 
+<<<<<<< HEAD
 let __dirname: string;
 try {
   const __filename = fileURLToPath(import.meta.url);
@@ -16,6 +17,10 @@ try {
 }
 =======
 >>>>>>> parent of cc61847 (Novo Layout)
+=======
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+>>>>>>> parent of e664a91 (Correção de Build)
 
 const app = express();
 const httpServer = createServer(app);
@@ -36,6 +41,7 @@ app.use(
 
 <<<<<<< HEAD
   app.use(express.urlencoded({ extended: false }));
+<<<<<<< HEAD
   // Servir arquivos estáticos da pasta public do cliente
   const assetsPath = process.env.NODE_ENV === "production" 
     ? path.resolve(__dirname, "public", "assets")
@@ -44,6 +50,10 @@ app.use(
 =======
 app.use(express.urlencoded({ extended: false }));
 >>>>>>> parent of cc61847 (Novo Layout)
+=======
+  // Servir arquivos estáticos da pasta public do cliente explicitamente se necessário
+  app.use("/assets", express.static(path.resolve(__dirname, "..", "client", "public", "assets")));
+>>>>>>> parent of e664a91 (Correção de Build)
 
 export function log(message: string, source = "express") {
   const formattedTime = new Date().toLocaleTimeString("en-US", {
