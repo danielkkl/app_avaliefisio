@@ -31,7 +31,7 @@ export const PainelMapaDor: React.FC<PainelMapaDorProps> = ({ value, onChange })
 
     // Carregar imagem de fundo
     const img = new Image();
-    img.src = "/assets/corpo_humano_mapa_dor.png?v=" + new Date().getTime(); // Adicionado timestamp para evitar cache
+    img.src = "/assets/corpo_humano_mapa_dor.png";
     img.crossOrigin = "anonymous";
     img.onload = () => {
       // Limpar e desenhar fundo
@@ -128,7 +128,7 @@ export const PainelMapaDor: React.FC<PainelMapaDorProps> = ({ value, onChange })
     if (!ctx) return;
 
     const img = new Image();
-    img.src = "/assets/corpo_humano_mapa_dor.png?v=" + new Date().getTime(); // Adicionado timestamp para evitar cache
+    img.src = "/assets/corpo_humano_mapa_dor.png";
     img.crossOrigin = "anonymous";
     img.onload = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);

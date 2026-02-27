@@ -10,22 +10,12 @@ interface PageHeaderProps {
 
 export function PageHeader({ title, description, children, className }: PageHeaderProps) {
   return (
-    <div className={cn("flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6", className)}>
-      <div>
-        <h1 className="text-2xl font-display font-bold text-slate-800 tracking-tight">
-          {title}
-        </h1>
-        {description && (
-          <p className="text-slate-500 mt-1 text-sm font-medium">
-            {description}
-          </p>
-        )}
+    <div className={cn("flex flex-col gap-1 pb-8 md:flex-row md:items-center md:justify-between", className)}>
+      <div className="space-y-1.5">
+        <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">{title}</h1>
+        {description && <p className="text-muted-foreground">{description}</p>}
       </div>
-      {children && (
-        <div className="flex items-center gap-3">
-          {children}
-        </div>
-      )}
+      {children && <div className="flex items-center gap-2 mt-4 md:mt-0">{children}</div>}
     </div>
   );
 }

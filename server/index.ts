@@ -2,6 +2,7 @@ import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { serveStatic } from "./static";
 import { createServer } from "http";
+<<<<<<< HEAD
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -13,6 +14,8 @@ try {
   // Fallback para quando import.meta.url não está disponível (ex: em arquivos compilados CJS)
   __dirname = process.cwd();
 }
+=======
+>>>>>>> parent of cc61847 (Novo Layout)
 
 const app = express();
 const httpServer = createServer(app);
@@ -25,19 +28,22 @@ declare module "http" {
 
 app.use(
   express.json({
-    limit: "50mb",
     verify: (req, _res, buf) => {
       req.rawBody = buf;
     },
   }),
 );
 
+<<<<<<< HEAD
   app.use(express.urlencoded({ extended: false }));
   // Servir arquivos estáticos da pasta public do cliente
   const assetsPath = process.env.NODE_ENV === "production" 
     ? path.resolve(__dirname, "public", "assets")
     : path.resolve(__dirname, "..", "client", "public", "assets");
   app.use("/assets", express.static(assetsPath));
+=======
+app.use(express.urlencoded({ extended: false }));
+>>>>>>> parent of cc61847 (Novo Layout)
 
 export function log(message: string, source = "express") {
   const formattedTime = new Date().toLocaleTimeString("en-US", {

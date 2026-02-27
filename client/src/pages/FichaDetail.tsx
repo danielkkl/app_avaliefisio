@@ -282,6 +282,7 @@ export default function FichaDetail() {
               </CardContent>
             </Card>
 
+<<<<<<< HEAD
             <div className="space-y-6">
               <Card className="border-none shadow-sm bg-blue-900 text-white">
                 <CardContent className="p-6">
@@ -298,6 +299,29 @@ export default function FichaDetail() {
                   </div>
                 </CardContent>
               </Card>
+=======
+          {/* Avaliação Física */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Activity className="w-5 h-5 text-primary" />
+                Avaliação Física
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4 text-sm">
+              <TextRow label="Inspeção / Palpação / Sensibilidade" value={ficha.inspecao} />
+              <div className="border-t pt-4">
+                <TextRow label="Postura Dinâmica – Marcha / Cinturas" value={ficha.posturaDinamica} />
+              </div>
+              <div className="border-t pt-4">
+                <TextRow label="Perimetria" value={ficha.perimetria} />
+              </div>
+              <div className="border-t pt-4">
+                <TextRow label="Testes Especiais" value={ficha.testesEspeciais} />
+              </div>
+            </CardContent>
+          </Card>
+>>>>>>> parent of cc61847 (Novo Layout)
 
               <Card className="border-none shadow-sm">
                 <CardContent className="p-6">
