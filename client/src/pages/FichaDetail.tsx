@@ -341,6 +341,7 @@ export default function FichaDetail() {
             </div>
           </div>
 
+<<<<<<< HEAD
           {/* Prescrições e Exercícios */}
           <Card className="border-none shadow-sm">
             <CardContent className="p-6">
@@ -349,6 +350,62 @@ export default function FichaDetail() {
                 {prescricoes.length > 0 ? (
                   prescricoes.map((p, i) => (
                     <div key={i} className="p-4 bg-slate-50 rounded-xl border border-slate-100 flex items-center justify-between">
+=======
+          {/* Avaliação Física */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Activity className="w-5 h-5 text-primary" />
+                Avaliação Física
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4 text-sm">
+              <TextRow label="Inspeção / Palpação / Sensibilidade" value={ficha.inspecao} />
+              <div className="border-t pt-4">
+                <TextRow label="Postura Dinâmica – Marcha / Cinturas" value={ficha.posturaDinamica} />
+              </div>
+              <div className="border-t pt-4">
+                <TextRow label="Perimetria" value={ficha.perimetria} />
+              </div>
+              <div className="border-t pt-4">
+                <TextRow label="Testes Especiais" value={ficha.testesEspeciais} />
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Mapa da Dor */}
+          {ficha.mapaDor && (
+            <Card>
+              <CardHeader>
+                <CardTitle>Mapa da Dor</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <img
+                  src={ficha.mapaDor}
+                  alt="Mapa da Dor"
+                  className="max-w-full border rounded"
+                />
+              </CardContent>
+            </Card>
+          )}
+
+          {/* Prescrições */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <ClipboardList className="w-5 h-5 text-primary" />
+                Prescrições & Condutas
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6">
+               <div className="space-y-4">
+                {prescricoes.map((p: any, i: number) => (
+                  <div
+                    key={i}
+                    className="grid grid-cols-1 gap-4 p-4 border rounded-xl bg-muted/5 hover:bg-muted/10 transition-colors"
+                  >
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+>>>>>>> parent of cc61847 (Novo Layout)
                       <div>
                         <p className="text-sm font-bold text-slate-700">{p.descricao}</p>
                         <p className="text-[10px] font-medium text-slate-400 uppercase">{p.frequencia}</p>

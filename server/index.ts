@@ -3,6 +3,7 @@ import { registerRoutes } from "./routes";
 import { serveStatic } from "./static";
 import { createServer } from "http";
 <<<<<<< HEAD
+<<<<<<< HEAD
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -21,6 +22,8 @@ try {
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 >>>>>>> parent of e664a91 (Correção de Build)
+=======
+>>>>>>> parent of cc61847 (Novo Layout)
 
 const app = express();
 const httpServer = createServer(app);
@@ -40,6 +43,7 @@ app.use(
 );
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   app.use(express.urlencoded({ extended: false }));
 <<<<<<< HEAD
   // Servir arquivos estáticos da pasta public do cliente
@@ -54,6 +58,9 @@ app.use(express.urlencoded({ extended: false }));
   // Servir arquivos estáticos da pasta public do cliente explicitamente se necessário
   app.use("/assets", express.static(path.resolve(__dirname, "..", "client", "public", "assets")));
 >>>>>>> parent of e664a91 (Correção de Build)
+=======
+app.use(express.urlencoded({ extended: false }));
+>>>>>>> parent of cc61847 (Novo Layout)
 
 export function log(message: string, source = "express") {
   const formattedTime = new Date().toLocaleTimeString("en-US", {
